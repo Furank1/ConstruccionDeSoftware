@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router'; // Asegúrate de importar RouterModule
+import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
-import { routes } from './app.routes'; // Importa el array de rutas que exportaste
+import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { FeedComponent } from './feed/feed.component';
 
 @NgModule({
   declarations: [
-
+    FeedComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
-    AppComponent,
-    // Configura las rutas aquí
+    AppRoutingModule,
+    ProfileComponent,
+    LoginComponent,
+    AppComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

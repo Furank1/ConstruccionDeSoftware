@@ -1,13 +1,20 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Router, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [
+    RouterOutlet
+  ],
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'medallia-frontend';
+  constructor(private router: Router) {}
+  title = 'Medallia';
+  goToRegister() {
+    console.log('Redirecting to register...');
+    this.router.navigate(['/register']);
+  }
 }
