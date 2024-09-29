@@ -3,18 +3,17 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './login.component.html',
+  selector: '/login',
   standalone: true,
-  imports: [FormsModule],
-  styleUrls: ['./login.component.css']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
+  imports: [FormsModule]
 })
 export class LoginComponent {
   constructor(private router: Router) {}
 
   onSubmit() {
     console.log("Formulario enviado");
-    // Redirigir a la página de inicio de sesión
-    this.router.navigate(['/login']); // Redirige a la ruta de inicio
+    // Aquí puedes agregar lógica adicional si es necesario
   }
 }

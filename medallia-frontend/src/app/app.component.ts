@@ -1,20 +1,18 @@
 import { Component } from '@angular/core';
-import {Router, RouterOutlet} from "@angular/router";
+import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router'; // Asegúrate de importar RouterModule
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
   standalone: true,
-  imports: [
-    RouterOutlet
-  ],
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+  imports: [RouterModule] // Asegúrate de importar RouterModule
 })
 export class AppComponent {
   constructor(private router: Router) {}
-  title = 'Medallia';
+
   goToRegister() {
-    console.log('Redirecting to register...');
-    this.router.navigate(['/register']);
+    this.router.navigate(['/login']); // Redirige a la ruta de creación de cuenta
   }
 }

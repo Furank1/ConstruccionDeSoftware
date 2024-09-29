@@ -7,6 +7,7 @@ export const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'feed', component: FeedComponent },
+  {path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' }
 ];
 

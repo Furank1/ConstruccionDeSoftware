@@ -1,3 +1,4 @@
+<!-- app.component.html -->
 <div class="app-container">
   <div class="login-container">
     <div class="login-box">
@@ -13,12 +14,8 @@
           <input type="password" id="password" placeholder="Introduce tu contraseña">
         </div>
         <button type="submit">Ingresar</button>
-        <button type="button" (click)="goToRegister()" class="create-account-button">Crear Cuenta</button>
-
+        <button type="button" (click)="goToRegister()">Crear Cuenta</button> <!-- Botón de crear cuenta -->
       </form>
     </div>
   </div>
-</div>
-<div class="app-container">
-  <router-outlet></router-outlet> <!-- Aquí se cargarán los componentes en función de las rutas -->
 </div>

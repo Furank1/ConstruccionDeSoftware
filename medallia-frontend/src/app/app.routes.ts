@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component'; // Componente de registro
+import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FeedComponent } from './feed/feed.component';
 
-export const routes: Routes = [
-  { path: '', component: LoginComponent }, // Página principal
-  { path: 'login', component: LoginComponent }, // Ruta para el registro
+const routes: Routes = [
+  { path: '', component: LoginComponent }, // Página principal (login)
+  { path: 'login', component: LoginComponent }, // Componente de creación de cuenta
   { path: 'profile', component: ProfileComponent },
   { path: 'feed', component: FeedComponent },
   { path: '**', redirectTo: '' }, // Ruta por defecto
@@ -16,4 +16,4 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
