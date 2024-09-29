@@ -16,11 +16,11 @@ public class ServicioCuenta {
     public boolean login(String correo, String contrasena) {
         Cuenta cuenta = repositoriocuenta.findByCorreo(correo);
         if (cuenta != null) {
-            return (contrasena, cuenta.getContrasena());
+
         }
         return false;
     }
 }
 
 
-}
+
