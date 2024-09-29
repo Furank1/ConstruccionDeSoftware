@@ -17,7 +17,7 @@ public class ControladorCuenta {
     @Autowired
     private ServicioCuenta servicioCuenta;
 
-    @CrossOrigin("*")
+    @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody CuentaDTO loginRequest) {
         boolean success = servicioCuenta.login(loginRequest.getEmail(), loginRequest.getPassword());
