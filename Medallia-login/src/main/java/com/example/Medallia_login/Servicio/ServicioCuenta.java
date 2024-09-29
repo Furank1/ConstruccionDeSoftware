@@ -13,13 +13,15 @@ public class ServicioCuenta {
 
 
 
-    public boolean login(String correo, String contrasena) {
-        Cuenta cuenta = repositoriocuenta.findByCorreo(correo);
+    public boolean login(String email, String password) {
+        Cuenta cuenta = repositoriocuenta.findByEmail(email);
         if (cuenta != null) {
-
+            return password.equals(cuenta.getPassword());
         }
         return false;
     }
+
+
 }
 
 
