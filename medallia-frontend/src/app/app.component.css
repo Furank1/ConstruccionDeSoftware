@@ -1,0 +1,57 @@
+/* Estilos generales */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.header {
+  background-color: #6200ea; /* Color de fondo del encabezado */
+  color: white; /* Color del texto */
+  padding: 1rem; /* Espaciado interno */
+  text-align: center; /* Centrar texto */
+}
+
+.header h1 {
+  margin: 0; /* Quitar márgenes por defecto */
+}
+
+.nav-bar {
+  margin-top: 1rem; /* Espaciado superior para el menú */
+}
+
+.nav-bar a {
+  color: white; /* Color del texto de los enlaces */
+  text-decoration: none; /* Quitar subrayado */
+  margin: 0 1rem; /* Espaciado horizontal entre enlaces */
+  padding: 0.5rem; /* Espaciado interno */
+  font-size: 1.2rem; /* Tamaño de la fuente */
+}
+
+.nav-bar a.active {
+  border-bottom: 2px solid yellow; /* Línea bajo el enlace activo */
+}
+
+.nav-bar a:hover {
+  text-decoration: underline; /* Subrayar al pasar el ratón */
+}
+
+.content {
+  padding: 2rem; /* Espaciado interno para el contenido */
+  min-height: calc(100vh - 200px); /* Altura mínima ajustada para el contenido */
+}
+
+footer {
+  background-color: #333; /* Color de fondo del pie de página */
+  color: white; /* Color del texto */
+  text-align: center; /* Centrar texto */
+  padding: 1rem; /* Espaciado interno */
+  position: relative; /* Posición relativa */
+  bottom: 0; /* Alinear al fondo */
+  width: 100%; /* Ancho completo */
+}
+
+footer p {
+  margin: 0; /* Quitar márgenes por defecto */
+}

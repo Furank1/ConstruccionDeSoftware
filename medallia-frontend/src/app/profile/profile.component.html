@@ -1,0 +1,9 @@
+<div class="profile-container">
+  <h2>Perfil de {{ userName }}</h2>
+  <div class="medals">
+    <div *ngFor="let medal of medals" class="medal">
+      <h3>{{ medal.name }}</h3>
+      <p>{{ medal.description }}</p>
+    </div>
+  </div>
+</div>
