@@ -14,25 +14,26 @@ public class ServicioCuenta {
     @Autowired
     private RepositorioCuentas cuentaRepository;
 
-    @Autowired
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+   // @Autowired
+    //private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    /*
     public Cuenta registrar(String email, String password) {
         Cuenta cuenta = new Cuenta(email, password);
         cuenta.setEmail(email);
-        cuenta.setPassword(passwordEncoder.encode(password));
+        //cuenta.setPassword(passwordEncoder.encode(password));
 
 
         // Guardar cuenta en el repositorio (base de datos)
         return cuentaRepository.save(cuenta);
-    }
+    }*/
 
     public Optional<Cuenta> login(String email, String password) {
         // Buscar la cuenta por correo
         Optional<Cuenta> cuentaOpt = cuentaRepository.findByEmail(email);
 
         // Validar si la cuenta existe y si la contraseña coincide
-        if (cuentaOpt.isPresent() && passwordEncoder.matches(password, cuentaOpt.get().getPassword())) {
+        if (cuentaOpt.isPresent() && cuentaOpt.get().getPassword().equals(password)) {
             return cuentaOpt;
         }
         return Optional.empty();

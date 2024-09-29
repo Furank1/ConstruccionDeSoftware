@@ -18,6 +18,7 @@ public class ControladorCuenta {
     @Autowired
     private ServicioCuenta cuentaService;
 
+    /*
     @CrossOrigin(origins = "*")
     @PostMapping("/registrar")
     public ResponseEntity<Cuenta> registrar(@RequestBody Cuenta cuenta) {
@@ -25,7 +26,7 @@ public class ControladorCuenta {
                 cuenta.getEmail(),
                 cuenta.getPassword());
         return ResponseEntity.ok(savedCuenta);
-    }
+    }*/
 
     @CrossOrigin(origins = "*")
     @PostMapping("/login")
