@@ -23,22 +23,23 @@ export class LoginComponent {
     const loginData = {
       email: this.email,
       password: this.password
-    };
+  };
 
-    const headers = new HttpHeaders({
+  const headers = new HttpHeaders({
       'Content-Type': 'application/json'
-    });
+  });
 
-    this.http.post<any>('http://localhost:8080/api/auth/login', loginData, { headers })
+  // Cambia esta línea para enviar el objeto loginData
+  this.http.post<any>('http://localhost:8080/api/auth/login', loginData, { headers })
       .subscribe(
-        response => {
-          console.log('Login exitoso');
-          this.router.navigate(['/dashboard']);  
-        },
-        error => {
-          console.error('Error de login', error);
-          this.errorMessage = 'Credenciales incorrectas';  
-        }
+          response => {
+              console.log('Login exitoso');
+              this.router.navigate(['/dashboard']);
+          },
+          error => {
+              console.error('Error de login', error);
+              this.errorMessage = 'Credenciales incorrectas';
+          }
       );
-  }
+    }
 }

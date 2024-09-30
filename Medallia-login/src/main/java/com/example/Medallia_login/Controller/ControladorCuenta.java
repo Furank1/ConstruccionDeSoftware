@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping ("/api/auth")
 public class ControladorCuenta {
@@ -22,9 +25,9 @@ public class ControladorCuenta {
     public ResponseEntity<String> login(@RequestBody CuentaDTO loginRequest) {
         boolean success = servicioCuenta.login(loginRequest.getEmail(), loginRequest.getPassword());
         if (success) {
-            return ResponseEntity.ok("Login exitoso");
+            return ResponseEntity.ok("{\"mensaje\": \"Login exitoso\"}");
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"mensaje\": \"Credenciales incorrectas\"}");
         }
     }
 

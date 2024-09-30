@@ -19,11 +19,6 @@ public class MedalliaLoginApplication {
 		SpringApplication.run(MedalliaLoginApplication.class, args);
 	}
 
-	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return String.format("Hello %s!", name);
-	}
-
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
