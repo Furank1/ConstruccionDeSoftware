@@ -1,0 +1,61 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  height: 100%; /* Asegúrate de que el cuerpo tenga altura completa */
+}
+
+.header {
+  background-color: #6200ea;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.nav-bar {
+  margin-top: 1rem;
+}
+
+.nav-bar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.nav-bar a.active {
+  border-bottom: 2px solid yellow;
+}
+
+.nav-bar a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  display: flex;                /* Utiliza flexbox para centrar */
+  flex-direction: column;      /* Coloca los elementos en columna */
+  align-items: center;         /* Centra los elementos horizontalmente */
+  justify-content: center;     /* Centra los elementos verticalmente */
+  height: calc(100vh - 200px); /* Ajusta la altura para centrar */
+  padding: 2rem;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+footer p {
+  margin: 0;
+}
