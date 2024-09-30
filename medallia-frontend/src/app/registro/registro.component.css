@@ -63,3 +63,19 @@ button:hover {
 .login-redirect {
   margin-top: 1rem;
 }
+/* Estilo para el botón de volver */
+.back-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: white; /* Color gris */
+  color: gray;
+  border: gray;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem; /* Espacio arriba del botón */
+}
+
+.back-button:hover {
+  background-color: transparent; /* Color más oscuro al pasar el mouse */
+}

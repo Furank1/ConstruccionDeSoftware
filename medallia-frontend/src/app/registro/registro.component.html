@@ -1,7 +1,7 @@
 <div class="login-container">
   <div class="login-box">
     <h2 class="subtitle">Crear Cuenta</h2>
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onRegister()">
       <div class="input-group">
         <label for="username">Nombre de Usuario</label>
         <input type="text" id="username" placeholder="Introduce tu nombre de usuario" required>
@@ -16,5 +16,6 @@
       </div>
       <button type="submit">Crear Cuenta</button>
     </form>
+    <button class="back-button" (click)="goToHome()">Volver a la Página Principal</button>
   </div>
 </div>

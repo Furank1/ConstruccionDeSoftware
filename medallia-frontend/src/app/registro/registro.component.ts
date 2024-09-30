@@ -12,8 +12,13 @@ import { FormsModule } from '@angular/forms';
 export class RegistroComponent {
   constructor(private router: Router) {}
 
-  onSubmit() {
+  onRegister() {
     console.log("Formulario enviado");
     // Aquí puedes agregar lógica adicional si es necesario
   }
+  goToHome() {
+    // Aquí puedes implementar la navegación a la página principal.
+    this.router.navigate(['/']); // Asegúrate de tener el RouterModule configurado para la navegación.
+  }
+
 }

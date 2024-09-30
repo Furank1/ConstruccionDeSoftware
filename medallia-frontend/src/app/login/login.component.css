@@ -78,7 +78,7 @@ button:hover {
   width: 100%;
   padding: 0.75rem;
   background-color: transparent; /* Fondo transparente */
-  color: #F29D35; /* Color del texto */
+  color: gray; /* Color del texto */
   border: 2px solid #F29D35; /* Borde oscuro */
   border-radius: 5px;
   font-size: 1rem;
