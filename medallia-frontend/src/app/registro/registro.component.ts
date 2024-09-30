@@ -3,20 +3,17 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-registro',
   standalone: true,
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  templateUrl: './registro.component.html',
+  styleUrls: ['./registro.component.css'],
   imports: [FormsModule]
 })
-export class LoginComponent {
+export class RegistroComponent {
   constructor(private router: Router) {}
 
   onSubmit() {
     console.log("Formulario enviado");
     // Aquí puedes agregar lógica adicional si es necesario
-  }
-  goToRegister() {
-    this.router.navigate(['/registro']); // Redirige a la ruta de creación de cuenta
   }
 }

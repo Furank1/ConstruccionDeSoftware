@@ -1,20 +1,21 @@
-<div class="login-container">
-  <div class="login-box">
-    <h2 class="subtitle">Crear Cuenta</h2>
-    <form (ngSubmit)="onSubmit()">
-      <div class="input-group">
-        <label for="username">Nombre de Usuario</label>
-        <input type="text" id="username" placeholder="Introduce tu nombre de usuario" required>
-      </div>
-      <div class="input-group">
-        <label for="registerEmail">Correo Electrónico</label>
-        <input type="email" id="registerEmail" placeholder="Introduce tu correo" required>
-      </div>
-      <div class="input-group">
-        <label for="registerPassword">Contraseña</label>
-        <input type="password" id="registerPassword" placeholder="Introduce tu contraseña" required>
-      </div>
-      <button type="submit">Crear Cuenta</button>
-    </form>
+<!-- app.component.html -->
+<div class="app-container">
+  <div class="login-container">
+    <div class="login-box">
+      <h1 class="title">Medallia</h1> <!-- Título grande -->
+
+      <form>
+        <div class="input-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" placeholder="Introduce tu correo">
+        </div>
+        <div class="input-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" placeholder="Introduce tu contraseña">
+        </div>
+        <button type="submit">Ingresar</button>
+        <button type="button" (click)="goToRegister()">Crear Cuenta</button> <!-- Botón de crear cuenta -->
+      </form>
+    </div>
   </div>
 </div>

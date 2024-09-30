@@ -12,7 +12,5 @@ import { RouterModule } from '@angular/router'; // Asegúrate de importar Router
 export class AppComponent {
   constructor(private router: Router) {}
 
-  goToRegister() {
-    this.router.navigate(['/login']); // Redirige a la ruta de creación de cuenta
-  }
+
 }
