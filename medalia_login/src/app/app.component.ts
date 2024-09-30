@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { LoginComponent } from './login/login.component';  // Asegúrate de que la ruta sea correcta
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [LoginComponent]  // Asegúrate de incluir LoginComponent aquí
 })
-export class AppComponent {
-  title = 'medalia_login';
-}
+export class AppComponent {}
