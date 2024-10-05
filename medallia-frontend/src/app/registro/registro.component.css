@@ -1,0 +1,81 @@
+/* Estilo para el contenedor del formulario de creación de cuenta */
+.login-container {
+  width: 100%;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo para el recuadro del formulario */
+.login-box {
+  background-color: #ffffff; /* Fondo blanco */
+  padding: 2rem; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+  width: 350px; /* Ancho del recuadro */
+  text-align: center; /* Centrar texto */
+}
+
+/* Estilo del título */
+.subtitle {
+  margin-bottom: 1rem;
+  font-size: 2rem; /* Tamaño del título */
+}
+
+/* Estilos para los campos de entrada */
+.input-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Estilo del botón */
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #F29D35; /* Color del botón */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #F2CD88; /* Color del botón al pasar el mouse */
+}
+
+/* Estilo del texto de redirección */
+.login-redirect {
+  margin-top: 1rem;
+}
+/* Estilo para el botón de volver */
+.back-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: white; /* Color gris */
+  color: gray;
+  border: gray;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem; /* Espacio arriba del botón */
+}
+
+.back-button:hover {
+  background-color: transparent; /* Color más oscuro al pasar el mouse */
+}
