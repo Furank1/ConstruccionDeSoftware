@@ -1,6 +1,7 @@
 package com.example.Medallia_login.Modelos;
 
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Cuenta {
 
     @Id
-    private String id;
+    private ObjectId id;
 
     private String email;
 
@@ -21,11 +22,11 @@ public class Cuenta {
 
     public Cuenta(){}
 
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
