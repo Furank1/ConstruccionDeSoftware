@@ -1,0 +1,8 @@
+<div class="feed">
+  <h2>Logros Recientes</h2>
+  <div *ngFor="let achievement of achievements" class="achievement">
+    <h3>{{ achievement.title }}</h3>
+    <p>{{ achievement.description }}</p>
+    <small>Logrado por: {{ achievement.user }}</small>
+  </div>
+</div>
