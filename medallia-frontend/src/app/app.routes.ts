@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FeedComponent } from './feed/feed.component';
 import { RegistroComponent } from './registro/registro.component';
+import {PublicacionComponent} from "./publicacion/publicacion.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent }, // Página principal (login)
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   {path: 'registro',component: RegistroComponent},
   { path: 'feed', component: FeedComponent },
+  {path: 'publicacion', component: PublicacionComponent },
   { path: '**', redirectTo: '' }, // Ruta por defecto
 ];
 
