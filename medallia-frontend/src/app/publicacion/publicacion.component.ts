@@ -24,9 +24,4 @@ export class PublicacionComponent {
   constructor() {}
 
   ngOnInit(): void {}
-
-  // Método para incrementar los aplausos
-  addAplausos(post: any) {
-    post.aplausos += 1; // Incrementa el número de aplausos
-  }
 }
