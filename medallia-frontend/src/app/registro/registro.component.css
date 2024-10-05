@@ -1,0 +1,51 @@
+.register-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #f29d35;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f2cd88;
+}
+.back-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: white; /* Color gris */
+  color: gray;
+  border: gray;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem; /* Espacio arriba del botón */
+}
+
+.back-button:hover {
+  background-color: transparent; /* Color más oscuro al pasar el mouse */
+}
