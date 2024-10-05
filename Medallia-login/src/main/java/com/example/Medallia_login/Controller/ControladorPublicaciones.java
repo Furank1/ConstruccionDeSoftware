@@ -21,7 +21,7 @@ public class ControladorPublicaciones {
 
     @Autowired
     private ServicioPublicacion servicioPublicacion;
-
+    //http://localhost:8080/publicaciones/aplauso?id=67008e415db9265054a9bf37
     @CrossOrigin(origins = "*")
     @PostMapping("/aplauso") // Agregar {id} a la ruta
     public ResponseEntity<String> incrementarAplausos(@RequestParam("id") String id) {
@@ -38,10 +38,6 @@ public class ControladorPublicaciones {
         }
 
     }
-
-
-    @Autowired
-    private ServicioPublicacion servicioPublicacion;
 
     //http://localhost:8080/publicaciones/get
     @CrossOrigin(origins = "*")

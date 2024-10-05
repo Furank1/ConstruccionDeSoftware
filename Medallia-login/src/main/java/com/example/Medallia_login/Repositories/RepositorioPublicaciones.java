@@ -9,9 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+
 @Repository
-    Optional<Publicacion> findById(ObjectId id);
-    List<Publicacion> findAll();
-    @Override
 public interface RepositorioPublicaciones extends MongoRepository<Publicacion, ObjectId> {
+
+    Optional<Publicacion> findById(ObjectId id);
+    @Override
+    List<Publicacion> findAll();
+
 }
