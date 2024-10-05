@@ -1,10 +1,13 @@
 package com.example.Medallia_login.Modelos;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "Publicaciones")
 public class Publicacion {
 
@@ -82,4 +85,3 @@ public class Publicacion {
         this.aplausos = aplausos;
     }
 }
-
