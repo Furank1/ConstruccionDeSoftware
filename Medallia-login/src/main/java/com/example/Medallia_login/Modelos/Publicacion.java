@@ -7,6 +7,7 @@ import java.time.Instant;
 
 @Document(collection = "Publicaciones")
 public class Publicacion {
+
     @Id
     private ObjectId id;  // Usamos ObjectId para el _id
 
