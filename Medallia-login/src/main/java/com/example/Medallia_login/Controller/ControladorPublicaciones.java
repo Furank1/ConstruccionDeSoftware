@@ -21,6 +21,7 @@ public class ControladorPublicaciones {
     @Autowired
     private ServicioPublicacion servicioPublicacion;
 
+    //http://localhost:8080/publicaciones/get
     @CrossOrigin(origins = "*")
     @GetMapping("/get")
     public List<Publicacion> getPublicaciones(){
