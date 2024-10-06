@@ -10,9 +10,6 @@ public class ServicioCuenta {
         @Autowired
         private RepositorioCuenta repositoriocuenta;
 
-
-
-
     public boolean login(String email, String password) {
         Cuenta cuenta = repositoriocuenta.findByEmail(email);
         if (cuenta != null) {

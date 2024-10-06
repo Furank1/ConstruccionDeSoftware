@@ -5,14 +5,16 @@ import java.time.Instant;
 public class PublicacionDTO {
     private String id;
     private String usuarioId;
+    private String nombreUsuario;
     private String descripcion;
     private String imagen;
     private Instant fecha;
     private int aplausos;
 
-    public PublicacionDTO(String id, String usuarioId, String descripcion, String imagen, Instant fecha, int aplausos) {
+    public PublicacionDTO(String id, String usuarioId, String nombreUsuario, String descripcion, String imagen, Instant fecha, int aplausos) {
         this.id = id;
         this.usuarioId = usuarioId;
+        this.nombreUsuario = nombreUsuario;
         this.descripcion = descripcion;
         this.imagen = imagen;
         this.fecha = fecha;
@@ -65,5 +67,13 @@ public class PublicacionDTO {
 
     public void setAplausos(int aplausos) {
         this.aplausos = aplausos;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 }

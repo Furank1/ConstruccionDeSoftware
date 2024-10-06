@@ -19,6 +19,9 @@ public class ServicioPublicacion {
     @Autowired
     private RepositorioPublicaciones repositoriopublicacion;
 
+    @Autowired
+    private RepositorioCuenta repositoriocuenta;
+
     public List<Publicacion> obtenerPublicaciones(){
         return repositoriopublicacion.findAll();
     }
@@ -40,7 +43,9 @@ public class ServicioPublicacion {
     public List<PublicacionDTO> convertirListaDTO(List<Publicacion> publicaciones){
         List<PublicacionDTO> publicacionDTOs = new ArrayList<>();
         for(Publicacion publicacion : publicaciones){
-            PublicacionDTO pubDTO = new PublicacionDTO(publicacion.getId().toHexString(), publicacion.getUsuarioId().toHexString(), publicacion.getDescripcion(), publicacion.getImagen(), publicacion.getFecha(), publicacion.getAplausos());
+            Optional<Cuenta> usuario = repositoriocuenta.findById(publicacion.getUsuarioId().toHexString());
+
+            PublicacionDTO pubDTO = new PublicacionDTO(publicacion.getId().toHexString(), publicacion.getUsuarioId().toHexString(),usuario.get().getEmail(), publicacion.getDescripcion(), publicacion.getImagen(), publicacion.getFecha(), publicacion.getAplausos());
             publicacionDTOs.add(pubDTO);
         }
         return publicacionDTOs;
