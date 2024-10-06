@@ -7,7 +7,11 @@
     <p class="post-description">{{ post.descripcion }}</p>
     <img [src]="post.imagen" alt="Publicación imagen" *ngIf="post.imagen" class="post-image"/>
     <div class="post-footer">
-      <button class="applause-button" (click)="addAplausos(post)">
+      <button 
+        class="applause-button" 
+        (click)="addAplausos(post)"
+        [disabled]="post.aplaudido" 
+      >
         <span class="applause-icon">👏</span> Aplausos ({{ post.aplausos }})
       </button>
     </div>

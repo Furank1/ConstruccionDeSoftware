@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { HttpClientModule, HttpClient } from '@angular/common/http'; // Importar HttpClientModule
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule, DatePipe, HttpClientModule], // Añadir HttpClientModule aquí
+  imports: [CommonModule, DatePipe, HttpClientModule],
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
@@ -23,7 +23,11 @@ export class FeedComponent implements OnInit {
       .subscribe(
         (data: any[]) => {
           console.log('Publicaciones cargadas', data);
-          this.posts = data;
+        
+          this.posts = data.map(post => ({
+            ...post,
+            aplaudido: false 
+          }));
         },
         (error: any) => {
           console.error('Error al cargar publicaciones', error);
@@ -32,6 +36,22 @@ export class FeedComponent implements OnInit {
   }
 
   addAplausos(post: any) {
-    post.aplausos += 1;
+    if (!post.aplaudido) { 
+      post.aplausos += 1;
+      post.aplaudido = true; 
+
+      this.http.post('http://localhost:8080/publicaciones/aplauso', null, { params: { id: post.id } })
+        .subscribe(
+          (response) => {
+            console.log('Aplausos incrementados en el servidor:', response);
+          },
+          (error) => {
+            console.error('Error al incrementar aplausos en el servidor:', error);
+            console.error('Cuerpo de respuesta:', error.error);
+
+            post.aplaudido = true; 
+          }
+        );
+    }
   }
 }

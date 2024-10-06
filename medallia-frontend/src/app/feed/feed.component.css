@@ -32,6 +32,11 @@ body {
   margin-left: 280px; 
 }
 
+.applause-button[disabled] {
+  background-color: grey; 
+  cursor: not-allowed; 
+  opacity: 0.7; 
+}
 
 .post {
   background-color: rgba(255, 255, 255, 0.2);
