@@ -28,7 +28,7 @@ export class LoginComponent {
       'Content-Type': 'application/json'
     });
 
-    this.http.post<any>('http://localhost:8080/api/auth/login', loginData, { headers })
+    this.http.post<any>('http://localhost:8080/cuenta/login', loginData, { headers })
       .subscribe(
         response => {
           console.log('Login exitoso');
@@ -36,6 +36,7 @@ export class LoginComponent {
         },
         error => {
           console.error('Error de login', error);
+          alert('Fallo el login');
           this.errorMessage = 'Credenciales incorrectas';
         }
       );

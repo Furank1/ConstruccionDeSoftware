@@ -1,0 +1,7 @@
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url('https://img.freepik.com/vector-premium/patron-costuras-premios-trofeos-medallas-primer-lugar-concepto-ganador-doodle-medalla-oro-trofeo-campeon-iconos-premio-dibujados-mano-ilustracion-vectorial-sobre-fondo-blanco_192280-811.jpg'); /* Imagen de fondo */
+}

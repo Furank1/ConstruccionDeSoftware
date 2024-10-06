@@ -1,6 +1,7 @@
 // publicacion.component.ts
 import { Component, OnInit } from '@angular/core';
-import { DatePipe } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";  // Importar CommonModule
+import { HttpClientModule } from '@angular/common/http';
 import { PublicacionService } from '../../publicacion.service';
 //import { PublicacionService } from './publicacion.service';
 
