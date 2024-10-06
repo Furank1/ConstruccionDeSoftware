@@ -14,7 +14,7 @@ export class LoginComponent {
 
   onSubmit() {
     console.log("Formulario enviado");
-    // Aquí puedes agregar lógica adicional si es necesario
+    this.router.navigate(['/publicacion']);
   }
   goToRegister() {
     this.router.navigate(['/registro']); // Redirige a la ruta de creación de cuenta

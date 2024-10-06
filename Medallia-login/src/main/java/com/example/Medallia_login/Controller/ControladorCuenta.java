@@ -15,11 +15,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping ("/api/auth")
+@RequestMapping ("/cuenta")
 public class ControladorCuenta {
     @Autowired
     private ServicioCuenta servicioCuenta;
 
+    //http://localhost:8080/publicaciones/get
     @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody CuentaDTO loginRequest) {

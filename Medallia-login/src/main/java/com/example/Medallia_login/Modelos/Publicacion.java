@@ -10,6 +10,7 @@ import java.time.Instant;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "Publicaciones")
 public class Publicacion {
+
     @Id
     private ObjectId id;  // Usamos ObjectId para el _id
 

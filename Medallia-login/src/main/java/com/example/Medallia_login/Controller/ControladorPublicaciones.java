@@ -1,6 +1,8 @@
 package com.example.Medallia_login.Controller;
 import com.example.Medallia_login.Dominio.CuentaDTO;
+import com.example.Medallia_login.Dominio.PublicacionDTO;
 import com.example.Medallia_login.Modelos.Cuenta;
+import com.example.Medallia_login.Modelos.Publicacion;
 import com.example.Medallia_login.Repositories.RepositorioCuenta;
 import com.example.Medallia_login.Servicio.ServicioCuenta;
 import com.example.Medallia_login.Servicio.ServicioPublicacion;
@@ -12,15 +14,16 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
-@RequestMapping ("/home")
+@RequestMapping ("/publicaciones")
 public class ControladorPublicaciones {
 
     @Autowired
     private ServicioPublicacion servicioPublicacion;
-
+    //http://localhost:8080/publicaciones/aplauso?id=67008e415db9265054a9bf37
     @CrossOrigin(origins = "*")
     @PostMapping("/aplauso") // Agregar {id} a la ruta
     public ResponseEntity<String> incrementarAplausos(@RequestParam("id") String id) {
@@ -38,5 +41,11 @@ public class ControladorPublicaciones {
 
     }
 
-
+    //http://localhost:8080/publicaciones/get
+    @CrossOrigin(origins = "*")
+    @GetMapping("/get")
+    public List<PublicacionDTO> getPublicaciones(){
+        List<Publicacion> publicaciones = servicioPublicacion.obtenerPublicaciones();
+        return servicioPublicacion.convertirListaDTO(publicaciones);
+    }
 }
