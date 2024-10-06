@@ -1,7 +1,134 @@
-.app-container {
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-image: url('https://img.freepik.com/vector-premium/patron-costuras-premios-trofeos-medallas-primer-lugar-concepto-ganador-doodle-medalla-oro-trofeo-campeon-iconos-premio-dibujados-mano-ilustracion-vectorial-sobre-fondo-blanco_192280-811.jpg'); /* Imagen de fondo */
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  animation: floatingBackground 10s ease-in-out infinite;
+}
+
+@keyframes floatingBackground {
+  0% { background-position: 0 0; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0 0; }
+}
+
+.container {
+  max-width: 800px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  padding: px;
+  box-sizing: border-box;
+  margin-left: 280px; 
+}
+
+
+.post {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 30px;
+  margin: 40px 0;
+  width: 100%;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.post:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+.username {
+  font-size: 22px;
+  font-weight: bold;
+  color: black;
+}
+
+.post-date {
+  font-size: 14px;
+  color: black;
+}
+
+.post-description {
+  margin: 20px 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: black;
+}
+
+.post-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  margin: 20px 0;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.applause-button {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.4s ease;
+  box-shadow: 0 5px 20px rgba(255, 65, 108, 0.4);
+}
+
+.applause-icon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.applause-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 40px rgba(255, 65, 108, 0.5);
+}
+
+@media (max-width: 600px) {
+  .post {
+    padding: 20px;
+  }
+
+  .username {
+    font-size: 18px;
+  }
+
+  .post-image {
+    height: 200px;
+  }
+
+  .applause-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
 }
