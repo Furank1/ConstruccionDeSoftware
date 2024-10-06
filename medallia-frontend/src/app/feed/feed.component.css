@@ -1,139 +1,78 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #1f1c2c, #928dab);
+.carousel-container {
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  padding: 40px;
-  box-sizing: border-box;
-}
-
-body {
-  overflow: hidden;
-  animation: floatingBackground 10s ease-in-out infinite;
-}
-
-@keyframes floatingBackground {
-  0% { background-position: 0 0; }
-  50% { background-position: 100% 100%; }
-  100% { background-position: 0 0; }
-}
-
-.container {
-  max-width: 800px;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; 
-  padding: px;
-  box-sizing: border-box;
-  margin-left: 280px; 
-}
-
-.applause-button[disabled] {
-  background-color: grey; 
-  cursor: not-allowed; 
-  opacity: 0.7; 
-}
-
-.post {
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: 30px;
-  margin: 40px 0;
-  width: 100%;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
-  transition: all 0.5s ease;
+  max-width: 600px;
+  margin: 0 auto;
   position: relative;
+  background-color: #f0f0f0; /* Fondo claro para el contenedor del carrusel */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.carousel-wrapper {
   overflow: hidden;
+  flex: 1;
+  border-radius: 10px; /* Bordes redondeados en el wrapper */
 }
 
-.post:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
-}
-
-.post-header {
+.carousel {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #fff;
+  transition: transform 0.5s ease; /* Efecto de transición suave */
 }
 
-.username {
-  font-size: 22px;
-  font-weight: bold;
-  color: black;
+.post-item {
+  min-width: 100%; /* Cada publicación ocupa todo el ancho */
+  opacity: 0; /* Inicia con la publicación oculta */
+  transition: opacity 0.5s ease;
 }
 
-.post-date {
-  font-size: 14px;
-  color: black;
+.post-item.active {
+  opacity: 1; /* Muestra la publicación activa */
 }
 
-.post-description {
-  margin: 20px 0;
-  font-size: 18px;
-  line-height: 1.6;
-  color: black;
+.carousel-button {
+  background-color: #f29d35;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px;
+  font-size: 20px; /* Aumenta el tamaño del botón */
+  transition: background-color 0.3s; /* Transición para el hover */
 }
 
-.post-image {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  margin: 20px 0;
+.carousel-button:hover {
+  background-color: #f2cd88;
 }
 
-.post-footer {
-  display: flex;
-  justify-content: flex-end;
+.post-content {
+  position: relative; /* Para usar con pseudo-elementos */
 }
 
 .applause-button {
-  background: linear-gradient(135deg, #ff416c, #ff4b2b);
-  color: #fff;
+  background-color: #F29D35; /* Color del botón */
+  color: white;
+  padding: 10px 15px;
   border: none;
-  border-radius: 50px;
-  padding: 12px 30px;
-  font-size: 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: all 0.4s ease;
-  box-shadow: 0 5px 20px rgba(255, 65, 108, 0.4);
-}
-
-.applause-icon {
-  margin-right: 10px;
-  font-size: 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .applause-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 10px 40px rgba(255, 65, 108, 0.5);
+  background-color: #F2CD88; /* Color del botón en hover */
 }
 
-@media (max-width: 600px) {
-  .post {
-    padding: 20px;
-  }
+/* Añadir efectos de sombra a las publicaciones */
+.post-content:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra al pasar el ratón */
+}
+.carousel-container {
+  height: 100vh; /* Ocupar toda la altura de la pantalla */
+}
 
-  .username {
-    font-size: 18px;
-  }
-
-  .post-image {
-    height: 200px;
-  }
-
-  .applause-button {
-    padding: 10px 20px;
-    font-size: 14px;
-  }
+.carousel {
+  display: flex;
 }
