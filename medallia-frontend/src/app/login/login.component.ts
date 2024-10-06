@@ -32,7 +32,7 @@ export class LoginComponent {
       .subscribe(
         response => {
           console.log('Login exitoso');
-          this.router.navigate(['/registro']);
+          this.router.navigate(['/feed']);
         },
         error => {
           console.error('Error de login', error);
