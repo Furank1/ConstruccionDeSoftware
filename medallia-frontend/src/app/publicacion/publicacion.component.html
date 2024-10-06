@@ -1,11 +1,8 @@
-<div class="post-list">
-  <div *ngFor="let post of posts" class="post-item">
-    <p><strong></strong> {{ post.user }}</p>
-    <p><strong></strong> {{ post.date | date:'short' }}</p> <!-- Formatear fecha -->
-    <img [src]="post.im" alt="Post image" width="100"> <!-- Mostrar imagen -->
-    <p>{{ post.content }}</p> <!-- Mostrar el contenido de la publicación -->
-    <p><strong>Aplausos:</strong> {{ post.aplausos }}</p> <!-- Mostrar el número de aplausos -->
-    <button (click)="addAplausos(post)">👍 Aplauso</button> <!-- Botón para incrementar aplausos -->
-    <hr>
-  </div>
+<!-- publicacion.component.html -->
+<div *ngFor="let post of posts" class="post">
+  <h3>{{ post.usuarioId }}</h3> 
+  <p>{{ post.descripcion }}</p>
+  <img [src]="post.imagen" alt="Publicación imagen" *ngIf="post.imagen"/>
+  <p>Fecha: {{ post.fecha | date: 'short' }}</p>
+  <button (click)="addAplausos(post)">Aplausos ({{ post.aplausos }})</button>
 </div>

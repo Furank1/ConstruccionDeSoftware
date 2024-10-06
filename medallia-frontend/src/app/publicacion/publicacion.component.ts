@@ -1,32 +1,44 @@
-import { Component } from '@angular/core';
-import {DatePipe, NgForOf} from "@angular/common";
+// publicacion.component.ts
+import { Component, OnInit } from '@angular/core';
+import { DatePipe } from "@angular/common";
+import { PublicacionService } from '../../publicacion.service';
+//import { PublicacionService } from './publicacion.service';
+
 
 @Component({
   selector: 'app-publicacion',
   standalone: true,
   imports: [
-    NgForOf,
     DatePipe
   ],
   templateUrl: './publicacion.component.html',
   styleUrls: ['./publicacion.component.css']
 })
-export class PublicacionComponent {
-  // Lista de publicaciones simuladas
-  posts = [
-    { content: 'Esta es la primera publicación.', aplausos: 5,
-      im: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEByMBn-eShsLDt5kvNR3-vP7pKiLeeCd9cw&s',
-      date: new Date(), user: 'Usuario1', id: 1234567890 },
-    { content: 'Segunda publicación, ¿qué les parece?', aplausos: 10, date: new Date(), user: 'Usuario2' },
-    { content: '¡Me encanta compartir mis logros aquí!', aplausos: 3, date: new Date(), user: 'Usuario3' },
-  ];
+export class PublicacionComponent implements OnInit {
+  // Lista de publicaciones
+  posts: any[] = [];
 
-  constructor() {}
+constructor(private publicacionService: PublicacionService) {}
 
-  ngOnInit(): void {}
 
-  // Método para incrementar los aplausos
+  ngOnInit(): void {
+    this.cargarPublicaciones(); // Cargar las publicaciones al iniciar
+  }
+
+  // Método para cargar las publicaciones
+  cargarPublicaciones(): void {
+    this.publicacionService.getPublicaciones().subscribe(
+      (data: any[]) => {
+        this.posts = data; 
+      },
+      (error: any) => {
+        console.error('Error al cargar publicaciones', error);
+      }
+    );
+  }
+
+  // aplausos hardcodeados... 
   addAplausos(post: any) {
-    post.aplausos += 1; // Incrementa el número de aplausos
+    post.aplausos += 1; 
   }
 }
