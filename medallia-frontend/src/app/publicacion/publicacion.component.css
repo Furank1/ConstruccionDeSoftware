@@ -1,0 +1,25 @@
+.post-list {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.post-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #f29d35;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f2cd88;
+}
