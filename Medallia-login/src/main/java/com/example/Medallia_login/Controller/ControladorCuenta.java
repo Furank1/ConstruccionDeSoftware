@@ -26,8 +26,10 @@ public class ControladorCuenta {
     public ResponseEntity<String> login(@RequestBody CuentaDTO loginRequest) {
         boolean success = servicioCuenta.login(loginRequest.getEmail(), loginRequest.getPassword());
         if (success) {
+            System.out.println("OPA");
             return ResponseEntity.ok("{\"mensaje\": \"Login exitoso\"}");
         } else {
+            System.out.println("NO OPA");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"mensaje\": \"Credenciales incorrectas\"}");
         }
     }

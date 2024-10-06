@@ -1,8 +1,19 @@
-<div class="feed">
-  <h2>Logros Recientes</h2>
-  <div *ngFor="let achievement of achievements" class="achievement">
-    <h3>{{ achievement.title }}</h3>
-    <p>{{ achievement.description }}</p>
-    <small>Logrado por: {{ achievement.user }}</small>
+<div class="container">
+  <div *ngFor="let post of posts" class="post">
+    <div class="post-header">
+      <h3 class="username">{{ post.usuarioNombre }}</h3>
+      <p class="post-date">{{ post.fecha | date: 'short' }}</p>
+    </div>
+    <p class="post-description">{{ post.descripcion }}</p>
+    <img [src]="post.imagen" alt="Publicación imagen" *ngIf="post.imagen" class="post-image"/>
+    <div class="post-footer">
+      <button 
+        class="applause-button" 
+        (click)="addAplausos(post)"
+        [disabled]="post.aplaudido" 
+      >
+        <span class="applause-icon">👏</span> Aplausos ({{ post.aplausos }})
+      </button>
+    </div>
   </div>
 </div>
