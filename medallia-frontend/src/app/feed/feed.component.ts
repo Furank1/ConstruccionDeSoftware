@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule, DatePipe, HttpClientModule],
+  imports: [CommonModule, DatePipe, HttpClientModule, RouterLink],
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
@@ -34,26 +35,21 @@ export class FeedComponent implements OnInit {
         }
       );
   }
-  currentPostIndex = 0; // Índice de la publicación actual
 
-  // Método para ir a la publicación anterior
+  currentPostIndex = 0;
+
   prevPost() {
-    this.currentPostIndex = (this.currentPostIndex > 0) ? this.currentPostIndex - 1 : this.posts.length - 1;
-    this.updateCarouselPosition();
+    if (this.currentPostIndex > 0) {
+      this.currentPostIndex--;
+    }
   }
 
-  // Método para ir a la siguiente publicación
   nextPost() {
-    this.currentPostIndex = (this.currentPostIndex < this.posts.length - 1) ? this.currentPostIndex + 1 : 0;
-    this.updateCarouselPosition();
+    if (this.currentPostIndex < this.posts.length - 1) {
+      this.currentPostIndex++;
+    }
   }
 
-  // Actualiza la posición del carrusel
-  updateCarouselPosition() {
-    const carousel = document.querySelector('.carousel') as HTMLElement;
-    const offset = -this.currentPostIndex * 100; // Calcula el desplazamiento
-    carousel.style.transform = `translateX(${offset}%)`; // Aplica el desplazamiento
-  }
   addAplausos(post: any) {
     if (!post.aplaudido) {
       post.aplausos += 1;

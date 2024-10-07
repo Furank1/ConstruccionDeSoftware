@@ -1,30 +1,32 @@
-<div class="carousel-container flex items-center justify-center my-8 w-full h-screen">
-  <button (click)="prevPost()" class="carousel-button bg-[#F29D35] text-white py-2 px-4 rounded-full hover:bg-[#F2CD88] transition duration-200">
+<div class="carousel-container flex items-center justify-center h-screen">
+  <button (click)="prevPost()" class="carousel-button text-white bg-[#F29D35] hover:bg-[#F2CD88] rounded-full p-2">
     ◀
   </button>
 
-  <div class="carousel-wrapper overflow-hidden flex-grow">
-    <div class="carousel flex transition-transform duration-300" [style.transform]="'translateX(' + (-currentPostIndex * 100) + '%)'">
+  <div class="carousel-wrapper overflow-hidden w-full max-w-screen-lg mx-4">
+    <div class="carousel flex transition-transform duration-300 ease-in-out" [style.transform]="'translateX(-' + (currentPostIndex * 100) + '%)'">
       <ng-container *ngFor="let post of posts; let i = index">
-        <div *ngIf="posts.length" class="post-item flex-shrink-0 w-full max-w-md p-4 bg-white rounded-lg shadow-md mx-2 h-full">
-          <div class="post-header flex items-center gap-4 mb-4">
-            <img src alt= "Usuario" class="w-12 h-12 rounded-full"/>
-            <h3 class="text-xl font-semibold text-gray-800">{{ post.usuarioId }}</h3>
-          </div>
-          <p class="text-gray-600 mb-4">{{ post.descripcion }}</p>
-          <img [src]="post.imagen" alt="Publicación imagen" *ngIf="post.imagen" class="rounded-lg max-h-60 object-cover mb-4"/>
-          <p class="text-sm text-gray-500 mb-4">Fecha: {{ post.fecha | date: 'short' }}</p>
-          <div class="aplausos flex items-center justify-end">
-            <button (click)="addAplausos(post)" class="applause-button bg-[#F29D35] text-white py-2 px-4 rounded-lg hover:bg-[#F2CD88] transition duration-200">
-              Aplausos ({{ post.aplausos }})
-            </button>
+        <div class="post-item flex-shrink-0 w-full h-full p-4" [ngClass]="{ 'hidden': i !== currentPostIndex }">
+          <div class="post-content bg-white rounded-lg shadow-md h-full">
+            <div class="post-header flex items-center gap-4 mb-4">
+              <img src="assets/default-avatar.png" alt="Usuario" class="w-12 h-12 rounded-full" />
+              <h3 class="text-xl font-semibold text-gray-800">{{ post.usuarioId }}</h3>
+            </div>
+            <p class="text-gray-600 mb-4">{{ post.descripcion }}</p>
+            <img [src]="post.imagen" alt="Publicación imagen" *ngIf="post.imagen" class="rounded-lg max-h-60 object-cover mb-4" />
+            <p class="text-sm text-gray-500 mb-4">Fecha: {{ post.fecha | date: 'short' }}</p>
+            <div class="aplausos flex items-center justify-end">
+              <button (click)="addAplausos(post)" class="applause-button bg-[#F29D35] text-white py-2 px-4 rounded-lg hover:bg-[#F2CD88]">
+                Aplausos ({{ post.aplausos }})
+              </button>
+            </div>
           </div>
         </div>
       </ng-container>
     </div>
   </div>
 
-  <button (click)="nextPost()" class="carousel-button bg-[#F29D35] text-white py-2 px-4 rounded-full hover:bg-[#F2CD88] transition duration-200">
+  <button (click)="nextPost()" class="carousel-button text-white bg-[#F29D35] hover:bg-[#F2CD88] rounded-full p-2">
     ▶
   </button>
 </div>

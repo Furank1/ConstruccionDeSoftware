@@ -1,35 +1,36 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
 .carousel-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 600px;
-  margin: 0 auto;
-  position: relative;
-  background-color: #f0f0f0; /* Fondo claro para el contenedor del carrusel */
-  padding: 20px; /* Espaciado interno */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  width: 100vw;
+  height: 100vh;
+  background-color: #f0f0f0;
+  padding: 20px;
 }
 
 .carousel-wrapper {
   overflow: hidden;
   flex: 1;
-  border-radius: 10px; /* Bordes redondeados en el wrapper */
+  height: 100%;
+  border-radius: 10px;
 }
 
 .carousel {
   display: flex;
-  transition: transform 0.5s ease; /* Efecto de transición suave */
+  transition: transform 0.5s ease;
+  width: 100%; /* Ocupar todo el ancho disponible */
 }
 
 .post-item {
-  min-width: 100%; /* Cada publicación ocupa todo el ancho */
-  opacity: 0; /* Inicia con la publicación oculta */
-  transition: opacity 0.5s ease;
-}
-
-.post-item.active {
-  opacity: 1; /* Muestra la publicación activa */
+  min-width: 100%; /* Cada post ocupa el 100% del ancho del carrusel */
+  height: 100%;
 }
 
 .carousel-button {
@@ -37,42 +38,27 @@
   color: white;
   border: none;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 50%;
+  font-size: 20px;
   cursor: pointer;
   margin: 0 10px;
-  font-size: 20px; /* Aumenta el tamaño del botón */
-  transition: background-color 0.3s; /* Transición para el hover */
+  transition: background-color 0.3s ease;
 }
 
 .carousel-button:hover {
   background-color: #f2cd88;
 }
 
-.post-content {
-  position: relative; /* Para usar con pseudo-elementos */
+.post-content img {
+  width: 100%; /* La imagen ocupará todo el ancho del contenedor */
+  height: auto; /* Mantiene las proporciones de la imagen */
+  object-fit: cover; /* Evita que la imagen se corte */
+  border-radius: 10px;
 }
 
-.applause-button {
-  background-color: #F29D35; /* Color del botón */
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.applause-button:hover {
-  background-color: #F2CD88; /* Color del botón en hover */
-}
-
-/* Añadir efectos de sombra a las publicaciones */
-.post-content:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra al pasar el ratón */
-}
-.carousel-container {
-  height: 100vh; /* Ocupar toda la altura de la pantalla */
-}
-
-.carousel {
+.post-item {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Hace que el contenedor ocupe toda la altura */
 }
