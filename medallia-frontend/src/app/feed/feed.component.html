@@ -1,19 +1,28 @@
-<div class="container">
-  <div *ngFor="let post of posts" class="post">
-    <div class="post-header">
-      <h3 class="username">{{ post.usuarioNombre }}</h3>
-      <p class="post-date">{{ post.fecha | date: 'short' }}</p>
-    </div>
-    <p class="post-description">{{ post.descripcion }}</p>
-    <img [src]="post.imagen" alt="Publicación imagen" *ngIf="post.imagen" class="post-image"/>
-    <div class="post-footer">
-      <button 
-        class="applause-button" 
-        (click)="addAplausos(post)"
-        [disabled]="post.aplaudido" 
-      >
-        <span class="applause-icon">👏</span> Aplausos ({{ post.aplausos }})
-      </button>
+<div class="page-container">
+  <!-- Barra de navegación estática -->
+  <nav class="navbar">
+    <!--Acá la idea es agregar los botones que necesitemos para poder navegar a las otras partes de la app-->
+    <button class="nav-button">Inicio</button>
+    <button class="nav-button">Perfil</button>
+    <button class="nav-button">Configuración</button>
+  </nav>
+
+  <!-- Contenedor del feed de publicaciones con scroll -->
+  <div class="feed-container">
+    <div class="container">
+      <div *ngFor="let post of posts" class="post" [ngClass]="{ 'error': post.error }">
+        <div class="post-header">
+          <h3 class="username">{{ post.usuarioNombre }}</h3>
+          <p class="post-date">{{ post.fecha | date: 'short' }}</p>
+        </div>
+        <p class="post-description">{{ post.descripcion }}</p>
+        <img [src]="post.imagen" alt="Publicación imagen" *ngIf="post.imagen" class="post-image"/>
+        <div class="post-footer">
+          <button class="applause-button" (click)="addAplausos(post)" [disabled]="post.aplaudido">
+            <span class="applause-icon">👏</span> Aplausos ({{ post.aplausos }})
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

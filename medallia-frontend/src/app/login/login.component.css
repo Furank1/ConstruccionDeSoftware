@@ -1,96 +1,93 @@
-/* Estilo para el contenedor principal */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #F5F5F5; 
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .app-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-image: url('https://img.freepik.com/vector-premium/patron-costuras-premios-trofeos-medallas-primer-lugar-concepto-ganador-doodle-medalla-oro-trofeo-campeon-iconos-premio-dibujados-mano-ilustracion-vectorial-sobre-fondo-blanco_192280-811.jpg'); /* Imagen de fondo */
+  height: 100vh;
+  background-color: #F5F5F5; 
 }
 
-/* Estilo para el contenedor del login */
+
 .login-container {
-  width: 100%;
-  height: 100vh; /* Ocupa toda la altura de la pantalla */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover; /* Asegura que la imagen cubra todo el fondo */
-  background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* No repite la imagen */
-}
-
-/* Estilo para el recuadro blanco del login */
-.login-box {
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: 10px;
-  border: 2px solid #8C4303; /* Borde color */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 350px;
-  text-align: center;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center; 
 }
 
-/* Título grande del login */
+
 .title {
-  margin-bottom: 1rem;
-  font-size: 2.5rem; /* Tamaño de fuente grande */
-  color: #020301; /* Color del título */
+  color: #4A90E2; 
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
-/* Estilo de los campos de entrada */
+
 .input-group {
-  margin-bottom: 1.5rem;
-  text-align: left;
+  margin-bottom: 15px;
+  text-align: left; 
 }
 
 .input-group label {
-  display: block;
-  margin-bottom: 0.5rem;
+  color: #333333;
   font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
 }
 
 .input-group input {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
+  padding: 10px;
+  border: 1px solid #CCC;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
-/* Estilo del botón de inicio de sesión */
+
 button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #F29D35;
-  color: white;
+  width: 100%; 
+  padding: 10px;
   border: none;
-  border-radius: 5px;
-  font-size: 1rem;
+  border-radius: 4px;
   cursor: pointer;
-  margin-bottom: 1rem; /* Espaciado entre botones */
-}
-
-button:hover {
-  background-color: #F2CD88;
-}
-
-.create-account-button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: transparent; /* Fondo transparente */
-  color: gray; /* Color del texto */
-  border: 2px solid #F29D35; /* Borde oscuro */
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* Transición suave para el hover */
-}
-
-.create-account-button:hover {
-  background-color: white; /* Color de fondo al pasar el cursor */
-  color: #8C4303; /* Cambia el color del texto al pasar el cursor */
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+  box-sizing: border-box; 
 }
 
 
+button[type="submit"] {
+  background-color: #4A90E2; 
+  color: white;
+}
+
+button[type="submit"]:hover {
+  background-color: #357ABD;
+}
 
 
+button[type="button"] {
+  background-color: #FFD700; 
+  color: white;
+}
+
+button[type="button"]:hover {
+  background-color: #E6BE00; 
+}
