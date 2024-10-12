@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-feed',
@@ -13,7 +13,7 @@ import {RouterLink} from "@angular/router";
 export class FeedComponent implements OnInit {
   posts: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.cargarPublicaciones();
@@ -50,6 +50,11 @@ export class FeedComponent implements OnInit {
     }
   }
 
+  openPublishModal(): void {
+    // Aquí puedes implementar la lógica para abrir un modal o redirigir a una página de publicación
+    console.log('Botón "Publicar" clicado');
+    this.router.navigate(['/publicar']);
+  }
   addAplausos(post: any) {
     if (!post.aplaudido) {
       post.aplausos += 1;

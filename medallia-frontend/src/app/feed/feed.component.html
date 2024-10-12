@@ -1,4 +1,4 @@
-<div class="carousel-container flex items-center justify-center h-screen">
+<div class="carousel-container flex items-center justify-center h-screen relative">
   <button (click)="prevPost()" class="carousel-button text-white bg-[#F29D35] hover:bg-[#F2CD88] rounded-full p-2">
     ◀
   </button>
@@ -28,5 +28,10 @@
 
   <button (click)="nextPost()" class="carousel-button text-white bg-[#F29D35] hover:bg-[#F2CD88] rounded-full p-2">
     ▶
+  </button>
+
+  <!-- Botón "Publicar" en la esquina superior derecha -->
+  <button (click)="openPublishModal()" class="absolute top-4 right-4 bg-[#F29D35] text-white py-2 px-4 rounded-lg hover:bg-[#F2CD88]">
+    Publicar
   </button>
 </div>

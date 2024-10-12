@@ -1,0 +1,47 @@
+<div class="container mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-8 text-center text-[#F29D35]">Crear Publicación</h1>
+
+  <form (ngSubmit)="onSubmit()" class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md border border-gray-200">
+
+    <!-- Descripción -->
+    <div class="mb-6">
+      <label class="block mb-2 text-sm font-medium text-gray-700" for="descripcion">Descripción</label>
+      <textarea
+        id="descripcion"
+        [(ngModel)]="descripcion"
+        name="descripcion"
+        rows="4"
+        class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F29D35] focus:border-transparent"
+        placeholder="Escribe una descripción..."
+      ></textarea>
+    </div>
+
+    <!-- Selector de Imagen -->
+    <div class="mb-6">
+      <label class="block mb-2 text-sm font-medium text-gray-700" for="user_avatar">Seleccionar Imagen</label>
+      <input
+        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#F29D35] focus:border-transparent transition duration-200 ease-in-out"
+        aria-describedby="user_avatar_help"
+        id="user_avatar"
+        type="file"
+        (change)="onFileSelected($event)"
+      />
+      <div class="mt-1 text-sm text-gray-500" id="user_avatar_help">
+        Una imagen de perfil es útil para confirmar que estás logueado en tu cuenta.
+      </div>
+    </div>
+
+    <!-- Vista previa de la imagen -->
+    <div class="mb-6">
+      <img *ngIf="imageUrl" [src]="imageUrl" alt="Vista previa de la imagen" class="rounded-lg max-h-60 object-cover mb-4 border border-gray-300 shadow-sm" />
+    </div>
+
+    <!-- Botón de Publicar -->
+    <button
+      type="submit"
+      class="w-full bg-[#F29D35] text-white py-2 rounded-lg hover:bg-[#F2CD88] transition duration-200 ease-in-out font-semibold shadow-md"
+    >
+      Publicar
+    </button>
+  </form>
+</div>
