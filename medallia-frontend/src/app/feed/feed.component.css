@@ -1,0 +1,143 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #4A90E2;
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-button {
+  background-color: #FFD700;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #E6BE00;
+  transform: scale(1.05);
+}
+
+.feed-container {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 60px;
+  padding: 20px;
+  background-color: #F5F5F5;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  width: 30%; 
+  max-width: 1200px; 
+  margin: 0 auto; 
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: 100%;
+  max-width: 800px;
+  transition: transform 0.3s ease;
+}
+
+
+
+.post:hover {
+  transform: translateY(-5px);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.username {
+  font-size: 18px;
+  color: #4A90E2;
+  margin: 0;
+  font-weight: bold;
+}
+
+.post-date {
+  font-size: 12px;
+  color: #999999;
+}
+
+.post-description {
+  color: #333333;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.post-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+
+.post-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.applause-button {
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 8px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.applause-button:hover:not(:disabled) {
+  background-color: #357ABD;
+  transform: scale(1.05);
+}
+
+.applause-button:disabled {
+  background-color: #999999;
+  cursor: not-allowed;
+}
+
+.applause-icon {
+  font-size: 18px;
+}
