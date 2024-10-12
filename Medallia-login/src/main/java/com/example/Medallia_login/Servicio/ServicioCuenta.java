@@ -5,17 +5,17 @@ import com.example.Medallia_login.Repositories.RepositorioCuenta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ServicioCuenta {
         @Autowired
         private RepositorioCuenta repositoriocuenta;
 
-    public boolean login(String email, String password) {
+    public Optional<Cuenta> login(String email, String password) {
         Cuenta cuenta = repositoriocuenta.findByEmail(email);
-        if (cuenta != null) {
-            return password.equals(cuenta.getPassword());
-        }
-        return false;
+        Optional <Cuenta> cuentaopt= Optional.ofNullable(cuenta);
+        return cuentaopt;
     }
 
 
