@@ -1,24 +1,20 @@
-<div class="page-container">
+<div class="page-container h-screen">
   <!-- Barra de navegación estática -->
   <nav class="navbar">
-    <!--Acá la idea es agregar los botones que necesitemos para poder navegar a las otras partes de la app-->
+    <!-- Agrega los botones para navegar a las otras partes de la app -->
     <button class="nav-button">Inicio</button>
     <button class="nav-button">Perfil</button>
     <button class="nav-button">Configuración</button>
+    <button (click)="publicar()" class="publish-button" >Publicar</button>
   </nav>
 
   <!-- Contenedor del feed de publicaciones con scroll -->
-  <div class="relative">
-    <!-- Botón de Publicar -->
-    <button
-      (click)="publicar()"
-      class="absolute top-0 right-0 m-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow-lg">
-      Publicar
-    </button>
+  <div class="relative h-full overflow-y-auto">
 
-    <!-- Grid de publicaciones -->
-    <div class="grid grid-cols-2 gap-4 md:grid-cols-4 mt-16">
-      <div *ngFor="let post of posts" class="grid gap-4">
+
+    <!-- Contenedor de las publicaciones (scrollable) -->
+    <div class="flex flex-col gap-4 mt-16 px-4">
+      <div *ngFor="let post of posts" class="flex justify-center">
         <app-publicacion
           [imagen]="post.imagen"
           [usuarioId]="post.usuario"
