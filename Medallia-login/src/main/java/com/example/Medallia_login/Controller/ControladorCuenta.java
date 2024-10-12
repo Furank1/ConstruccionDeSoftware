@@ -30,6 +30,7 @@ public class ControladorCuenta {
             Cuenta cuenta = cuentaopt.get();
             Map<String, Object> response = new HashMap<>();
             response.put("id", cuenta.getId().toHexString());
+            response.put("email", cuenta.getEmail());
             response.put("ok", true);
 
             return ResponseEntity.ok(response);
