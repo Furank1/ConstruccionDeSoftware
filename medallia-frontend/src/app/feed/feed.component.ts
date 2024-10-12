@@ -38,28 +38,4 @@ export class FeedComponent implements OnInit {
   }
 
 
-  publicar(): void {
-    // Aquí puedes implementar la lógica para abrir un modal o redirigir a una página de publicación
-    console.log('Botón "Publicar" clicado');
-    this.router.navigate(['/publicar']);
-  }
-  addAplausos(post: any) {
-    if (!post.aplaudido) {
-      post.aplausos += 1;
-      post.aplaudido = true;
-
-      this.http.post('http://localhost:8080/publicaciones/aplauso', null, { params: { id: post.id } })
-        .subscribe(
-          (response) => {
-            console.log('Aplausos incrementados en el servidor:', response);
-          },
-          (error) => {
-            console.error('Error al incrementar aplausos en el servidor:', error);
-            console.error('Cuerpo de respuesta:', error.error);
-
-            post.aplaudido = true;
-          }
-        );
-    }
-  }
 }
