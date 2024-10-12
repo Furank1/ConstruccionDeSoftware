@@ -8,20 +8,25 @@
   </nav>
 
   <!-- Contenedor del feed de publicaciones con scroll -->
-  <div class="feed-container">
-    <div class="container">
-      <div *ngFor="let post of posts" class="post" [ngClass]="{ 'error': post.error }">
-        <div class="post-header">
-          <h3 class="username">{{ post.usuarioNombre }}</h3>
-          <p class="post-date">{{ post.fecha | date: 'short' }}</p>
-        </div>
-        <p class="post-description">{{ post.descripcion }}</p>
-        <img [src]="post.imagen" alt="Publicación imagen" *ngIf="post.imagen" class="post-image"/>
-        <div class="post-footer">
-          <button class="applause-button" (click)="addAplausos(post)" [disabled]="post.aplaudido">
-            <span class="applause-icon">👏</span> Aplausos ({{ post.aplausos }})
-          </button>
-        </div>
+  <div class="relative">
+    <!-- Botón de Publicar -->
+    <button
+      (click)="publicar()"
+      class="absolute top-0 right-0 m-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow-lg">
+      Publicar
+    </button>
+
+    <!-- Grid de publicaciones -->
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-4 mt-16">
+      <div *ngFor="let post of posts" class="grid gap-4">
+        <app-publicacion
+          [imagen]="post.imagen"
+          [usuarioId]="post.usuario"
+          [descripcion]="post.descripcion"
+          [fecha]="post.fecha"
+          [aplausos]="post.aplausos"
+          (aplauso)="addAplausos(post.aplausos)">
+        </app-publicacion>
       </div>
     </div>
   </div>
