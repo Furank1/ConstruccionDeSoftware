@@ -1,45 +1,50 @@
-// publicacion.component.ts
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, DatePipe } from "@angular/common";  // Importar CommonModule
-import { HttpClientModule } from '@angular/common/http';
-import { PublicacionService } from '../../publicacion.service';
-//import { PublicacionService } from './publicacion.service';
-
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {NgOptimizedImage} from "@angular/common";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-publicacion',
+  templateUrl: './publicacion.component.html',
   standalone: true,
   imports: [
-    DatePipe
+    NgOptimizedImage
   ],
-  templateUrl: './publicacion.component.html',
   styleUrls: ['./publicacion.component.css']
 })
-export class PublicacionComponent implements OnInit {
-  // Lista de publicaciones
+export class PublicacionComponent {
+
+  @Input() imagen!: string;
+  @Input() usuarioId!: string;
+  @Input() descripcion!: string;
+  @Input() fecha!: Date;
+  @Input() aplausos!: number;  // Recibe el número de aplausos desde el componente padre
   posts: any[] = [];
-
-constructor(private publicacionService: PublicacionService) {}
-
-
+  // Función que incrementa el número de aplausos
+  @Output() aplauso = new EventEmitter<void>();
+  onAplaudir() {
+    this.aplausos++;
+  }
   ngOnInit(): void {
-    this.cargarPublicaciones(); // Cargar las publicaciones al iniciar
+    this.cargarPublicaciones();
   }
 
-  // Método para cargar las publicaciones
+  constructor(private http: HttpClient) {
+  }
+
   cargarPublicaciones(): void {
-    this.publicacionService.getPublicaciones().subscribe(
-      (data: any[]) => {
-        this.posts = data; 
-      },
-      (error: any) => {
-        console.error('Error al cargar publicaciones', error);
-      }
-    );
-  }
+    this.http.get<any[]>('http://localhost:8080/publicaciones/get')
+      .subscribe(
+        (data: any[]) => {
+          console.log('Publicaciones cargadas', data);
 
-  // aplausos hardcodeados... 
-  addAplausos(post: any) {
-    post.aplausos += 1; 
+          this.posts = data.map(post => ({
+            ...post,
+            aplaudido: false
+          }));
+        },
+        (error: any) => {
+          console.error('Error al cargar publicaciones', error);
+        }
+      );
   }
 }

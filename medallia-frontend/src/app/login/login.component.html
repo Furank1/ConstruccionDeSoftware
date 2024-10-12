@@ -2,9 +2,11 @@
 <div class="app-container">
   <div class="login-container">
     <div class="login-box">
+      <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
       <h1 class="title">Medallia</h1> <!-- Título grande -->
 
-      <form (ngSubmit)="onSubmit()" #loginForm="ngForm"> 
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
         <div class="input-group">
           <label for="email">Correo electrónico</label>
           <input type="email" id="email" [(ngModel)]="email" name="email" required>
@@ -14,7 +16,7 @@
              <input type="password" id="password" [(ngModel)]="password" name="password" required>
         </div>
         <button type="submit" (click)="onSubmit()">Ingresar</button>
-        <button type="button" (click)="goToRegister()">Crear Cuenta</button> <!-- Botón de crear cuenta -->
+        <button class="create-account-button" type="button" (click)="goToRegister()">Crear Cuenta</button> <!-- Botón de crear cuenta -->
       </form>
     </div>
   </div>

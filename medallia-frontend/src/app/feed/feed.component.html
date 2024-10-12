@@ -1,19 +1,29 @@
-<div class="container">
-  <div *ngFor="let post of posts" class="post">
-    <div class="post-header">
-      <h3 class="username">{{ post.usuarioNombre }}</h3>
-      <p class="post-date">{{ post.fecha | date: 'short' }}</p>
-    </div>
-    <p class="post-description">{{ post.descripcion }}</p>
-    <img [src]="post.imagen" alt="Publicación imagen" *ngIf="post.imagen" class="post-image"/>
-    <div class="post-footer">
-      <button 
-        class="applause-button" 
-        (click)="addAplausos(post)"
-        [disabled]="post.aplaudido" 
-      >
-        <span class="applause-icon">👏</span> Aplausos ({{ post.aplausos }})
-      </button>
+<div class="page-container h-screen">
+  <!-- Barra de navegación estática -->
+  <nav class="navbar">
+    <!-- Agrega los botones para navegar a las otras partes de la app -->
+    <button class="nav-button">Inicio</button>
+    <button class="nav-button">Perfil</button>
+    <button class="nav-button">Configuración</button>
+    <button class="nav-button">Publicar</button>
+  </nav>
+
+  <!-- Contenedor del feed de publicaciones con scroll -->
+  <div class="relative h-full overflow-y-auto">
+
+
+    <!-- Contenedor de las publicaciones (scrollable) -->
+    <div class="flex flex-col gap-4 mt-16 px-4">
+      <div *ngFor="let post of posts" class="flex justify-center">
+        <app-publicacion
+          [imagen]="post.imagen"
+          [usuarioId]="post.usuario"
+          [descripcion]="post.descripcion"
+          [fecha]="post.fecha"
+          [aplausos]="post.aplausos"
+          (aplauso)="addAplausos(post.aplausos)">
+        </app-publicacion>
+      </div>
     </div>
   </div>
 </div>

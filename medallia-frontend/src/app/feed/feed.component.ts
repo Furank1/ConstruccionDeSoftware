@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {Router, RouterLink} from "@angular/router";
+import {PublicacionComponent} from "../publicacion/publicacion.component";
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule, DatePipe, HttpClientModule],
+  imports: [CommonModule, DatePipe, HttpClientModule, RouterLink, PublicacionComponent],
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
 export class FeedComponent implements OnInit {
   posts: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.cargarPublicaciones();
@@ -23,10 +25,10 @@ export class FeedComponent implements OnInit {
       .subscribe(
         (data: any[]) => {
           console.log('Publicaciones cargadas', data);
-        
+
           this.posts = data.map(post => ({
             ...post,
-            aplaudido: false 
+            aplaudido: false
           }));
         },
         (error: any) => {
@@ -35,10 +37,16 @@ export class FeedComponent implements OnInit {
       );
   }
 
+
+  publicar(): void {
+    // Aquí puedes implementar la lógica para abrir un modal o redirigir a una página de publicación
+    console.log('Botón "Publicar" clicado');
+    this.router.navigate(['/publicar']);
+  }
   addAplausos(post: any) {
-    if (!post.aplaudido) { 
+    if (!post.aplaudido) {
       post.aplausos += 1;
-      post.aplaudido = true; 
+      post.aplaudido = true;
 
       this.http.post('http://localhost:8080/publicaciones/aplauso', null, { params: { id: post.id } })
         .subscribe(
@@ -49,7 +57,7 @@ export class FeedComponent implements OnInit {
             console.error('Error al incrementar aplausos en el servidor:', error);
             console.error('Cuerpo de respuesta:', error.error);
 
-            post.aplaudido = true; 
+            post.aplaudido = true;
           }
         );
     }
