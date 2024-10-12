@@ -10,11 +10,12 @@
   <div class="grid grid-cols-2 gap-4 md:grid-cols-4 mt-16">
     <div *ngFor="let publicacion of posts" class="grid gap-4">
       <app-publicacion
-        [imageUrl]="publicacion.imageUrl"
-        [titulo]="publicacion.titulo"
+        [imagen]="publicacion.imageUrl"
+        [usuarioId]="publicacion.titulo"
         [descripcion]="publicacion.descripcion"
-        [categoria]="publicacion.categoria"
-        (aplauso)="addAplausos(publicacion.id)">
+        [fecha]="publicacion.categoria"
+        [aplausos]="publicacion.aplausos" 
+        (aplauso)="addAplausos(publicacion.aplausos)">
       </app-publicacion>
     </div>
   </div>
