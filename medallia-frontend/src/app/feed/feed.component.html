@@ -1,37 +1,22 @@
-<div class="carousel-container flex items-center justify-center h-screen relative">
-  <button (click)="prevPost()" class="carousel-button text-white bg-[#F29D35] hover:bg-[#F2CD88] rounded-full p-2">
-    ◀
-  </button>
-
-  <div class="carousel-wrapper overflow-hidden w-full max-w-screen-lg mx-4">
-    <div class="carousel flex transition-transform duration-300 ease-in-out" [style.transform]="'translateX(-' + (currentPostIndex * 100) + '%)'">
-      <ng-container *ngFor="let post of posts; let i = index">
-        <div class="post-item flex-shrink-0 w-full h-full p-4" [ngClass]="{ 'hidden': i !== currentPostIndex }">
-          <div class="post-content bg-white rounded-lg shadow-md h-full">
-            <div class="post-header flex items-center gap-4 mb-4">
-              <img src="assets/default-avatar.png" alt="Usuario" class="w-12 h-12 rounded-full" />
-              <h3 class="text-xl font-semibold text-gray-800">{{ post.usuarioId }}</h3>
-            </div>
-            <p class="text-gray-600 mb-4">{{ post.descripcion }}</p>
-            <img [src]="post.imagen" alt="Publicación imagen" *ngIf="post.imagen" class="rounded-lg max-h-60 object-cover mb-4" />
-            <p class="text-sm text-gray-500 mb-4">Fecha: {{ post.fecha | date: 'short' }}</p>
-            <div class="aplausos flex items-center justify-end">
-              <button (click)="addAplausos(post)" class="applause-button bg-[#F29D35] text-white py-2 px-4 rounded-lg hover:bg-[#F2CD88]">
-                Aplausos ({{ post.aplausos }})
-              </button>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-    </div>
-  </div>
-
-  <button (click)="nextPost()" class="carousel-button text-white bg-[#F29D35] hover:bg-[#F2CD88] rounded-full p-2">
-    ▶
-  </button>
-
-  <!-- Botón "Publicar" en la esquina superior derecha -->
-  <button (click)="openPublishModal()" class="absolute top-4 right-4 bg-[#F29D35] text-white py-2 px-4 rounded-lg hover:bg-[#F2CD88]">
+<div class="relative">
+  <!-- Botón de Publicar -->
+  <button
+    (click)="publicar()"
+    class="absolute top-0 right-0 m-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow-lg">
     Publicar
   </button>
+
+  <!-- Grid de publicaciones -->
+  <div class="grid grid-cols-2 gap-4 md:grid-cols-4 mt-16">
+    <div *ngFor="let publicacion of posts" class="grid gap-4">
+      <app-publicacion
+        [imageUrl]="publicacion.imageUrl"
+        [titulo]="publicacion.titulo"
+        [descripcion]="publicacion.descripcion"
+        [categoria]="publicacion.categoria"
+        (aplauso)="addAplausos(publicacion.id)">
+      </app-publicacion>
+    </div>
+  </div>
 </div>
+

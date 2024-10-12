@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {Router, RouterLink} from "@angular/router";
+import {PublicacionComponent} from "../publicacion/publicacion.component";
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule, DatePipe, HttpClientModule, RouterLink],
+  imports: [CommonModule, DatePipe, HttpClientModule, RouterLink, PublicacionComponent],
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
@@ -36,21 +37,8 @@ export class FeedComponent implements OnInit {
       );
   }
 
-  currentPostIndex = 0;
 
-  prevPost() {
-    if (this.currentPostIndex > 0) {
-      this.currentPostIndex--;
-    }
-  }
-
-  nextPost() {
-    if (this.currentPostIndex < this.posts.length - 1) {
-      this.currentPostIndex++;
-    }
-  }
-
-  openPublishModal(): void {
+  publicar(): void {
     // Aquí puedes implementar la lógica para abrir un modal o redirigir a una página de publicación
     console.log('Botón "Publicar" clicado');
     this.router.navigate(['/publicar']);

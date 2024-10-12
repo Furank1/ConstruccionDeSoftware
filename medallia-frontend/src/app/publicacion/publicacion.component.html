@@ -1,26 +1,27 @@
-<div class="carousel-container">
-  <button (click)="prevPost()" class="carousel-button">◀</button>
-
-  <div class="carousel-wrapper">
-    <ng-container *ngFor="let post of posts; let i = index">
-      <div class="post-item" *ngIf="i === currentPostIndex">
-        <div class="post-content p-4 bg-white rounded-lg shadow-md">
-          <div class="post-header flex items-center gap-4 mb-4">
-            <img src="assets/default-avatar.png" alt="Usuario" class="w-12 h-12 rounded-full"/>
-            <h3 class="text-xl font-semibold text-gray-800">{{ post.usuarioId }}</h3>
-          </div>
-          <p class="text-gray-600 mb-4">{{ post.descripcion }}</p>
-          <img ngSrc="post.imagen" alt="Publicación imagen" *ngIf="post.imagen" class="rounded-lg max-h-60 object-cover mb-4"/>
-          <p class="text-sm text-gray-500 mb-4">Fecha: {{ post.fecha | date: 'short' }}</p>
-          <div class="aplausos flex items-center justify-end">
-            <button (click)="addAplausos(post)" class="applause-button bg-[#F29D35] text-white py-2 px-4 rounded-lg hover:bg-[#F2CD88]">
-              Aplausos ({{ post.aplausos }})
-            </button>
-          </div>
-        </div>
-      </div>
-    </ng-container>
+<div class="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6 w-96">
+  <!-- Imagen de la publicación cargada dinámicamente -->
+  <div class="m-2.5 overflow-hidden rounded-md h-80 flex justify-center items-center">
+    <img class="w-full h-full object-cover" [src]="imageUrl" alt="Imagen de la publicación" />
   </div>
 
-  <button (click)="nextPost()" class="carousel-button">▶</button>
+  <!-- Información de la publicación -->
+  <div class="p-6 text-center">
+    <h4 class="mb-1 text-xl font-semibold text-slate-800">
+      {{ titulo }}
+    </h4>
+    <p class="text-sm font-semibold text-slate-500 uppercase">
+      {{ categoria }}
+    </p>
+    <p class="text-base text-slate-600 mt-4 font-light">
+      {{ descripcion }}
+    </p>
+  </div>
+  <!-- Botón de interacción con el número de aplausos -->
+  <div class="flex justify-center p-6 pt-2 gap-7">
+    <button (click)="onAplaudir()"
+            class="min-w-32 rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            type="button">
+      Aplaudir ({{ aplausos }})
+    </button>
+  </div>
 </div>
