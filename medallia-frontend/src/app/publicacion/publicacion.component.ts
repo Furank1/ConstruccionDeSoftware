@@ -1,14 +1,10 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgOptimizedImage} from "@angular/common";
-import {HttpClient} from "@angular/common/http";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-publicacion',
-  templateUrl: './publicacion.component.html',
   standalone: true,
-  imports: [
-    NgOptimizedImage
-  ],
+  templateUrl: './publicacion.component.html',
   styleUrls: ['./publicacion.component.css']
 })
 export class PublicacionComponent {
@@ -17,34 +13,24 @@ export class PublicacionComponent {
   @Input() usuarioId!: string;
   @Input() descripcion!: string;
   @Input() fecha!: Date;
-  @Input() aplausos!: number;  // Recibe el número de aplausos desde el componente padre
-  posts: any[] = [];
-  // Función que incrementa el número de aplausos
+  @Input() aplausos!: number;  
+  @Input() postId!: string;  
   @Output() aplauso = new EventEmitter<void>();
+
+  constructor(private http: HttpClient) {}
+
   onAplaudir() {
     this.aplausos++;
-  }
-  ngOnInit(): void {
-    this.cargarPublicaciones();
-  }
-
-  constructor(private http: HttpClient) {
-  }
-
-  cargarPublicaciones(): void {
-    this.http.get<any[]>('http://localhost:8080/publicaciones/get')
-      .subscribe(
-        (data: any[]) => {
-          console.log('Publicaciones cargadas', data);
-
-          this.posts = data.map(post => ({
-            ...post,
-            aplaudido: false
-          }));
+    this.aplauso.emit();
+    // Acá se mandan los aplausos 
+    this.http.post(`http://localhost:8080/publicaciones/aplauso?id=${this.postId}`, {})
+      .subscribe({
+        next: (response) => {
+          console.log('Aplausos actualizados exitosamente', response);
         },
-        (error: any) => {
-          console.error('Error al cargar publicaciones', error);
+        error: (error) => {
+          console.error('Error al actualizar los aplausos', error);
         }
-      );
+      });
   }
 }
