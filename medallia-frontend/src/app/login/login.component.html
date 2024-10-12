@@ -4,16 +4,16 @@
     <div class="login-box">
       <h1 class="title">Medallia</h1> <!-- Título grande -->
 
-      <form>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm"> 
         <div class="input-group">
           <label for="email">Correo electrónico</label>
-          <input type="email" id="email" placeholder="Introduce tu correo">
+          <input type="email" id="email" [(ngModel)]="email" name="email" required>
         </div>
         <div class="input-group">
           <label for="password">Contraseña</label>
-          <input type="password" id="password" placeholder="Introduce tu contraseña">
+             <input type="password" id="password" [(ngModel)]="password" name="password" required>
         </div>
-        <button type="button" (click)="onSubmit()">Ingresar</button>
+        <button type="submit" (click)="onSubmit()">Ingresar</button>
         <button type="button" (click)="goToRegister()">Crear Cuenta</button> <!-- Botón de crear cuenta -->
       </form>
     </div>

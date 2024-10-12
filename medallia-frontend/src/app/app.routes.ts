@@ -7,13 +7,13 @@ import { RegistroComponent } from './registro/registro.component';
 import {PublicacionComponent} from "./publicacion/publicacion.component";
 
 const routes: Routes = [
-  { path: '', component: LoginComponent }, // Página principal (login)
-  { path: 'login', component: LoginComponent }, // Componente de creación de cuenta
+  { path: '', component: LoginComponent }, 
+  { path: 'login', component: LoginComponent }, 
   { path: 'profile', component: ProfileComponent },
   {path: 'registro',component: RegistroComponent},
   { path: 'feed', component: FeedComponent },
   {path: 'publicacion', component: PublicacionComponent },
-  { path: '**', redirectTo: '' }, // Ruta por defecto
+  { path: '**', redirectTo: '' }, 
 ];
 
 @NgModule({
