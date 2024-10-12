@@ -8,7 +8,9 @@ import com.example.Medallia_login.Repositories.RepositorioPublicaciones;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,8 @@ public class ServicioPublicacion {
 
     @Autowired
     private RepositorioCuenta repositoriocuenta;
+    @Autowired
+    private RepositorioPublicaciones repositorioPublicaciones;
 
     public List<Publicacion> obtenerPublicaciones(){
         return repositoriopublicacion.findAll();
@@ -49,5 +53,18 @@ public class ServicioPublicacion {
             publicacionDTOs.add(pubDTO);
         }
         return publicacionDTOs;
+    }
+
+    @Transactional
+    public Publicacion crearPublicacion(ObjectId objectId, String descripcion, Instant fecha, String imagen, int aplausos){
+        Publicacion publicacion = new Publicacion();
+        publicacion.setUsuarioId(objectId);
+        publicacion.setDescripcion(descripcion);
+        publicacion.setFecha(fecha);
+        publicacion.setImagen(imagen);
+        publicacion.setAplausos(aplausos);
+        repositorioPublicaciones.save(publicacion);
+
+        return publicacion;
     }
 }
