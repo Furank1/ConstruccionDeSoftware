@@ -17,20 +17,26 @@ export class PublicacionComponent {
   @Input() postId!: string;  
   @Output() aplauso = new EventEmitter<void>();
 
+  haAplaudido: boolean = false;  
+
   constructor(private http: HttpClient) {}
 
   onAplaudir() {
-    this.aplausos++;
-    this.aplauso.emit();
-    // Acá se mandan los aplausos 
-    this.http.post(`http://localhost:8080/publicaciones/aplauso?id=${this.postId}`, {})
-      .subscribe({
-        next: (response) => {
-          console.log('Aplausos actualizados exitosamente', response);
-        },
-        error: (error) => {
-          console.error('Error al actualizar los aplausos', error);
-        }
-      });
+    if (!this.haAplaudido) {  // Si, es un contador simple que no valida si ya se aplaudió antes por este usuario
+      this.aplausos++;
+      this.haAplaudido = true;  
+      this.aplauso.emit();
+      
+     
+      this.http.post(`http://localhost:8080/publicaciones/aplauso?id=${this.postId}`, {})
+        .subscribe({
+          next: (response) => {
+            console.log('Aplausos actualizados exitosamente', response);
+          },
+          error: (error) => {
+            console.error('Error al actualizar los aplausos', error);
+          }
+        });
+    }
   }
 }

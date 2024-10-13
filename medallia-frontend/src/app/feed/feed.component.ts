@@ -43,6 +43,9 @@ export class FeedComponent implements OnInit {
   irAProfile(): void {
     this.router.navigate(['/profile']);
   }
+  irAFeed(): void {
+    this.router.navigate(['/feed']);  
+  }
   irAMedallas(): void {
     this.router.navigate(['/medalla']);
   }
