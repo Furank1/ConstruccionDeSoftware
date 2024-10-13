@@ -1,6 +1,9 @@
 package com.example.Medallia_login.Servicio;
 
+import com.example.Medallia_login.MedalliaLoginApplication;
+import com.example.Medallia_login.Modelos.Cuenta;
 import com.example.Medallia_login.Modelos.Medalla;
+import com.example.Medallia_login.Repositories.RepositorioCuenta;
 import com.example.Medallia_login.Repositories.RepositorioMedallas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,8 @@ public class ServicioMedallas {
 
     @Autowired
     private RepositorioMedallas repositorioMedallas;
+    @Autowired
+    private RepositorioCuenta repositorioCuenta;
 
 
     public Optional <List<Map<String,Object>>> retornarMedallas(){
@@ -30,5 +35,12 @@ public class ServicioMedallas {
         }
         Optional<List<Map<String,Object>>> medallasopt= Optional.of(listaMedallas);
         return medallasopt;
+    }
+
+
+    public Optional <List<Cuenta>> retornarmedallasusuarios(){
+         List<Cuenta> cuentas = repositorioCuenta.findAll();
+         Optional <List<Cuenta>> cuentasopt= Optional.of(cuentas);
+        return cuentasopt;
     }
 }
