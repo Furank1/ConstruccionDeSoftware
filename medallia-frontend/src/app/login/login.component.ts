@@ -18,6 +18,13 @@ export class LoginComponent {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+ngOnInit():void{
+  const loggedInUser = localStorage.getItem('loggedInUser');
+  if (loggedInUser) {
+    this.router.navigate(['/feed']);
+  }
+}
+
   onSubmit() {
     const loginData = {
       email: this.email,

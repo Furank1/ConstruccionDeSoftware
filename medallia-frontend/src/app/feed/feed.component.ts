@@ -19,7 +19,7 @@ export class FeedComponent implements OnInit {
   ngOnInit(): void {
     const loggedInUser = localStorage.getItem('loggedInUser');
         if (!loggedInUser) {
-      this.router.navigate(['/login']);  // Redirige al login si no está logueado
+      this.router.navigate(['/login']);  // chao no estas logeao
     }
     this.cargarPublicaciones();
   }
@@ -47,6 +47,7 @@ export class FeedComponent implements OnInit {
     this.router.navigate(['/medalla']);
   }
   irACerrarSesion(): void {
+    localStorage.removeItem('loggedInUser');
     this.router.navigate(['/login']);
   }
   irAPublicar(): void {
