@@ -68,6 +68,9 @@ public class ServicioPublicacion {
                     System.out.println("Cantidad de aplausos alcanzada");
                     if(!publicacion.getTieneMedalla()) {
                         System.out.println("Entregando medalla: " +medalla.get().getNombre());
+                        if(cuenta.getMedallas() == null) {
+                            cuenta.setMedallas(new ArrayList<>());
+                        }
                         cuenta.getMedallas().add(medallaObjId);
                         System.out.println(cuenta.getMedallas().toString());
                         publicacion.setTieneMedalla(true);
