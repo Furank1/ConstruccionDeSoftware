@@ -27,7 +27,7 @@ public class ControladorPublicaciones {
     @CrossOrigin(origins = "*")
     @PostMapping("/aplauso") // Agregar {id} a la ruta
     public ResponseEntity<?> incrementarAplausos(@RequestParam("id") String id) {
-        System.out.println("llega al controlador");
+        //System.out.println("llega al controlador");
         if(!id.isEmpty()){
             ObjectId objectId = new ObjectId(id);
             servicioPublicacion.incrementarAplausosPorId(objectId);
