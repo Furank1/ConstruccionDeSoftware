@@ -72,10 +72,10 @@ export class PublicarComponent {
     const publicacionData = {
       descripcion: this.descripcion,
       imagen: this.imageUrl,
-      medallaId: this.medallaSeleccionada,
       usuarioId: this.UsuarioLogeado,
       fecha: new Date().toISOString(), // Incluyendo la fecha actual
-      aplausos: 0 // Inicialmente sin aplausos
+      aplausos: 0,// Inicialmente sin aplausos
+      medalla: this.medallaSeleccionada
     };
 
 
@@ -83,7 +83,7 @@ export class PublicarComponent {
     this.http.post('http://localhost:8080/publicaciones/register', publicacionData)
       .subscribe(response => {
         console.log('Publicación creada:', response);
-        //this.router.navigate(['/feed']);
+        this.router.navigate(['/feed']);
         }, error => {
         console.error('Error al crear la publicación:', error);
       });
