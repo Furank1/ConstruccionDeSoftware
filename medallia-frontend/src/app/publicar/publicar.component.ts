@@ -71,25 +71,22 @@ export class PublicarComponent {
     console.log("URL",this.imageUrl);
     const publicacionData = {
       descripcion: this.descripcion,
-      imageUrl: this.imageUrl,
+      imagen: this.imageUrl,
       medallaId: this.medallaSeleccionada,
       usuarioId: this.UsuarioLogeado,
       fecha: new Date().toISOString(), // Incluyendo la fecha actual
       aplausos: 0 // Inicialmente sin aplausos
     };
-    console.log("URL wakata",publicacionData.imageUrl);
+
 
     // Enviar los datos de la publicación al backend
     this.http.post('http://localhost:8080/publicaciones/register', publicacionData)
       .subscribe(response => {
-        console.log("URL wakata2",publicacionData.imageUrl);
         console.log('Publicación creada:', response);
-        console.log("URL wakata3",publicacionData.imageUrl);
         //this.router.navigate(['/feed']);
         }, error => {
         console.error('Error al crear la publicación:', error);
       });
-    console.log("URL wakata4",publicacionData.imageUrl);
   }
 
 }
