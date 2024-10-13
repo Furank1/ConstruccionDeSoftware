@@ -1,0 +1,61 @@
+<div>
+  <div>
+    <nav class="flex justify-between items-center bg-accent py-3 fixed w-full top-0 z-50 shadow-lg">
+      <button (click)='volver()' class="ml-4 border bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+        Volver
+      </button>
+      <h1 class="text-2xl font-bold text-center mx-auto">Crear Publicación</h1>
+      <div class="w-16"></div>
+    </nav>
+   </div>
+  <div class="mt-16 max-w-xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+
+    <form (submit)="onSubmit()" class="space-y-6">
+      <!-- Descripción -->
+      <div>
+        <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
+        <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="3"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Escribe una descripción..."></textarea>
+      </div>
+
+      <!-- Seleccionar enlace de imagen -->
+      <div>
+        <label for="imageUrl" class="block text-sm font-medium text-gray-700">Subir el link de la imagen</label>
+        <input type="text" id="imageUrl" [(ngModel)]="imageUrl" name="imageUrl"
+               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+               placeholder="Aqui va el enlace de tu imagen...">
+      </div>
+
+      <!-- Selección de medallas -->
+      <div>
+        <label for="medallas" class="block text-sm font-medium text-gray-700">Seleccionar Medalla</label>
+        <select id="medallas" [(ngModel)]="medallaSeleccionada" name="medalla" (change)="seleccionarMedalla($event)"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+          <option value="" disabled selected>Seleccione una medalla</option>
+          <option *ngFor="let medalla of medallas" [value]="medalla.id">
+            {{ medalla.nombre }} ({{ medalla.aplausos }} aplausos)
+          </option>
+        </select>
+      </div>
+
+      <!-- Mostrar la medalla seleccionada -->
+      <div *ngIf="medallaSeleccionada" class="text-center mt-4">
+        <p>Medalla seleccionada: {{ nombreMedallaSeleccionada }}</p>
+      </div>
+
+      <!-- Botón de enviar -->
+      <div class="text-center">
+        <button type="submit" class="bg-primary text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-accent hover:text-gray-800 hover:scale-110 transition-transform duration-300 ease-in-out">
+          Publicar
+        </button>
+      </div>
+    </form>
+
+    <!-- Vista previa de la imagen -->
+    <div *ngIf="imageUrl" class="mt-6">
+      <h3 class="text-lg font-medium text-gray-700">Vista previa:</h3>
+      <img [src]="imageUrl" alt="Vista previa de la imagen seleccionada" class="mt-4 max-h-64 object-cover rounded-lg shadow-md">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="flex flex-col h-screen bg-secondary">
+  <!-- Barra de navegación estática -->
+  <nav class="flex justify-around items-center bg-accent py-3 fixed w-full top-0 z-50 shadow-lg">
+    <!-- Botones para navegar a las otras partes de la app -->
+    <button (click)='irAProfile()' class="border border bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+      Perfíl
+    </button>
+
+    <button (click)='irAFeed()' class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+      Feed
+    </button>
+    <button (click) ="irAMedallas()" class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+      Medalla
+    </button>
+
+    <button (click) ="irAPublicar()" class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+      Publicar
+    </button>
+
+    <button (click)="irACerrarSesion()" class="bg-primary text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-accent hover:text-gray-800 hover:scale-110 transition-transform duration-300 ease-in-out">
+     Cerrar Sesión
+    </button>
+  </nav>
+
+  <!-- Contenedor del feed de publicaciones con scroll -->
+  <div class="relative h-full overflow-y-auto mt-20">
+    <div class="flex flex-col gap-4 px-4">
+      <div *ngFor="let post of posts" class="flex justify-center">
+        <app-publicacion
+          [imagen]="post.imagen"
+          [usuarioId]="post.usuario"
+          [nombreUsuario]="post.nombreUsuario"
+          [descripcion]="post.descripcion"
+          [fecha]="post.fecha"
+          [aplausos]="post.aplausos"
+          [postId]="post.id">
+        </app-publicacion>
+      </div>
+    </div>
+  </div>
+</div>
