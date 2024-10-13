@@ -27,6 +27,7 @@ export class PublicarComponent {
     this.cargarMedallas();
   }
 
+
   // Método para cargar las medallas desde el backend
   cargarMedallas(): void {
     this.http.get<any[]>('http://localhost:8080/medallas/obtenermedallas')
