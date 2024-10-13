@@ -38,13 +38,13 @@ public class ServicioPublicacion {
 
 
     public void incrementarAplausosPorId(ObjectId publicacionId) {
-        System.out.println(publicacionId);
-        System.out.println("llega al servicio");
+        //System.out.println(publicacionId);
+        //System.out.println("llega al servicio");
         Optional<Publicacion> publicacion = repositoriopublicacion.findById(publicacionId);
         if(publicacion.isPresent()){
-            System.out.println("encontrono una publicacion : "+ publicacion.get().getDescripcion());
+            //System.out.println("encontrono una publicacion : "+ publicacion.get().getDescripcion());
             publicacion.get().setAplausos(publicacion.get().getAplausos()+1);
-
+            entregarMedalla(publicacion.get());
             repositoriopublicacion.save(publicacion.get());
         }else{
             System.out.println("no");
@@ -58,17 +58,31 @@ public class ServicioPublicacion {
             Cuenta cuenta = cuentaOpt.get();
             System.out.println(cuenta.getId().toHexString());
             ObjectId medallaObjId = publicacion.getMedalla();
+            if(medallaObjId == null) {
+                medallaObjId = new ObjectId("000000000000000000000000");
+            }
+            System.out.println(medallaObjId);
             Optional<Medalla> medalla = repositorioMedallas.findById(medallaObjId);
             if(medalla.isPresent()) {
                 if(medalla.get().getCantidadNecesaria() <= publicacion.getAplausos()){
                     System.out.println("Cantidad de aplausos alcanzada");
-                    System.out.println("Entregando medalla: "+medalla.get().getNombre());
+                    if(!publicacion.getTieneMedalla()) {
+                        System.out.println("Entregando medalla: " +medalla.get().getNombre());
+                        cuenta.getMedallas().add(medallaObjId);
+                        System.out.println(cuenta.getMedallas().toString());
+                        publicacion.setTieneMedalla(true);
+                    } else {
+                        System.out.println("Usuario ya tiene medalla");
+                    }
+                } else {
+                    System.out.println("Cantidad de aplausos no alcanzada");
                 }
-                cuenta.getMedallas().add(medallaObjId);
+            } else {
+                System.out.println("Medalla no esta en la base de datos");
             }
+        } else {
+            System.out.println("No hay cuenta");
         }
-
-
     }
 
     public List<PublicacionDTO> convertirListaDTO(List<Publicacion> publicaciones){
