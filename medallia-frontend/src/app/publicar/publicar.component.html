@@ -10,12 +10,12 @@
                 placeholder="Escribe una descripción..."></textarea>
     </div>
 
-    <!-- Seleccionar archivo -->
+    <!-- Seleccionar enlace de imagen -->
     <div>
-      <label for="file" class="block text-sm font-medium text-gray-700">Seleccionar Imagen</label>
-      <input type="file" id="file" (change)="onFileSelected($event)"
-             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-blue-500">
-      <p class="mt-1 text-sm text-gray-500">Una imagen de perfil es útil para confirmar que estás logueado en tu cuenta</p>
+      <label for="imageUrl" class="block text-sm font-medium text-gray-700">Subir el link de la imagen</label>
+      <input type="text" id="imageUrl" [(ngModel)]="imageUrl" name="imageUrl"
+             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+             placeholder="Aqui va el enlace de tu imagen...">
     </div>
 
     <!-- Selección de medallas -->
