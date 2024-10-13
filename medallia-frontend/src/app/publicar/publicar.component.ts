@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgIf, CommonModule } from '@angular/common'; // Asegúrate de importar CommonModule
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-publicar',
@@ -16,12 +17,13 @@ import { NgIf, CommonModule } from '@angular/common'; // Asegúrate de importar 
   styleUrls: ['./publicar.component.css']
 })
 export class PublicarComponent {
-  imageUrl: string | null = null;
+  UsuarioLogeado = localStorage.getItem('loggedInUser');
+  imageUrl: string ='';
   descripcion: string = '';
   medallas: any[] = []; // Almacena las medallas
   medallaSeleccionada: string | null = null; // Almacena el ID de la medalla seleccionada
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,  private router: Router) {
     this.cargarMedallas();
   }
 
@@ -64,24 +66,30 @@ export class PublicarComponent {
   }
 
   // Método para enviar el formulario
-  // Método para enviar el formulario
   onSubmit(): void {
+    console.log("Consolelog",this.UsuarioLogeado);
+    console.log("URL",this.imageUrl);
     const publicacionData = {
       descripcion: this.descripcion,
       imageUrl: this.imageUrl,
       medallaId: this.medallaSeleccionada,
-      usuarioId: localStorage.getItem('loggedInUser'),
+      usuarioId: this.UsuarioLogeado,
       fecha: new Date().toISOString(), // Incluyendo la fecha actual
       aplausos: 0 // Inicialmente sin aplausos
     };
+    console.log("URL wakata",publicacionData.imageUrl);
 
     // Enviar los datos de la publicación al backend
     this.http.post('http://localhost:8080/publicaciones/register', publicacionData)
       .subscribe(response => {
+        console.log("URL wakata2",publicacionData.imageUrl);
         console.log('Publicación creada:', response);
-      }, error => {
+        console.log("URL wakata3",publicacionData.imageUrl);
+        //this.router.navigate(['/feed']);
+        }, error => {
         console.error('Error al crear la publicación:', error);
       });
+    console.log("URL wakata4",publicacionData.imageUrl);
   }
 
 }

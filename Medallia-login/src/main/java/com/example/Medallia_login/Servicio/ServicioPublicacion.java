@@ -62,6 +62,7 @@ public class ServicioPublicacion {
         publicacion.setDescripcion(descripcion);
         publicacion.setFecha(fecha);
         publicacion.setImagen(imagen);
+        System.out.println(publicacion.getImagen());
         publicacion.setAplausos(aplausos);
         repositorioPublicaciones.save(publicacion);
 
