@@ -17,6 +17,10 @@ export class FeedComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+        if (!loggedInUser) {
+      this.router.navigate(['/login']);  // chao no estas logeao
+    }
     this.cargarPublicaciones();
   }
 
@@ -39,6 +43,22 @@ export class FeedComponent implements OnInit {
           console.error('Error al cargar publicaciones', error);
         }
       );
+  }
+  irAProfile(): void {
+    this.router.navigate(['/profile']);
+  }
+  irAFeed(): void {
+    this.router.navigate(['/feed']);  
+  }
+  irAMedallas(): void {
+    this.router.navigate(['/medalla']);
+  }
+  irACerrarSesion(): void {
+    localStorage.removeItem('loggedInUser');
+    this.router.navigate(['/login']);
+  }
+  irAPublicar(): void {
+    this.router.navigate(['/publicar']);
   }
 
   extraerNombreUsuario(correo: string): string {
