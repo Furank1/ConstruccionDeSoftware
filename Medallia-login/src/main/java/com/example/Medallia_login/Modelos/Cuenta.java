@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "Usuarios")
 public class Cuenta {
 
@@ -16,6 +18,7 @@ public class Cuenta {
     private String email;
 
     private String password;
+    private List<ObjectId> medallas;
 
     public Cuenta(String correo, String password) {
         this.email = correo;
@@ -26,6 +29,14 @@ public class Cuenta {
 
     public ObjectId getId() {
         return id;
+    }
+
+    public List<ObjectId> getMedallas() {
+        return medallas;
+    }
+
+    public void setMedallas(List<ObjectId> medallas) {
+        this.medallas = medallas;
     }
 
     public void setId(ObjectId id) {
