@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForOf} from "@angular/common";
+import {PublicacionComponent} from "../publicacion/publicacion.component";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   standalone: true,
-  imports: [
-    NgForOf
-  ],
+    imports: [
+        NgForOf,
+        PublicacionComponent
+    ],
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {

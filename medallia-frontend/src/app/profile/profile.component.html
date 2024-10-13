@@ -7,3 +7,37 @@
     </div>
   </div>
 </div>
+<!--<div class="page-container"
+   Barra de navegación estática
+  <nav class="navbar">
+
+    <button class="nav-button">Inicio</button>
+    <button class="nav-button">Perfil</button>
+    <button class="nav-button">Configuración</button>
+  </nav>
+
+   Contenedor del feed de publicaciones con scroll
+  <div class="relative">
+     Botón de Publicar
+    <button
+      (click)="publicar()"
+      class="absolute top-0 right-0 m-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow-lg">
+      Publicar
+    </button>
+
+
+     div class="grid grid-cols-2 gap-4 md:grid-cols-4 mt-16"
+     Grid de publicaciones  <!<div *ngFor="let post of posts" class="grid gap-4">
+      <app-publicacion
+         [imagen]="post.imagen"
+         [usuarioId]="post.usuario"
+         [descripcion]="post.descripcion"
+         [fecha]="post.fecha"
+         [aplausos]="post.aplausos"
+         (aplauso)="addAplausos(post.aplausos)">
+       </app-publicacion>
+     </div>
+   </div>
+ </div>
+</div>
+-->

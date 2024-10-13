@@ -1,19 +1,34 @@
-<div class="container">
-  <div *ngFor="let post of posts" class="post">
-    <div class="post-header">
-      <h3 class="username">{{ post.usuarioNombre }}</h3>
-      <p class="post-date">{{ post.fecha | date: 'short' }}</p>
-    </div>
-    <p class="post-description">{{ post.descripcion }}</p>
-    <img [src]="post.imagen" alt="Publicación imagen" *ngIf="post.imagen" class="post-image"/>
-    <div class="post-footer">
-      <button 
-        class="applause-button" 
-        (click)="addAplausos(post)"
-        [disabled]="post.aplaudido" 
-      >
-        <span class="applause-icon">👏</span> Aplausos ({{ post.aplausos }})
-      </button>
+<div class="flex flex-col h-screen bg-secondary">
+  <!-- Barra de navegación estática -->
+  <nav class="flex justify-around items-center bg-accent py-3 fixed w-full top-0 z-50 shadow-lg">
+    <!-- Botones para navegar a las otras partes de la app -->
+    <button class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+      Perfíl
+    </button>
+    <button class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+      Configuración
+    </button>
+    <button class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+      Cerrar sesión
+    </button>
+    <button class="bg-primary text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-accent hover:text-gray-800 hover:scale-110 transition-transform duration-300 ease-in-out">
+      Publicar
+    </button>
+  </nav>
+
+  <!-- Contenedor del feed de publicaciones con scroll -->
+  <div class="relative h-full overflow-y-auto mt-20">
+    <div class="flex flex-col gap-4 px-4">
+      <div *ngFor="let post of posts" class="flex justify-center">
+        <app-publicacion
+          [imagen]="post.imagen"
+          [usuarioId]="post.usuario"
+          [descripcion]="post.descripcion"
+          [fecha]="post.fecha"
+          [aplausos]="post.aplausos"
+          [postId]="post.id">
+        </app-publicacion>
+      </div>
     </div>
   </div>
 </div>

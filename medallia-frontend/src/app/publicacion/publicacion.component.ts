@@ -1,45 +1,36 @@
-// publicacion.component.ts
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, DatePipe } from "@angular/common";  // Importar CommonModule
-import { HttpClientModule } from '@angular/common/http';
-import { PublicacionService } from '../../publicacion.service';
-//import { PublicacionService } from './publicacion.service';
-
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-publicacion',
   standalone: true,
-  imports: [
-    DatePipe
-  ],
   templateUrl: './publicacion.component.html',
   styleUrls: ['./publicacion.component.css']
 })
-export class PublicacionComponent implements OnInit {
-  // Lista de publicaciones
-  posts: any[] = [];
+export class PublicacionComponent {
 
-constructor(private publicacionService: PublicacionService) {}
+  @Input() imagen!: string;
+  @Input() usuarioId!: string;
+  @Input() descripcion!: string;
+  @Input() fecha!: Date;
+  @Input() aplausos!: number;  
+  @Input() postId!: string;  
+  @Output() aplauso = new EventEmitter<void>();
 
+  constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    this.cargarPublicaciones(); // Cargar las publicaciones al iniciar
-  }
-
-  // Método para cargar las publicaciones
-  cargarPublicaciones(): void {
-    this.publicacionService.getPublicaciones().subscribe(
-      (data: any[]) => {
-        this.posts = data; 
-      },
-      (error: any) => {
-        console.error('Error al cargar publicaciones', error);
-      }
-    );
-  }
-
-  // aplausos hardcodeados... 
-  addAplausos(post: any) {
-    post.aplausos += 1; 
+  onAplaudir() {
+    this.aplausos++;
+    this.aplauso.emit();
+    // Acá se mandan los aplausos 
+    this.http.post(`http://localhost:8080/publicaciones/aplauso?id=${this.postId}`, {})
+      .subscribe({
+        next: (response) => {
+          console.log('Aplausos actualizados exitosamente', response);
+        },
+        error: (error) => {
+          console.error('Error al actualizar los aplausos', error);
+        }
+      });
   }
 }
