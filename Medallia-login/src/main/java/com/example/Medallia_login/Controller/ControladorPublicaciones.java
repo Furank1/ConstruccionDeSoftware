@@ -47,4 +47,13 @@ public class ControladorPublicaciones {
         List<Publicacion> publicaciones = servicioPublicacion.obtenerPublicaciones();
         return servicioPublicacion.convertirListaDTO(publicaciones);
     }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/register")
+    public ResponseEntity<?> crearPublicacion(@RequestBody PublicacionDTO publicacionDTO){
+        ObjectId objId = new ObjectId(publicacionDTO.getUsuarioId());
+        Publicacion publiGuardada = servicioPublicacion.crearPublicacion(objId, publicacionDTO.getDescripcion(), publicacionDTO.getFecha(), publicacionDTO.getImagen(), publicacionDTO.getAplausos());
+        return ResponseEntity.ok(publiGuardada);
+    }
+
 }
