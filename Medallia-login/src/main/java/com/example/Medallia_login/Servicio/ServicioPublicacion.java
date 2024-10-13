@@ -2,8 +2,10 @@ package com.example.Medallia_login.Servicio;
 
 import com.example.Medallia_login.Dominio.PublicacionDTO;
 import com.example.Medallia_login.Modelos.Cuenta;
+import com.example.Medallia_login.Modelos.Medalla;
 import com.example.Medallia_login.Modelos.Publicacion;
 import com.example.Medallia_login.Repositories.RepositorioCuenta;
+import com.example.Medallia_login.Repositories.RepositorioMedallas;
 import com.example.Medallia_login.Repositories.RepositorioPublicaciones;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,10 @@ public class ServicioPublicacion {
     private RepositorioCuenta repositoriocuenta;
     @Autowired
     private RepositorioPublicaciones repositorioPublicaciones;
+    @Autowired
+    private ServicioMedallas servicioMedallas;
+    @Autowired
+    private RepositorioMedallas repositorioMedallas;
 
     public List<Publicacion> obtenerPublicaciones(){
         return repositoriopublicacion.findAll();
@@ -38,10 +44,31 @@ public class ServicioPublicacion {
         if(publicacion.isPresent()){
             System.out.println("encontrono una publicacion : "+ publicacion.get().getDescripcion());
             publicacion.get().setAplausos(publicacion.get().getAplausos()+1);
+
             repositoriopublicacion.save(publicacion.get());
         }else{
             System.out.println("no");
         }
+    }
+
+    public void entregarMedalla(Publicacion publicacion){
+        ObjectId usuarioId = publicacion.getUsuarioId();
+        Optional<Cuenta> cuentaOpt = repositoriocuenta.findById(usuarioId.toHexString());
+        if(cuentaOpt.isPresent()) {
+            Cuenta cuenta = cuentaOpt.get();
+            System.out.println(cuenta.getId().toHexString());
+            ObjectId medallaObjId = publicacion.getMedalla();
+            Optional<Medalla> medalla = repositorioMedallas.findById(medallaObjId);
+            if(medalla.isPresent()) {
+                if(medalla.get().getCantidadNecesaria() <= publicacion.getAplausos()){
+                    System.out.println("Cantidad de aplausos alcanzada");
+                    System.out.println("Entregando medalla: "+medalla.get().getNombre());
+                }
+                cuenta.getMedallas().add(medallaObjId);
+            }
+        }
+
+
     }
 
     public List<PublicacionDTO> convertirListaDTO(List<Publicacion> publicaciones){
@@ -51,7 +78,7 @@ public class ServicioPublicacion {
             PublicacionDTO pubDTO;
 
             if(publicacion.getMedalla() == null) {
-                pubDTO = new PublicacionDTO(publicacion.getId().toHexString(), publicacion.getUsuarioId().toHexString(),usuario.get().getEmail(), publicacion.getDescripcion(), publicacion.getImagen(), publicacion.getFecha(), publicacion.getAplausos());
+                pubDTO = new PublicacionDTO(publicacion.getId().toHexString(), publicacion.getUsuarioId().toHexString(),usuario.get().getEmail(), publicacion.getDescripcion(), publicacion.getImagen(), publicacion.getFecha(), publicacion.getAplausos(), "0");
             } else {
                 pubDTO = new PublicacionDTO(publicacion.getId().toHexString(), publicacion.getUsuarioId().toHexString(),usuario.get().getEmail(), publicacion.getDescripcion(), publicacion.getImagen(), publicacion.getFecha(), publicacion.getAplausos(), publicacion.getMedalla().toHexString());
             }

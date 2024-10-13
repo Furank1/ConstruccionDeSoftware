@@ -52,6 +52,7 @@ public class ControladorPublicaciones {
     @CrossOrigin(origins = "*")
     @PostMapping("/register")
     public ResponseEntity<?> crearPublicacion(@RequestBody PublicacionDTO publicacionDTO){
+        System.out.println("Llega pubDTO");
         ObjectId objId = new ObjectId(publicacionDTO.getUsuarioId());
         ObjectId objIdMedalla = new ObjectId(publicacionDTO.getMedalla());
         Publicacion publiGuardada = servicioPublicacion.crearPublicacion(objId, publicacionDTO.getDescripcion(), publicacionDTO.getFecha(), publicacionDTO.getImagen(), publicacionDTO.getAplausos(), objIdMedalla);

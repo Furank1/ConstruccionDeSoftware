@@ -23,16 +23,6 @@ public class PublicacionDTO {
         this.medalla = medalla;
     }
 
-    public PublicacionDTO(String id, String usuarioId, String nombreUsuario, String descripcion, String imagen, Instant fecha, int aplausos) {
-        this.id = id;
-        this.usuarioId = usuarioId;
-        this.nombreUsuario = nombreUsuario;
-        this.descripcion = descripcion;
-        this.imagen = imagen;
-        this.fecha = fecha;
-        this.aplausos = aplausos;
-    }
-
     public String getId() {
         return id;
     }
