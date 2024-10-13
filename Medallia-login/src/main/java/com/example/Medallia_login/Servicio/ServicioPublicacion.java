@@ -71,6 +71,7 @@ public class ServicioPublicacion {
                         cuenta.getMedallas().add(medallaObjId);
                         System.out.println(cuenta.getMedallas().toString());
                         publicacion.setTieneMedalla(true);
+                        repositoriocuenta.save(cuenta);
                     } else {
                         System.out.println("Usuario ya tiene medalla");
                     }
