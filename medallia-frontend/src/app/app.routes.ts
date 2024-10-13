@@ -6,6 +6,7 @@ import { RegistroComponent } from './registro/registro.component';
 import {PublicacionComponent} from './publicacion/publicacion.component';
 import {PublicarComponent} from "./publicar/publicar.component";
 import {FeedComponent} from "./feed/feed.component";
+import { MedallaComponent } from './medalla/medalla.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'registro',component: RegistroComponent},
   { path: 'feed', component: FeedComponent },
   {path: 'publicacion', component: PublicacionComponent },
+  {path: 'medalla', component: MedallaComponent },
   {path: 'publicar', component: PublicarComponent },
   { path: '**', redirectTo: '' },
 ];

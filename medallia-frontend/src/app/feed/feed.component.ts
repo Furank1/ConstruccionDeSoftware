@@ -17,6 +17,10 @@ export class FeedComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+        if (!loggedInUser) {
+      this.router.navigate(['/login']);  // Redirige al login si no está logueado
+    }
     this.cargarPublicaciones();
   }
 
@@ -35,6 +39,18 @@ export class FeedComponent implements OnInit {
           console.error('Error al cargar publicaciones', error);
         }
       );
+  }
+  irAProfile(): void {
+    this.router.navigate(['/profile']);
+  }
+  irAMedallas(): void {
+    this.router.navigate(['/medalla']);
+  }
+  irACerrarSesion(): void {
+    this.router.navigate(['/login']);
+  }
+  irAPublicar(): void {
+    this.router.navigate(['/publicar']);
   }
 
 

@@ -32,7 +32,10 @@ export class LoginComponent {
       .subscribe(
         response => {
           console.log('Login exitoso');
+
+                    localStorage.setItem('loggedInUser', JSON.stringify(response));
           this.router.navigate(['/feed']);
+
         },
         error => {
           console.error('Error de login', error);
@@ -43,6 +46,6 @@ export class LoginComponent {
   }
 
   goToRegister() {
-    this.router.navigate(['/registro']); // Redirige a la ruta de creación de cuenta
+    this.router.navigate(['/registro']); // opcional implementar el registro
   }
 }
