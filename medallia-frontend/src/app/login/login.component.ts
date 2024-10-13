@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [CommonModule, FormsModule, HttpClientModule]  // Asegúrate de importar HttpClientModule aquí
+  imports: [CommonModule, FormsModule, HttpClientModule]
 })
 export class LoginComponent {
   email: string = '';
@@ -17,6 +17,13 @@ export class LoginComponent {
   errorMessage: string = '';
 
   constructor(private http: HttpClient, private router: Router) {}
+
+ngOnInit():void{
+  const loggedInUser = localStorage.getItem('loggedInUser');
+  if (loggedInUser) {
+    this.router.navigate(['/feed']);
+  }
+}
 
   onSubmit() {
     const loginData = {
@@ -32,7 +39,10 @@ export class LoginComponent {
       .subscribe(
         response => {
           console.log('Login exitoso');
+
+                    localStorage.setItem('loggedInUser', JSON.stringify(response));
           this.router.navigate(['/feed']);
+
         },
         error => {
           console.error('Error de login', error);
@@ -43,6 +53,6 @@ export class LoginComponent {
   }
 
   goToRegister() {
-    this.router.navigate(['/registro']); // Redirige a la ruta de creación de cuenta
+    this.router.navigate(['/registro']); // opcional implementar el registro
   }
 }
