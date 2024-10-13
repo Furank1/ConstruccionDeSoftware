@@ -64,17 +64,24 @@ export class PublicarComponent {
   }
 
   // Método para enviar el formulario
+  // Método para enviar el formulario
   onSubmit(): void {
     const publicacionData = {
       descripcion: this.descripcion,
       imageUrl: this.imageUrl,
-      medallaId: this.medallaSeleccionada // Añadir ID de la medalla seleccionada
+      medallaId: this.medallaSeleccionada,
+      usuarioId: localStorage.getItem('loggedInUser'),
+      fecha: new Date().toISOString(), // Incluyendo la fecha actual
+      aplausos: 0 // Inicialmente sin aplausos
     };
 
     // Enviar los datos de la publicación al backend
-    this.http.post('http://localhost:8080/publicaciones/get', publicacionData)
+    this.http.post('http://localhost:8080/publicaciones/register', publicacionData)
       .subscribe(response => {
         console.log('Publicación creada:', response);
+      }, error => {
+        console.error('Error al crear la publicación:', error);
       });
   }
+
 }
