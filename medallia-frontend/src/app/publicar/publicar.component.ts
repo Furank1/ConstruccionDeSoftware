@@ -44,7 +44,9 @@ export class PublicarComponent {
     this.medallaSeleccionada = selectElement.value; // Obtener el valor del select
     console.log('Medalla seleccionada:', this.medallaSeleccionada);
   }
-
+  volver(): void {
+    this.router.navigate(['/feed']);
+  }
   // Propiedad calculada para obtener el nombre de la medalla seleccionada
   get nombreMedallaSeleccionada(): string {
     const medalla = this.medallas.find(m => m.id === this.medallaSeleccionada);
