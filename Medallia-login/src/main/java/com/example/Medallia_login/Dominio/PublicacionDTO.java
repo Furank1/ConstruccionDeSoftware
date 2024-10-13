@@ -10,6 +10,18 @@ public class PublicacionDTO {
     private String imagen;
     private Instant fecha;
     private int aplausos;
+    private String medalla;
+
+    public PublicacionDTO(String id, String usuarioId, String nombreUsuario, String descripcion, String imagen, Instant fecha, int aplausos, String medalla) {
+        this.id = id;
+        this.usuarioId = usuarioId;
+        this.nombreUsuario = nombreUsuario;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+        this.fecha = fecha;
+        this.aplausos = aplausos;
+        this.medalla = medalla;
+    }
 
     public PublicacionDTO(String id, String usuarioId, String nombreUsuario, String descripcion, String imagen, Instant fecha, int aplausos) {
         this.id = id;
@@ -75,5 +87,13 @@ public class PublicacionDTO {
 
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getMedalla() {
+        return medalla;
+    }
+
+    public void setMedalla(String medalla) {
+        this.medalla = medalla;
     }
 }

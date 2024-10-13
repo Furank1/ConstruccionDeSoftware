@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "Publicaciones")
@@ -24,16 +26,22 @@ public class Publicacion {
 
     private int aplausos;
 
+    private ObjectId medalla;
+
+    private Boolean tieneMedalla;
+
     // Constructor vacío
     public Publicacion() {}
 
     // Constructor con parámetros
-    public Publicacion(ObjectId usuarioId, String descripcion, String imagen, Instant fecha, int aplausos) {
+    public Publicacion(ObjectId usuarioId, String descripcion, String imagen, Instant fecha, int aplausos, ObjectId medalla) {
         this.usuarioId = usuarioId;
         this.descripcion = descripcion;
         this.imagen = imagen;
         this.fecha = fecha;
         this.aplausos = aplausos;
+        this.medalla = medalla;
+        tieneMedalla = false;
     }
 
     // Getters y setters
@@ -83,5 +91,21 @@ public class Publicacion {
 
     public void setAplausos(int aplausos) {
         this.aplausos = aplausos;
+    }
+
+    public ObjectId getMedalla() {
+        return medalla;
+    }
+
+    public void setMedalla(ObjectId medalla) {
+        this.medalla = medalla;
+    }
+
+    public Boolean getTieneMedalla() {
+        return tieneMedalla;
+    }
+
+    public void setTieneMedalla(Boolean tieneMedalla) {
+        this.tieneMedalla = tieneMedalla;
     }
 }

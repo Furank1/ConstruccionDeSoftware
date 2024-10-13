@@ -48,15 +48,20 @@ public class ServicioPublicacion {
         List<PublicacionDTO> publicacionDTOs = new ArrayList<>();
         for(Publicacion publicacion : publicaciones){
             Optional<Cuenta> usuario = repositoriocuenta.findById(publicacion.getUsuarioId().toHexString());
+            PublicacionDTO pubDTO;
 
-            PublicacionDTO pubDTO = new PublicacionDTO(publicacion.getId().toHexString(), publicacion.getUsuarioId().toHexString(),usuario.get().getEmail(), publicacion.getDescripcion(), publicacion.getImagen(), publicacion.getFecha(), publicacion.getAplausos());
+            if(publicacion.getMedalla() == null) {
+                pubDTO = new PublicacionDTO(publicacion.getId().toHexString(), publicacion.getUsuarioId().toHexString(),usuario.get().getEmail(), publicacion.getDescripcion(), publicacion.getImagen(), publicacion.getFecha(), publicacion.getAplausos());
+            } else {
+                pubDTO = new PublicacionDTO(publicacion.getId().toHexString(), publicacion.getUsuarioId().toHexString(),usuario.get().getEmail(), publicacion.getDescripcion(), publicacion.getImagen(), publicacion.getFecha(), publicacion.getAplausos(), publicacion.getMedalla().toHexString());
+            }
             publicacionDTOs.add(pubDTO);
         }
         return publicacionDTOs;
     }
 
     @Transactional
-    public Publicacion crearPublicacion(ObjectId objectId, String descripcion, Instant fecha, String imagen, int aplausos){
+    public Publicacion crearPublicacion(ObjectId objectId, String descripcion, Instant fecha, String imagen, int aplausos, ObjectId objIdMedallas){
         Publicacion publicacion = new Publicacion();
         publicacion.setUsuarioId(objectId);
         publicacion.setDescripcion(descripcion);
@@ -64,8 +69,9 @@ public class ServicioPublicacion {
         publicacion.setImagen(imagen);
         System.out.println(publicacion.getImagen());
         publicacion.setAplausos(aplausos);
+        publicacion.setMedalla(objIdMedallas);
+        publicacion.setTieneMedalla(false);
         repositorioPublicaciones.save(publicacion);
-
         return publicacion;
     }
 }
