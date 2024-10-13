@@ -11,10 +11,11 @@ export class PublicacionComponent {
 
   @Input() imagen!: string;
   @Input() usuarioId!: string;
+  @Input() nombreUsuario!: string;
   @Input() descripcion!: string;
   @Input() fecha!: Date;
-  @Input() aplausos!: number;  
-  @Input() postId!: string;  
+  @Input() aplausos!: number;
+  @Input() postId!: string;
   @Output() aplauso = new EventEmitter<void>();
 
   constructor(private http: HttpClient) {}
@@ -22,7 +23,7 @@ export class PublicacionComponent {
   onAplaudir() {
     this.aplausos++;
     this.aplauso.emit();
-    // Acá se mandan los aplausos 
+    // Acá se mandan los aplausos
     this.http.post(`http://localhost:8080/publicaciones/aplauso?id=${this.postId}`, {})
       .subscribe({
         next: (response) => {

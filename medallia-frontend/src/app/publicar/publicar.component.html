@@ -18,6 +18,23 @@
       <p class="mt-1 text-sm text-gray-500">Una imagen de perfil es útil para confirmar que estás logueado en tu cuenta</p>
     </div>
 
+    <!-- Selección de medallas -->
+    <div>
+      <label for="medallas" class="block text-sm font-medium text-gray-700">Seleccionar Medalla</label>
+      <select id="medallas" [(ngModel)]="medallaSeleccionada" name="medalla" (change)="seleccionarMedalla($event)"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        <option value="" disabled selected>Seleccione una medalla</option>
+        <option *ngFor="let medalla of medallas" [value]="medalla.id">
+          {{ medalla.nombre }} ({{ medalla.aplausos }} aplausos)
+        </option>
+      </select>
+    </div>
+
+    <!-- Mostrar la medalla seleccionada -->
+    <div *ngIf="medallaSeleccionada" class="text-center mt-4">
+      <p>Medalla seleccionada: {{ nombreMedallaSeleccionada }}</p>
+    </div>
+
     <!-- Botón de enviar -->
     <div class="text-center">
       <button type="submit"

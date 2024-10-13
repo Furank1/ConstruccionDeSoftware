@@ -26,10 +26,14 @@ export class FeedComponent implements OnInit {
         (data: any[]) => {
           console.log('Publicaciones cargadas', data);
 
-          this.posts = data.map(post => ({
-            ...post,
-            aplaudido: false
-          }));
+          this.posts = data.map(post => {
+            console.log('Usuario:', post.nombreUsuario);
+            return {
+              ...post,
+              aplaudido: false,
+              nombreUsuario: this.extraerNombreUsuario(post.nombreUsuario)
+            };
+          });
         },
         (error: any) => {
           console.error('Error al cargar publicaciones', error);
@@ -37,5 +41,11 @@ export class FeedComponent implements OnInit {
       );
   }
 
+  extraerNombreUsuario(correo: string): string {
+    if (!correo || typeof correo !== 'string') {
+      return 'Usuario desconocido';
+    }
+    return correo.split('@')[0];
+  }
 
 }
