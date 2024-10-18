@@ -4,60 +4,55 @@
       <nav class="flex justify-around items-center bg-accent py-3 fixed w-full top-0 z-50 shadow-lg">
         <!-- Botones para navegar a las otras partes de la app -->
 
-        <button (click)='irAProfile()' class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-        Perfil
-        </button>
         <button (click)="irAFeed()" class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
           Feed
         </button>
-        
-
-        <button (click)='irAMedallas()' class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-          Medallas
-        </button>
-
         <button (click)="irAPublicar()" class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
           Publicar
         </button>
-    
         <button (click)=" irACerrarSesion()" class="bg-primary text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-accent hover:text-gray-800 hover:scale-110 transition-transform duration-300 ease-in-out">
           Cerrar Sesión
         </button>
       </nav>
+  <div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+    <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-6">
 
+      <div class="w-32 h-32 md:w-48 md:h-48 overflow-hidden rounded-full border-4 border-gray-300">
+        <img src="https://via.placeholder.com/150" alt="Foto de Perfil" class="w-full h-full object-cover">
+      </div>
 
+      <div class="mt-6 md:mt-0">
+        <h1 class="text-3xl font-bold text-gray-800">{{ user?.nombre }}</h1>
+        <p class="text-gray-600 mt-2">{{ user?.usuarioId }}</p>
 
-<!--<div class="page-container"
-   Barra de navegación estática
-  <nav class="navbar">
+        <p class="text-gray-600 mt-4">{{ user?.descripcion }}</p>
 
-    <button class="nav-button">Inicio</button>
-    <button class="nav-button">Perfil</button>
-    <button class="nav-button">Configuración</button>
-  </nav>
+        <div class="mt-6">
+          <h2 class="text-xl font-semibold text-gray-700">Medallas Ganadas</h2>
+          <div class="flex space-x-4 mt-4">
+            <div *ngFor="let medalla of user?.medallas" class="w-16 h-16">
+              <img [src]="medalla.imagen" alt="Medalla" class="w-full h-full object-cover rounded-full border-2 border-yellow-500">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-   Contenedor del feed de publicaciones con scroll
-  <div class="relative">
-     Botón de Publicar
-    <button
-      (click)="publicar()"
-      class="absolute top-0 right-0 m-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow-lg">
-      Publicar
-    </button>
-
-
-     div class="grid grid-cols-2 gap-4 md:grid-cols-4 mt-16"
-     Grid de publicaciones  <!<div *ngFor="let post of posts" class="grid gap-4">
-      <app-publicacion
-         [imagen]="post.imagen"
-         [usuarioId]="post.usuario"
-         [descripcion]="post.descripcion"
-         [fecha]="post.fecha"
-         [aplausos]="post.aplausos"
-         (aplauso)="addAplausos(post.aplausos)">
-       </app-publicacion>
-     </div>
-   </div>
- </div>
+    <div class="mt-8">
+      <h2 class="text-2xl font-semibold text-gray-700">Actividad Reciente</h2>
+      <div class="mt-4 space-y-4">
+        <div *ngFor="let post of user?.post" class="flex justify-center">
+          <app-publicacion
+            [imagen]="post.imagen"
+            [usuarioId]="post.usuario"
+            [nombreUsuario]="post.nombreUsuario"
+            [descripcion]="post.descripcion"
+            [fecha]="post.fecha"
+            [aplausos]="post.aplausos"
+            [postId]="post.id">
+          </app-publicacion>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
--->

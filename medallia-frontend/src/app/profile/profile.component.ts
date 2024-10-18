@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { PublicacionComponent } from '../publicacion/publicacion.component';
 import { Router } from '@angular/router';  // Importar Router
@@ -14,33 +14,33 @@ import { Router } from '@angular/router';  // Importar Router
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  userName: string = 'Usuario Ejemplo';
-  medals = [
-    { name: 'Medalla de Oro', description: 'Obtenida por completar 10 logros.' },
-    { name: 'Medalla de Plata', description: 'Obtenida por participar en 5 eventos.' }
-  ];
+  user: {
+    medallas: any[];
+    descripcion: any[];
+    publicaciones: any[];
+    usuarioId: string;
+    nombre: string[];
+    post: any[];
+  } | undefined
 
-  constructor(private router: Router) { }  
+
+
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  irAMedallas(): void {
-    this.router.navigate(['/medalla']);  
+  irAFeed(): void {
+    this.router.navigate(['/feed']);
   }
 
-  irAFeed(): void {
-    this.router.navigate(['/feed']);  
-  }
-  irAProfile(): void {
-    this.router.navigate(['/profile']);
-  }
   irACerrarSesion(): void {
-    localStorage.removeItem('loggedInUser');  
-    this.router.navigate(['/login']); 
+    localStorage.removeItem('loggedInUser');
+    this.router.navigate(['/login']);
   }
 
   irAPublicar(): void {
-    this.router.navigate(['/publicar']); 
+    this.router.navigate(['/publicar']);
   }
 }
