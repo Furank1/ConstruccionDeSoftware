@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForOf, NgIf} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { NgForOf, NgIf } from '@angular/common';
 import { PublicacionComponent } from '../publicacion/publicacion.component';
 import { Router } from '@angular/router';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 
 @Component({
   selector: 'app-profile',
@@ -17,22 +17,59 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user!: {
-    medallas: any[];
-    descripcion: string;
-    publicaciones: any[];
-    usuarioId: string;
-    nombre: string;
-  };
+  user: any = undefined;
+
+  constructor(private router: Router, private http: HttpClient) {}
+
+  ngOnInit(): void {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+      const userData = localStorage.getItem('loggedInUser');
+      console.log('Contenido de loggedInUser:', userData);
+
+      if (userData) {
+        try {
+          this.user = JSON.parse(userData);
+          console.log(this.user);
+        } catch (error) {
+          console.error('Error al parsear JSON:', error);
+          this.user = {};
+        }
+      } else {
+        this.user = {};
+      }
+
+    if (loggedInUser) {
+      this.user = JSON.parse(loggedInUser);
+      this.cargarDatosUsuario();
+    } else {
+      console.error('No hay usuario logueado en el localStorage');
+      this.router.navigate(['/login']);
+    }
+  }
+
 
   cargarDatosUsuario(): void {
-    this.http.get<any>('http://localhost:8080/api/auth/login')
+    if (!this.user || !this.user.usuarioId) {
+      console.error('usuarioId no está disponible');
+      return;
+    }
+
+    this.http.get<any>(`http://localhost:8080/perfil/get?id=${this.user.usuarioId}`)
       .subscribe(
         (data: any) => {
-          console.log('Datos del usuario cargados', data);
-          this.user = data;
+          if (data && data.usuarioId) {
+            console.log('Datos del usuario cargados', data);
+            this.user = {
+              nombre: data.nombre || 'Usuario Desconocido',
+              usuarioId: data.usuarioId,
+              descripcion: data.biografia || '',
+              medallas: data.medallas || [],
+              publicaciones: []
+            };
 
-          this.cargarPublicacionesUsuario(this.user?.usuarioId);
+          } else {
+            console.error('El objeto de datos de usuario no contiene la información esperada', data);
+          }
         },
         (error: any) => {
           console.error('Error al cargar los datos del usuario', error);
@@ -40,43 +77,6 @@ export class ProfileComponent implements OnInit {
       );
   }
 
-  ngOnInit(): void {
-    this.cargarDatosUsuario();
-  }
-
-  cargarPublicacionesUsuario(usuarioId: string | undefined): void {
-    if (!usuarioId) return;
-
-    this.http.get<any[]>('http://localhost:8080/publicaciones/get')
-      .subscribe(
-        (data: any[]) => {
-          console.log('Publicaciones cargadas', data);
-
-
-          const publicacionesDelUsuario = data.filter(post => post.usuarioId === usuarioId)
-            .map(post => ({
-              ...post,
-              aplaudido: false,  // Inicialización de aplaudido como falso
-              nombre: this.extraerNombreUsuario(post.usuarioId)
-            }));
-
-          this.user = {
-            ...this.user,
-            publicaciones: publicacionesDelUsuario
-          };
-        },
-        (error: any) => {
-          console.error('Error al cargar publicaciones', error);
-        }
-      );
-  }
-
-
-  extraerNombreUsuario(nombreUsuario: string): string {
-    return nombreUsuario.split('@')[0];
-  }
-
-  constructor(private router: Router, private http: HttpClient) { }
 
   irAFeed(): void {
     this.router.navigate(['/feed']);
