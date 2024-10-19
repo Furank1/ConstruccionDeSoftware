@@ -45,6 +45,7 @@ public class ControladorPublicaciones {
     @GetMapping("/get")
     public List<PublicacionDTO> getPublicaciones(){
         List<Publicacion> publicaciones = servicioPublicacion.obtenerPublicaciones();
+        System.out.println("llega aca");
         return servicioPublicacion.convertirListaDTO(publicaciones);
     }
 
