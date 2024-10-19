@@ -11,14 +11,14 @@ public class Perfil {
 
     @Id
     private ObjectId id;
-    private ObjectId idUsuario;
     private String biografia;
-    private String ImagenURL;
+    private String foto;
+    private ObjectId usuarioId;
 
-    public Perfil(ObjectId idUsuario, String biografia, String imagenURL) {
-        this.idUsuario = idUsuario;
+    public Perfil(ObjectId usuarioId, String biografia, String foto) {
+        this.usuarioId = usuarioId;
         this.biografia = biografia;
-        ImagenURL = imagenURL;
+        this.foto = foto;
     }
 
     public ObjectId getId() {
@@ -30,11 +30,11 @@ public class Perfil {
     }
 
     public ObjectId getIdUsuario() {
-        return idUsuario;
+        return usuarioId;
     }
 
     public void setIdUsuario(ObjectId idUsuario) {
-        this.idUsuario = idUsuario;
+        this.usuarioId= idUsuario;
     }
 
     public String getBiografia() {
@@ -46,10 +46,10 @@ public class Perfil {
     }
 
     public String getImagenURL() {
-        return ImagenURL;
+        return foto;
     }
 
     public void setImagenURL(String imagenURL) {
-        ImagenURL = imagenURL;
+        foto = imagenURL;
     }
 }

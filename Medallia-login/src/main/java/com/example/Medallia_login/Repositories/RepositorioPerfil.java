@@ -4,6 +4,8 @@ import com.example.Medallia_login.Modelos.Perfil;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface RepositorioPerfil extends MongoRepository<Perfil, ObjectId> {
+import java.util.Optional;
 
+public interface RepositorioPerfil extends MongoRepository<Perfil, ObjectId> {
+    Optional<Perfil> findByUsuarioId(ObjectId usuarioId);
 }
