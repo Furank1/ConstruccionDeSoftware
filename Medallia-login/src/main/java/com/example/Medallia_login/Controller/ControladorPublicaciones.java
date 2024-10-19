@@ -27,7 +27,7 @@ public class ControladorPublicaciones {
     @CrossOrigin(origins = "*")
     @PostMapping("/aplauso") // Agregar {id} a la ruta
     public ResponseEntity<?> incrementarAplausos(@RequestParam("id") String id) {
-        System.out.println("llega al controlador");
+        //System.out.println("llega al controlador");
         if(!id.isEmpty()){
             ObjectId objectId = new ObjectId(id);
             servicioPublicacion.incrementarAplausosPorId(objectId);
@@ -48,11 +48,14 @@ public class ControladorPublicaciones {
         return servicioPublicacion.convertirListaDTO(publicaciones);
     }
 
+    //http://localhost:8080/publicaciones/register
     @CrossOrigin(origins = "*")
     @PostMapping("/register")
     public ResponseEntity<?> crearPublicacion(@RequestBody PublicacionDTO publicacionDTO){
+        System.out.println("Llega pubDTO");
         ObjectId objId = new ObjectId(publicacionDTO.getUsuarioId());
-        Publicacion publiGuardada = servicioPublicacion.crearPublicacion(objId, publicacionDTO.getDescripcion(), publicacionDTO.getFecha(), publicacionDTO.getImagen(), publicacionDTO.getAplausos());
+        ObjectId objIdMedalla = new ObjectId(publicacionDTO.getMedalla());
+        Publicacion publiGuardada = servicioPublicacion.crearPublicacion(objId, publicacionDTO.getDescripcion(), publicacionDTO.getFecha(), publicacionDTO.getImagen(), publicacionDTO.getAplausos(), objIdMedalla);
         return ResponseEntity.ok(publiGuardada);
     }
 

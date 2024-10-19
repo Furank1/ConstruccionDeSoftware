@@ -2,7 +2,7 @@
   <!-- Barra de navegación estática -->
   <nav class="flex justify-around items-center bg-accent py-3 fixed w-full top-0 z-50 shadow-lg">
     <!-- Botones para navegar a las otras partes de la app -->
-    <button (click)='irAProfile()' class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+    <button (click)='irAProfile()' class="border border bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
       Perfíl
     </button>
 
@@ -12,7 +12,7 @@
     <button (click) ="irAMedallas()" class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
       Medalla
     </button>
-    
+
     <button (click) ="irAPublicar()" class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
       Publicar
     </button>
@@ -29,6 +29,7 @@
         <app-publicacion
           [imagen]="post.imagen"
           [usuarioId]="post.usuario"
+          [nombreUsuario]="post.nombreUsuario"
           [descripcion]="post.descripcion"
           [fecha]="post.fecha"
           [aplausos]="post.aplausos"

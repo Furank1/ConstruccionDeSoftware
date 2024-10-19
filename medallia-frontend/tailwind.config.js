@@ -1,7 +1,5 @@
 module.exports = {
-  content: [
-    './src/**/*.{html,ts}',
-  ],
+  content: ["./src/**/*.{html,ts}"],
   theme: {
     extend: {      colors: {
       primary: '#BF15B4',     // Color fucsia

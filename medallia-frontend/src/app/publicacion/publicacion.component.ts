@@ -11,10 +11,11 @@ export class PublicacionComponent {
 
   @Input() imagen!: string;
   @Input() usuarioId!: string;
+  @Input() nombreUsuario!: string;
   @Input() descripcion!: string;
   @Input() fecha!: Date;
-  @Input() aplausos!: number;  
-  @Input() postId!: string;  
+  @Input() aplausos!: number;
+  @Input() postId!: string;
   @Output() aplauso = new EventEmitter<void>();
 
   haAplaudido: boolean = false;  

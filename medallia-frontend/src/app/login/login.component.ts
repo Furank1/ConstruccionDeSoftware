@@ -39,8 +39,9 @@ ngOnInit():void{
       .subscribe(
         response => {
           console.log('Login exitoso');
-
-                    localStorage.setItem('loggedInUser', JSON.stringify(response));
+          const userId = response.id; // Solo toma el ID
+          localStorage.setItem('userId', userId);
+                    localStorage.setItem('loggedInUser', response.id);
           this.router.navigate(['/feed']);
 
         },
