@@ -5,7 +5,10 @@ import org.bson.types.ObjectId;
 import java.util.List;
 
 public class PerfilDTO {
+
+
     private String biografia;
+
     private String imagen;
 
     private List<String> medallasUsuario;
@@ -44,4 +47,5 @@ public class PerfilDTO {
     public void setPublicacionesUsuario(List<PublicacionDTO> publicacionesUsuario) {
         this.publicacionesUsuario = publicacionesUsuario;
     }
+
 }
