@@ -38,21 +38,17 @@
       </div>
     </div>
 
-    <div class="mt-8">
+    <div class="mt-8" *ngIf="user?.publicaciones">
       <h2 class="text-2xl font-semibold text-gray-700">Actividad Reciente</h2>
       <div class="mt-4 space-y-4">
-        <div *ngFor="let post of user?.post" class="flex justify-center">
-          <app-publicacion
-            [imagen]="post.imagen"
-            [usuarioId]="post.usuario"
-            [nombreUsuario]="post.nombreUsuario"
-            [descripcion]="post.descripcion"
-            [fecha]="post.fecha"
-            [aplausos]="post.aplausos"
-            [postId]="post.id">
+        <div *ngFor="let publicacion of user?.publicaciones" class="flex justify-center">
+          <app-publicacion>
+            [imagen]="publicacion.image"
+            [usuarioId]="publicacion.usuarioId"
           </app-publicacion>
         </div>
       </div>
+      </div>
     </div>
   </div>
-</div>
+
