@@ -120,4 +120,15 @@ public class ServicioPublicacion {
         repositorioPublicaciones.save(publicacion);
         return publicacion;
     }
+
+    public List<PublicacionDTO> obtenerPublicacionesUsuarioDTO(String objId) {
+        List<Publicacion> publicacionesUsuario = new ArrayList<>();
+        List<Publicacion> publicaciones = obtenerPublicaciones();
+        for(Publicacion publicacion : publicaciones) {
+            if(publicacion.getUsuarioId().toHexString().equals(objId)) {
+                publicacionesUsuario.add(publicacion);
+            }
+        }
+        return convertirListaDTO(publicacionesUsuario);
+    }
 }

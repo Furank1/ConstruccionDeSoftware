@@ -9,4 +9,5 @@ import java.util.Optional;
 
 public interface RepositorioMedallas extends MongoRepository<Medalla, ObjectId> {
     Optional<Medalla> findById(ObjectId id);
+
 }

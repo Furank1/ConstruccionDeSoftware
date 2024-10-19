@@ -5,6 +5,7 @@ import com.example.Medallia_login.Modelos.Cuenta;
 import com.example.Medallia_login.Modelos.Medalla;
 import com.example.Medallia_login.Repositories.RepositorioCuenta;
 import com.example.Medallia_login.Repositories.RepositorioMedallas;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,6 @@ public class ServicioMedallas {
         Optional<List<Map<String,Object>>> medallasopt= Optional.of(listaMedallas);
         return medallasopt;
     }
-
 
     public Optional <List<Cuenta>> retornarmedallasusuarios(){
          List<Cuenta> cuentas = repositorioCuenta.findAll();
