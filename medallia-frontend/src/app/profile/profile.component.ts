@@ -57,16 +57,16 @@ export class ProfileComponent implements OnInit {
     this.http.get<any>(`http://localhost:8080/perfil/get?id=${this.user.usuarioId}`)
       .subscribe(
         (data: any) => {
-          if (data && data.usuarioId) {
+          if (data) {
             console.log('Datos del usuario cargados', data);
+            
             this.user = {
               nombre: data.nombre || 'Usuario Desconocido',
-              usuarioId: data.usuarioId,
+              usuarioId: this.user.usuarioId,
               descripcion: data.biografia || '',
               medallas: data.medallas || [],
               publicaciones: []
             };
-
           } else {
             console.error('El objeto de datos de usuario no contiene la información esperada', data);
           }
@@ -76,6 +76,7 @@ export class ProfileComponent implements OnInit {
         }
       );
   }
+
 
 
   irAFeed(): void {
