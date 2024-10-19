@@ -30,14 +30,12 @@ export class FeedComponent implements OnInit {
         (data: any[]) => {
           console.log('Publicaciones cargadas', data);
 
-          this.posts = data.map(post => {
-            console.log('Usuario:', post.nombreUsuario);
-            return {
-              ...post,
-              aplaudido: false,
-              nombreUsuario: this.extraerNombreUsuario(post.nombreUsuario)
-            };
-          });
+          this.posts = data.map(post => ({
+            ...post,
+            aplaudido: false,
+            nombreUsuario: this.extraerNombreUsuario(post.nombreUsuario)
+          })).sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
+
         },
         (error: any) => {
           console.error('Error al cargar publicaciones', error);
@@ -48,7 +46,7 @@ export class FeedComponent implements OnInit {
     this.router.navigate(['/profile']);
   }
   irAFeed(): void {
-    this.router.navigate(['/feed']);  
+    this.router.navigate(['/feed']);
   }
   irAMedallas(): void {
     this.router.navigate(['/medalla']);
