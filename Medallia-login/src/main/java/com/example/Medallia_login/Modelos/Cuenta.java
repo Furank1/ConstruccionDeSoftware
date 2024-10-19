@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "Usuarios")
@@ -23,6 +24,7 @@ public class Cuenta {
     public Cuenta(String correo, String password) {
         this.email = correo;
         this.password = password;
+        medallas = new ArrayList<>();
     }
 
     public Cuenta(){}

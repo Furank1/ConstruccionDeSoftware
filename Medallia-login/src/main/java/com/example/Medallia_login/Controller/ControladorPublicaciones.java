@@ -27,7 +27,7 @@ public class ControladorPublicaciones {
     @CrossOrigin(origins = "*")
     @PostMapping("/aplauso") // Agregar {id} a la ruta
     public ResponseEntity<?> incrementarAplausos(@RequestParam("id") String id) {
-        System.out.println("llega al controlador");
+        //System.out.println("llega al controlador");
         if(!id.isEmpty()){
             ObjectId objectId = new ObjectId(id);
             servicioPublicacion.incrementarAplausosPorId(objectId);
@@ -45,6 +45,7 @@ public class ControladorPublicaciones {
     @GetMapping("/get")
     public List<PublicacionDTO> getPublicaciones(){
         List<Publicacion> publicaciones = servicioPublicacion.obtenerPublicaciones();
+        System.out.println("llega aca");
         return servicioPublicacion.convertirListaDTO(publicaciones);
     }
 
@@ -52,6 +53,7 @@ public class ControladorPublicaciones {
     @CrossOrigin(origins = "*")
     @PostMapping("/register")
     public ResponseEntity<?> crearPublicacion(@RequestBody PublicacionDTO publicacionDTO){
+        System.out.println("Llega pubDTO");
         ObjectId objId = new ObjectId(publicacionDTO.getUsuarioId());
         ObjectId objIdMedalla = new ObjectId(publicacionDTO.getMedalla());
         Publicacion publiGuardada = servicioPublicacion.crearPublicacion(objId, publicacionDTO.getDescripcion(), publicacionDTO.getFecha(), publicacionDTO.getImagen(), publicacionDTO.getAplausos(), objIdMedalla);

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';  // Importar Router
 import { HttpClientModule, HttpClient } from '@angular/common/http'; // Importar HttpClient y HttpClientModule
+import { forkJoin } from 'rxjs'; // Importar forkJoin para manejar múltiples peticiones
 
 @Component({
   selector: 'app-medalla',
@@ -16,47 +17,33 @@ export class MedallaComponent {
   medallaMap: Map<string, string> = new Map(); // Diccionario para mapear ObjectId a nombres
 
   constructor(private router: Router, private http: HttpClient) {
-    this.cargarMedallas();  // Cargar las medallas primero
-    this.cargarMedallasUsuario(); // Luego cargar los usuarios
+    this.cargarDatos();  // Cargar las medallas y luego los usuarios
   }
 
-  // Método para cargar las medallas desde el backend
-  cargarMedallas(): void {
-    this.http.get<any[]>('http://localhost:8080/medallas/obtenermedallas')
-      .subscribe(
-        (medallas) => {
-          // Crear un mapeo de ObjectId -> nombre de medalla
-          medallas.forEach(medalla => {
-            this.medallaMap.set(medalla.id, medalla.nombre);
-          });
-        },
-        (error) => {
-          console.error('Error al cargar las medallas', error);
-        }
-      );
-  }
+  // Método para cargar tanto las medallas como los usuarios
+  cargarDatos(): void {
+    // Utilizamos forkJoin para esperar a que ambas peticiones se completen
+    forkJoin({
+      medallas: this.http.get<any[]>('http://localhost:8080/medallas/obtenermedallas'),
+      usuarios: this.http.get<any[]>('http://localhost:8080/medallas/obtenermedallasusuarios')
+    }).subscribe(({ medallas, usuarios }) => {
+      // Crear un mapeo de ObjectId -> nombre de medalla
+      medallas.forEach(medalla => {
+        this.medallaMap.set(medalla.id, medalla.nombre);
+      });
 
-  // Método para cargar los usuarios con sus medallas desde el backend
-  cargarMedallasUsuario(): void {
-    this.http.get<any[]>('http://localhost:8080/medallas/obtenermedallasusuarios')
-      .subscribe(
-        (response) => {
-          console.log('Respuesta del backend:', response); // Verificar la respuesta
+      // Mapear los ObjectId de medallas a sus nombres usando el diccionario
+      this.usuarios = usuarios.map(usuario => {
+        return {
+          nombre: usuario.email, // Aquí se usa el email como nombre del usuario (ajusta si tienes otro campo)
+          medallas: usuario.medallas.map((medallaId: string) => this.medallaMap.get(medallaId) || 'Medalla desconocida') // Reemplazar ObjectId con nombre
+        };
+      });
 
-          // Mapear los ObjectId de medallas a sus nombres usando el diccionario
-          this.usuarios = response.map(usuario => {
-            return {
-              nombre: usuario.email, // Aquí se usa el email como nombre del usuario (ajusta si tienes otro campo)
-              medallas: usuario.medallas.map((medallaId: string) => this.medallaMap.get(medallaId)) // Reemplazar ObjectId con nombre
-            };
-          });
-
-          console.log('Usuarios con medallas:', this.usuarios); // Verificar si los nombres de usuarios están presentes
-        },
-        (error) => {
-          console.error('Error al cargar las medallas de los usuarios', error);
-        }
-      );
+      console.log('Usuarios con medallas:', this.usuarios); // Verificar si los nombres de usuarios están presentes
+    }, error => {
+      console.error('Error al cargar los datos:', error);
+    });
   }
 
   irAProfile(): void {
