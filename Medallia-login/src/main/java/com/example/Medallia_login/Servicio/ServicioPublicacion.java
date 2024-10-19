@@ -33,6 +33,7 @@ public class ServicioPublicacion {
     private RepositorioMedallas repositorioMedallas;
 
     public List<Publicacion> obtenerPublicaciones(){
+        System.out.println("no funciona AAAAAAAAAAAAAAAAAAAAAAAAA");
         return repositoriopublicacion.findAll();
     }
 
