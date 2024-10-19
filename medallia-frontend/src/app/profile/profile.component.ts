@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForOf, NgIf} from '@angular/common';
 import { PublicacionComponent } from '../publicacion/publicacion.component';
 import { Router } from '@angular/router';
-import {HttpClient, HttpClientModule} from "@angular/common/http";  // Importar Router
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-profile',
@@ -17,23 +17,22 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";  // Importar 
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user: {
+  user!: {
     medallas: any[];
     descripcion: string;
-    publicaciones: any[];  // Asegúrate de definir el tipo
+    publicaciones: any[];
     usuarioId: string;
     nombre: string;
-  }| undefined
+  };
 
   cargarDatosUsuario(): void {
-
-    this.http.get<any>('http://localhost:8080/usuario/get')
+    this.http.get<any>('http://localhost:8080/api/auth/login')
       .subscribe(
         (data: any) => {
           console.log('Datos del usuario cargados', data);
           this.user = data;
 
-          this.cargarPublicacionesUsuario(this.user);
+          this.cargarPublicacionesUsuario(this.user?.usuarioId);
         },
         (error: any) => {
           console.error('Error al cargar los datos del usuario', error);
@@ -42,31 +41,28 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarPublicacionesUsuario(this.user);
+    this.cargarDatosUsuario();
   }
 
-  cargarPublicacionesUsuario(nombreUsuario: { publicaciones: any[] } | undefined): void {
+  cargarPublicacionesUsuario(usuarioId: string | undefined): void {
+    if (!usuarioId) return;
+
     this.http.get<any[]>('http://localhost:8080/publicaciones/get')
       .subscribe(
         (data: any[]) => {
           console.log('Publicaciones cargadas', data);
 
-          // Filtrar publicaciones que pertenecen al usuario actual
-          const publicacionesDelUsuario = data
-            .filter(post => post.nombreUsuario === nombreUsuario)
-            .map(post => {
-              return {
-                ...post,
-                aplaudido: false,
-                nombre: this.extraerNombreUsuario(post.nombreUsuario)
-              };
-            });
 
-          // Asignar las publicaciones al objeto user
-          this.user= {
-            descripcion: "", medallas: [], nombre: "", usuarioId: "",
-            ...this.user,  // Mantén las propiedades actuales del objeto user
-            publicaciones: publicacionesDelUsuario  // Agrega las publicaciones filtradas
+          const publicacionesDelUsuario = data.filter(post => post.usuarioId === usuarioId)
+            .map(post => ({
+              ...post,
+              aplaudido: false,  // Inicialización de aplaudido como falso
+              nombre: this.extraerNombreUsuario(post.usuarioId)
+            }));
+
+          this.user = {
+            ...this.user,
+            publicaciones: publicacionesDelUsuario
           };
         },
         (error: any) => {
@@ -74,7 +70,6 @@ export class ProfileComponent implements OnInit {
         }
       );
   }
-
 
 
   extraerNombreUsuario(nombreUsuario: string): string {

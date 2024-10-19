@@ -1,36 +1,32 @@
-<div class="profile-container">
+<div class="profile-container" *ngIf="user">
+  <!-- Barra de navegación estática -->
+  <nav class="flex justify-around items-center bg-accent py-3 fixed w-full top-0 z-50 shadow-lg">
+    <button (click)="irAFeed()" class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+      Feed
+    </button>
+    <button (click)="irAPublicar()" class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+      Publicar
+    </button>
+    <button (click)="irACerrarSesion()" class="bg-primary text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-accent hover:text-gray-800 hover:scale-110 transition-transform duration-300 ease-in-out">
+      Cerrar Sesión
+    </button>
+  </nav>
 
-      <!-- Barra de navegación estática -->
-      <nav class="flex justify-around items-center bg-accent py-3 fixed w-full top-0 z-50 shadow-lg">
-        <!-- Botones para navegar a las otras partes de la app -->
-
-        <button (click)="irAFeed()" class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-          Feed
-        </button>
-        <button (click)="irAPublicar()" class="bg-accent text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-          Publicar
-        </button>
-        <button (click)=" irACerrarSesion()" class="bg-primary text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-accent hover:text-gray-800 hover:scale-110 transition-transform duration-300 ease-in-out">
-          Cerrar Sesión
-        </button>
-      </nav>
   <div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
     <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-6">
-
       <div class="w-32 h-32 md:w-48 md:h-48 overflow-hidden rounded-full border-4 border-gray-300">
         <img src="https://via.placeholder.com/150" alt="Foto de Perfil" class="w-full h-full object-cover">
       </div>
 
       <div class="mt-6 md:mt-0">
-        <h1 class="text-3xl font-bold text-gray-800">{{ user?.nombre }}</h1>
-        <p class="text-gray-600 mt-2">{{ user?.usuarioId }}</p>
-
-        <p class="text-gray-600 mt-4">{{ user?.descripcion }}</p>
+        <h1 class="text-3xl font-bold text-gray-800">{{ user.nombre }}</h1>
+        <p class="text-gray-600 mt-2">{{ user.usuarioId }}</p>
+        <p class="text-gray-600 mt-4">{{ user.descripcion }}</p>
 
         <div class="mt-6">
           <h2 class="text-xl font-semibold text-gray-700">Medallas Ganadas</h2>
           <div class="flex space-x-4 mt-4">
-            <div *ngFor="let medalla of user?.medallas" class="w-16 h-16">
+            <div *ngFor="let medalla of user.medallas" class="w-16 h-16">
               <img [src]="medalla.imagen" alt="Medalla" class="w-full h-full object-cover rounded-full border-2 border-yellow-500">
             </div>
           </div>
@@ -38,17 +34,21 @@
       </div>
     </div>
 
-    <div class="mt-8" *ngIf="user?.publicaciones">
+    <div class="mt-8" *ngIf="user && user.publicaciones && user.publicaciones.length > 0">
       <h2 class="text-2xl font-semibold text-gray-700">Actividad Reciente</h2>
       <div class="mt-4 space-y-4">
-        <div *ngFor="let publicacion of user?.publicaciones" class="flex justify-center">
+        <div *ngFor="let publicacion of user.publicaciones" class="flex justify-center">
           <app-publicacion>
-            [imagen]="publicacion.image"
+            [imagen]="publicacion.imagen"
             [usuarioId]="publicacion.usuarioId"
+            [descripcion]="publicacion.descripcion"
+            [fecha]="publicacion.fecha"
+            [aplausos]="publicacion.aplausos"
+            [postId]="publicacion._id">
           </app-publicacion>
         </div>
       </div>
-      </div>
     </div>
-  </div>
 
+  </div>
+</div>
