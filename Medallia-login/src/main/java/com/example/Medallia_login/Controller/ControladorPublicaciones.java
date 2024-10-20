@@ -1,5 +1,6 @@
 package com.example.Medallia_login.Controller;
 import com.example.Medallia_login.Dominio.CuentaDTO;
+import com.example.Medallia_login.Dominio.PubAplausosDTO;
 import com.example.Medallia_login.Dominio.PublicacionDTO;
 import com.example.Medallia_login.Modelos.Cuenta;
 import com.example.Medallia_login.Modelos.Publicacion;
@@ -58,6 +59,17 @@ public class ControladorPublicaciones {
         ObjectId objIdMedalla = new ObjectId(publicacionDTO.getMedalla());
         Publicacion publiGuardada = servicioPublicacion.crearPublicacion(objId, publicacionDTO.getDescripcion(), publicacionDTO.getFecha(), publicacionDTO.getImagen(), publicacionDTO.getAplausos(), objIdMedalla);
         return ResponseEntity.ok(publiGuardada);
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/aplaudidas")
+    public ResponseEntity<List<String>> publicacionesAplaudidasPorUsuario(@RequestBody PubAplausosDTO pubAplausosDTO){
+        String publicacionId = pubAplausosDTO.getPublicacionId();
+        String usuarioId = pubAplausosDTO.getUsuarioId();
+
+        List<String> aplausosUsuario = servicioPublicacion.incrementarAplausosEnLista(publicacionId, usuarioId);
+
+        return ResponseEntity.ok(aplausosUsuario);
     }
 
 }
