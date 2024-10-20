@@ -3,6 +3,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgIf, CommonModule } from '@angular/common'; // Asegúrate de importar CommonModule
 import { Router } from '@angular/router';
+import { FeedComponent } from "../feed/feed.component";
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-publicar',
@@ -13,7 +15,10 @@ import { Router } from '@angular/router';
     NgIf,
     HttpClientModule,
     CommonModule // Añadir CommonModule aquí
-  ],
+    ,
+    FeedComponent,
+    NavbarComponent
+],
   styleUrls: ['./publicar.component.css']
 })
 export class PublicarComponent {

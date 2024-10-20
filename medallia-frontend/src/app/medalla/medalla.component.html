@@ -1,26 +1,6 @@
 <div class="flex flex-col h-screen bg-secondary">
     <!-- Barra de navegación estática -->
-    <nav class="flex justify-around items-center bg-accent py-3 fixed w-full top-0 z-50 shadow-lg">
-      <!-- Botones para navegar a las otras partes de la app -->
-      <button (click)='irAProfile()' class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-        Perfil
-      </button>
-      <button (click)="irAFeed()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-        Feed
-      </button>
-      <button (click)="irAMedallas()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-        Medalla
-      </button>
-
-
-      <button (click)="irAPublicar()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-        Publicar
-      </button>
-
-      <button (click)="irACerrarSesion()" class="bg-primary text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-accent hover:text-gray-800 hover:scale-110 transition-transform duration-300 ease-in-out">
-        Cerrar Sesión
-      </button>
-    </nav>
+    <app-navbar></app-navbar>
 
     <!-- Contenedor del componente de medallas con scroll -->
     <div class="relative h-full overflow-y-auto mt-20">

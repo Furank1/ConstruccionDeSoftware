@@ -3,6 +3,7 @@ import { NgForOf, NgIf } from '@angular/common';
 import { PublicacionComponent } from '../publicacion/publicacion.component';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-profile',
@@ -12,8 +13,9 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
     HttpClientModule,
     NgForOf,
     PublicacionComponent,
-    NgIf
-  ],
+    NgIf,
+    NavbarComponent
+],
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
@@ -56,26 +58,5 @@ export class ProfileComponent implements OnInit {
           console.error('Error al cargar los datos del usuario', error);
         }
       );
-  }
-
-
-
-  irAFeed(): void {
-    this.router.navigate(['/feed']);
-  }
-  irAPerfil(): void {
-    this.router.navigate(['/profile']);
-  }
-  irAMedalla(): void{
-    this.router.navigate(['/medalla']);
-  }
-
-  irACerrarSesion(): void {
-    localStorage.removeItem('loggedInUser');
-    this.router.navigate(['/login']);
-  }
-
-  irAPublicar(): void {
-    this.router.navigate(['/publicar']);
   }
 }
