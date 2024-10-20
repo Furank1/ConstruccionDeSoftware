@@ -11,9 +11,10 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   loggedInUser: string | null = null;
+  nombreUsuario = localStorage.getItem('userEmail');
 
   constructor(private router: Router) {
-    // nombredeusuariologueao
+    this.nombreUsuario= this.extraerNombreUsuario(this.nombreUsuario);
     this.loggedInUser = localStorage.getItem('loggedInUser');
   }
 
@@ -36,5 +37,11 @@ export class NavbarComponent {
   irACerrarSesion() {
     localStorage.removeItem('loggedInUser');
     this.router.navigate(['/login']);
+  }
+  extraerNombreUsuario(correo: string | null): string {
+    if (!correo || typeof correo !== 'string') {
+      return 'Usuario desconocido';
+    }
+    return correo.split('@')[0];
   }
 }

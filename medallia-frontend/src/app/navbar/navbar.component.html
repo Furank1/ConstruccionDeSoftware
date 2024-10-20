@@ -1,10 +1,9 @@
 <nav class="flex justify-around items-center bg-accent py-3 fixed w-full top-0 z-50 shadow-lg">
   <div class="text-gray-800 font-bold">
-    <!-- Mostrar el nombre del usuario logueado -->
-    <span *ngIf="loggedInUser">Bienvenido, {{ loggedInUser }}</span>
+
   </div>
   <button (click)="irAProfile()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-    Perfil
+   {{nombreUsuario}}
   </button>
   <button (click)="irAFeed()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
     Feed
