@@ -1,7 +1,5 @@
 module.exports = {
-  content: [
-    "./**/*.{html,js}", // Incluir todos los archivos HTML y TypeScript en el proyecto Angular
-  ],
+  content: ["./src/**/*.{html,ts}"],
   theme: {
     extend: {      colors: {
       primary: '#BF15B4',     // Color fucsia
