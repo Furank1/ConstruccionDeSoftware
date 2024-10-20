@@ -66,6 +66,10 @@ public class ControladorPublicaciones {
     public ResponseEntity<List<String>> publicacionesAplaudidasPorUsuario(@RequestBody PubAplausosDTO pubAplausosDTO){
         String publicacionId = pubAplausosDTO.getPublicacionId();
         String usuarioId = pubAplausosDTO.getUsuarioId();
+        System.out.println("LOCURIÑA AQUI HOLA");
+        System.out.println(publicacionId);
+        System.out.println(usuarioId);
+        System.out.println("=====================");
 
         List<String> aplausosUsuario = servicioPublicacion.incrementarAplausosEnLista(publicacionId, usuarioId);
 
