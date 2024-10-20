@@ -21,6 +21,7 @@
   export class ProfileComponent implements OnInit {
     user: any = {};
     loggedInUser = localStorage.getItem('loggedInUser');
+    nombreUsuario = localStorage.getItem('userEmail');
     editando = false; // Control para el modo edición
 
     constructor(private router: Router, private http: HttpClient) {}
@@ -39,7 +40,7 @@
             if (data) {
               console.log('Datos del usuario cargados', data);
               this.user = {
-                nombre: data.nombre || 'Usuario Desconocido',
+                nombre: this.extraerNombreUsuario(this.nombreUsuario) ,
                 usuarioId: this.loggedInUser,
                 descripcion: data.biografia || '',
                 imagen: data.imagen || '',
@@ -79,7 +80,14 @@
           }
         );
     }
-    
+
+    extraerNombreUsuario(correo: string | null): string {
+      if (!correo || typeof correo !== 'string') {
+        return 'Usuario desconocido';
+      }
+      return correo.split('@')[0];
+    }
+
     irAFeed(): void {
       this.router.navigate(['/feed']);
     }

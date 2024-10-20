@@ -20,7 +20,6 @@
 
       <div class="mt-6 md:mt-0">
         <h1 class="text-3xl font-bold text-gray-800">{{ user.nombre }}</h1>
-        <p class="text-gray-600 mt-2">{{ user.usuarioId }}</p>
         <p class="text-gray-600 mt-4">{{ user.descripcion }}</p>
 
         <button (click)="toggleEditar()" class="bg-primary text-white font-bold py-2 px-4 mt-4 rounded-full shadow-md hover:bg-accent hover:text-gray-800 transition-transform">
@@ -56,7 +55,7 @@
     <div class="mt-8" *ngIf="user && user.publicaciones && user.publicaciones.length > 0">
       <h2 class="text-2xl font-semibold text-gray-700">Actividad Reciente</h2>
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-        <div *ngFor="let publicacion of user.publicaciones" class="mb-4"> 
+        <div *ngFor="let publicacion of user.publicaciones" class="mb-4">
           <app-publicacion
             class="object-cover object-center w-full h-40 max-w-full rounded-lg"
             [imagen]="publicacion.imagen"

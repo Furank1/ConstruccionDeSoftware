@@ -42,6 +42,7 @@ ngOnInit():void{
           const userId = response.id; // Solo toma el ID
           localStorage.setItem('userId', userId);
                     localStorage.setItem('loggedInUser', response.id);
+          localStorage.setItem('userEmail', response.email);
           this.router.navigate(['/feed']);
 
         },
