@@ -23,7 +23,7 @@ public class ServicioPerfil {
 
     public Perfil actualizarPerfil (String perfilId, String biografia, String imagen){
         ObjectId id = new ObjectId(perfilId);
-        Optional<Perfil> perfilActual = repositorioPerfil.findById(id);
+        Optional<Perfil> perfilActual = repositorioPerfil.findByUsuarioId(id);
         
         if(perfilActual.isPresent()){
             perfilActual.get().setBiografia(biografia);
