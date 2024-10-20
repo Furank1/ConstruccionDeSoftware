@@ -3,11 +3,12 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {Router, RouterLink} from "@angular/router";
 import {PublicacionComponent} from "../publicacion/publicacion.component";
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule, DatePipe, HttpClientModule, RouterLink, PublicacionComponent],
+  imports: [CommonModule, DatePipe, HttpClientModule, RouterLink, PublicacionComponent, NavbarComponent],
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
@@ -41,22 +42,6 @@ export class FeedComponent implements OnInit {
           console.error('Error al cargar publicaciones', error);
         }
       );
-  }
-  irAProfile(): void {
-    this.router.navigate(['/profile']);
-  }
-  irAFeed(): void {
-    this.router.navigate(['/feed']);
-  }
-  irAMedallas(): void {
-    this.router.navigate(['/medalla']);
-  }
-  irACerrarSesion(): void {
-    localStorage.removeItem('loggedInUser');
-    this.router.navigate(['/login']);
-  }
-  irAPublicar(): void {
-    this.router.navigate(['/publicar']);
   }
 
   extraerNombreUsuario(correo: string): string {
