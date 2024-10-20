@@ -130,4 +130,22 @@ public class ServicioPublicacion {
         }
         return convertirListaDTO(publicacionesUsuario);
     }
+
+    public List<String> incrementarAplausosEnLista(String publicacionId, String usuarioId){
+        ObjectId publicacionIdObj = new ObjectId(publicacionId);
+        incrementarAplausosPorId(publicacionIdObj);
+        Optional<Cuenta> usuarioActual = repositoriocuenta.findById(usuarioId);
+        if(usuarioActual.isPresent()) {
+            System.out.println(usuarioActual.get().getAplausos().toString());
+            if(usuarioActual.get().getAplausos() == null) {
+                //System.out.println("no aplausos");
+                usuarioActual.get().setAplausos(new ArrayList<>());
+            }
+            usuarioActual.get().getAplausos().add(publicacionId);
+            System.out.println("aplauso");
+        }
+        System.out.println(usuarioActual.get().getAplausos().toString());
+        repositoriocuenta.save(usuarioActual.get());
+        return usuarioActual.get().getAplausos();
+    }
 }
