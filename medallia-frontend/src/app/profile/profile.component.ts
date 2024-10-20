@@ -38,7 +38,6 @@
           (data: any) => {
             if (data) {
               console.log('Datos del usuario cargados', data);
-
               this.user = {
                 nombre: data.nombre || 'Usuario Desconocido',
                 usuarioId: this.loggedInUser,
@@ -80,8 +79,7 @@
           }
         );
     }
-
-
+    
     irAFeed(): void {
       this.router.navigate(['/feed']);
     }
