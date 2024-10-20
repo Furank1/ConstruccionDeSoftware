@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,7 +35,12 @@ public class ControladorPerfil {
         PerfilDTO perfilDTO = new PerfilDTO();
         perfilDTO.setBiografia(perfil.getBiografia());
         perfilDTO.setImagen(perfil.getImagenURL());
-        List<String> medallasUsuario = servicioCuenta.retornarMedallasUsuarioUnico(id).stream().map(ObjectId::toHexString).toList();
+
+        List<String> medallasUsuario = new ArrayList<>();
+        List<ObjectId> medallasUsuarioObjId = servicioCuenta.retornarMedallasUsuarioUnico(id);
+        if(medallasUsuarioObjId != null){
+            medallasUsuario = servicioCuenta.retornarMedallasUsuarioUnico(id).stream().map(ObjectId::toHexString).toList();
+        }
         perfilDTO.setMedallasUsuario(medallasUsuario);
         List<PublicacionDTO> publicacionesUsuario = servicioPublicacion.obtenerPublicacionesUsuarioDTO(id);
         perfilDTO.setPublicacionesUsuario(publicacionesUsuario);

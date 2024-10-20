@@ -18,7 +18,12 @@ public class ServicioPerfil {
         System.out.println(idusuario);
         ObjectId id = new ObjectId(idusuario);
         Optional<Perfil> perfil = repositorioPerfil.findByUsuarioId(id);
-        return perfil.orElse(null);
+        if(perfil.isPresent()){
+            return perfil.get();
+        } else {
+            return new Perfil(id, "", "");
+        }
+        
     }
 
     public Perfil actualizarPerfil (String perfilId, String biografia, String imagen){
