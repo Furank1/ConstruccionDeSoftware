@@ -36,9 +36,10 @@
 
     <div class="mt-8" *ngIf="user && user.publicaciones && user.publicaciones.length > 0">
       <h2 class="text-2xl font-semibold text-gray-700">Actividad Reciente</h2>
-      <div class="mt-4 space-y-4">
-        <div *ngFor="let publicacion of user.publicaciones" class="flex justify-center">
-          <app-publicacion>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div *ngFor="let publicacion of user.publicaciones" class="mb-4"> 
+          <app-publicacion
+            class="object-cover object-center w-full h-40 max-w-full rounded-lg"
             [imagen]="publicacion.imagen"
             [usuarioId]="publicacion.usuarioId"
             [descripcion]="publicacion.descripcion"
@@ -49,6 +50,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>

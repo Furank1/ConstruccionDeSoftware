@@ -46,7 +46,7 @@ export class ProfileComponent implements OnInit {
               usuarioId: this.loggedInUser,
               descripcion: data.biografia || '',
               medallas: data.medallas || [],
-              publicaciones: []
+              publicaciones: data.publicacionesUsuario || []
             };
           } else {
             console.error('El objeto de datos de usuario no contiene la información esperada', data);
