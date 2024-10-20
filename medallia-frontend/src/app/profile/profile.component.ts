@@ -20,19 +20,34 @@
   })
   export class ProfileComponent implements OnInit {
     user: any = {};
+    medallas: any[] = []; // Medallas globales
     loggedInUser = localStorage.getItem('loggedInUser');
     nombreUsuario = localStorage.getItem('userEmail');
     editando = false; // Control para el modo edición
-
+    mostrarMedallas = false;
+  
     constructor(private router: Router, private http: HttpClient) {}
-
+  
     ngOnInit(): void {
       if (!this.loggedInUser) {
         this.router.navigate(['/login']);  // Redirigir si no está logueado
       }
+      this.cargarMedallas(); // todas las medallas disponibles
       this.cargarDatosUsuario();
     }
-
+  
+    cargarMedallas(): void {
+      this.http.get<any[]>('http://localhost:8080/medallas/obtenermedallas')
+        .subscribe(
+          (data: any[]) => {
+            this.medallas = data;
+          },
+          (error: any) => {
+            console.error('Error al cargar las medallas', error);
+          }
+        );
+    }
+  
     cargarDatosUsuario(): void {
       this.http.get<any>(`http://localhost:8080/perfil/get?id=${this.loggedInUser}`)
         .subscribe(
@@ -40,13 +55,15 @@
             if (data) {
               console.log('Datos del usuario cargados', data);
               this.user = {
-                nombre: this.extraerNombreUsuario(this.nombreUsuario) ,
+                nombre: this.extraerNombreUsuario(this.nombreUsuario),
                 usuarioId: this.loggedInUser,
                 descripcion: data.biografia || '',
                 imagen: data.imagen || '',
-                medallas: data.medallas || [],
-                publicaciones: []
+                medallasUsuario: this.agruparMedallas(data.medallasUsuario || []), // Agrupar las medallas
+                publicaciones: data.publicacionesUsuario || []
               };
+              // Vincular los nombres de las medallas
+              this.vincularNombresMedallas();
             } else {
               console.error('El objeto de datos de usuario no contiene la información esperada', data);
             }
@@ -56,18 +73,52 @@
           }
         );
     }
-
+  
+    agruparMedallas(medallas: string[]): { id: string, count: number }[] {
+      const medallasMap: { [id: string]: number } = {};
+  
+      // Contar ocurrencias de cada medalla
+      medallas.forEach(id => {
+        if (medallasMap[id]) {
+          medallasMap[id]++;
+        } else {
+          medallasMap[id] = 1;
+        }
+      });
+  
+      // Convertir el objeto en un arreglo
+      return Object.keys(medallasMap).map(id => ({
+        id,
+        count: medallasMap[id]
+      }));
+    }
+  
+    vincularNombresMedallas(): void {
+      // Asocia los nombres de las medallas con los IDs del usuario
+      this.user.medallasUsuario = this.user.medallasUsuario.map((medallaUsuario: { id: any; }) => {
+        const medallaCompleta = this.medallas.find(medalla => medalla.id === medallaUsuario.id);
+        return {
+          ...medallaUsuario,
+          nombre: medallaCompleta ? medallaCompleta.nombre : 'Desconocida'
+        };
+      });
+    }
+  
+    toggleMostrarMedallas(): void {
+      this.mostrarMedallas = !this.mostrarMedallas;
+    }
+  
     toggleEditar(): void {
       this.editando = !this.editando;
     }
-
+  
     guardarCambios(): void {
       const perfilActualizado = {
         id: this.loggedInUser,
         biografia: this.user.descripcion,
         imagen: this.user.imagen
       };
-
+  
       // Realizar la solicitud POST al back-end
       this.http.post('http://localhost:8080/perfil/update', perfilActualizado)
         .subscribe(
@@ -80,24 +131,12 @@
           }
         );
     }
-
+  
     extraerNombreUsuario(correo: string | null): string {
       if (!correo || typeof correo !== 'string') {
         return 'Usuario desconocido';
       }
       return correo.split('@')[0];
     }
-
-    irAFeed(): void {
-      this.router.navigate(['/feed']);
-    }
-
-    irACerrarSesion(): void {
-      localStorage.removeItem('loggedInUser');
-      this.router.navigate(['/login']);
-    }
-
-    irAPublicar(): void {
-      this.router.navigate(['/publicar']);
-    }
   }
+  

@@ -1,4 +1,4 @@
-<div class="profile-container" *ngIf="user">
+<div *ngIf="user">
   <!-- Barra de navegación estática -->
   <app-navbar></app-navbar>
 
@@ -29,17 +29,20 @@
           </button>
         </div>
 
-        <!-- Medallas -->
-        <div class="mt-6">
-          <h2 class="text-xl font-semibold text-gray-700">Medallas Ganadas</h2>
-          <div class="flex space-x-4 mt-4">
-            <div *ngFor="let medalla of user.medallas" class="w-16 h-16">
-              <img [src]="medalla.imagen" alt="Medalla" class="w-full h-full object-cover rounded-full border-2 border-yellow-500">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- Medallas -->
+<div class="mt-6">
+  <button (click)="toggleMostrarMedallas()" class="text-xl font-semibold text-gray-700 focus:outline-none">
+    Medallas Ganadas
+  </button>
+  <ul *ngIf="mostrarMedallas" class="mt-4 border border-gray-300 rounded-lg shadow-md max-w-md mx-auto">
+    <li *ngFor="let medalla of user.medallasUsuario" class="p-2 border-b last:border-b-0 border-gray-200">
+      <p class="text-sm text-gray-800">
+        {{ medalla.nombre }} <span *ngIf="medalla.count > 1">x{{ medalla.count }}</span>
+      </p>
+    </li>
+  </ul>
+</div>
+
 
     <!-- Publicaciones recientes -->
     <div class="mt-8" *ngIf="user && user.publicaciones && user.publicaciones.length > 0">

@@ -24,6 +24,7 @@ export class PublicacionComponent implements OnInit {
   haAplaudido: boolean = false;
   fechaFormateada!: string;
   mostrarModal: boolean = false; //  visibilidad del modal
+  
 
   constructor(private http: HttpClient) {}
 
