@@ -21,10 +21,13 @@ public class Cuenta {
     private String password;
     private List<ObjectId> medallas;
 
+    private List<String> aplausos;
+
     public Cuenta(String correo, String password) {
         this.email = correo;
         this.password = password;
         medallas = new ArrayList<>();
+        aplausos = new ArrayList<>();
     }
 
     public Cuenta(){}
@@ -59,5 +62,13 @@ public class Cuenta {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<String> getAplausos() {
+        return aplausos;
+    }
+
+    public void setAplausos(List<String> aplausos) {
+        this.aplausos = aplausos;
     }
 }
