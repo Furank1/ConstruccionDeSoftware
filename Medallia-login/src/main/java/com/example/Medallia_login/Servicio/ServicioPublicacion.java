@@ -136,7 +136,7 @@ public class ServicioPublicacion {
         incrementarAplausosPorId(publicacionIdObj);
         Optional<Cuenta> usuarioActual = repositoriocuenta.findById(usuarioId);
         if(usuarioActual.isPresent()) {
-            System.out.println(usuarioActual.get().getAplausos().toString());
+            //System.out.println(usuarioActual.get().getAplausos().toString());
             if(usuarioActual.get().getAplausos() == null) {
                 //System.out.println("no aplausos");
                 usuarioActual.get().setAplausos(new ArrayList<>());
