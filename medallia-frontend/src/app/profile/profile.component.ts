@@ -63,6 +63,12 @@ export class ProfileComponent implements OnInit {
   irAFeed(): void {
     this.router.navigate(['/feed']);
   }
+  irAPerfil(): void {
+    this.router.navigate(['/profile']);
+  }
+  irAMedalla(): void{
+    this.router.navigate(['/medalla']);
+  }
 
   irACerrarSesion(): void {
     localStorage.removeItem('loggedInUser');
