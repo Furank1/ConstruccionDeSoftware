@@ -28,8 +28,10 @@ public class ServicioPerfil {
         if(perfilActual.isPresent()){
             perfilActual.get().setBiografia(biografia);
             perfilActual.get().setImagenURL(imagen);
-
+            System.out.println("Falopa máxima");
             repositorioPerfil.save(perfilActual.get());
+        }else{
+            System.out.println("No se encontro el perfil: Falota triste");
         }
 
         return perfilActual.orElse(null);
