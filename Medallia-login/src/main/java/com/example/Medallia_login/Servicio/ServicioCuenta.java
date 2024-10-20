@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,15 @@ public class ServicioCuenta {
         Cuenta cuentaAux = repositoriocuenta.findById(usuarioId).get();
         List<ObjectId> medallasUsuario = cuentaAux.getMedallas();
         return medallasUsuario;
+    }
+
+    public List<String> getPublicacionesAplaudidas(String usuarioId) {
+        Cuenta cuentaAux = repositoriocuenta.findById(usuarioId).get();
+        List<String> pubAplaudidasUsuario = cuentaAux.getAplausos();
+        if (pubAplaudidasUsuario == null) {
+            pubAplaudidasUsuario = new ArrayList<>();
+        }
+        return pubAplaudidasUsuario;
     }
 
 

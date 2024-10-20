@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,6 +38,13 @@ public class ControladorCuenta {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("pubaplaudidas")
+    public List<String> getPublicacionesAplaudidas(@RequestParam("id") String id){
+        List<String> pubAplaudidasUsuario = servicioCuenta.getPublicacionesAplaudidas(id);
+        return pubAplaudidasUsuario;
     }
 
 
