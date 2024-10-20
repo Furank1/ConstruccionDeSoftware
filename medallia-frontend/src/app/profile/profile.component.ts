@@ -4,6 +4,7 @@
   import { Router } from '@angular/router';
   import { HttpClient, HttpClientModule } from "@angular/common/http";
   import { FormsModule } from '@angular/forms';
+  import { NavbarComponent } from '../navbar/navbar.component';
 
   @Component({
     selector: 'app-profile',
@@ -14,8 +15,7 @@
       NgForOf,
       PublicacionComponent,
       NgIf,
-      FormsModule // Agrega FormsModule aquí
-    ],
+      FormsModule, NavbarComponent],
     styleUrls: ['./profile.component.css']
   })
   export class ProfileComponent implements OnInit {
