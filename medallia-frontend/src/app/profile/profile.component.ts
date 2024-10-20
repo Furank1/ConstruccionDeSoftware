@@ -17,52 +17,33 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user: any = undefined;
-
+  user: any = {};
+  loggedInUser = localStorage.getItem('loggedInUser');
   constructor(private router: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
-    const loggedInUser = localStorage.getItem('loggedInUser');
-      const userData = localStorage.getItem('loggedInUser');
-      console.log('Contenido de loggedInUser:', userData);
 
-      if (userData) {
-        try {
-          this.user = JSON.parse(userData);
-          console.log(this.user);
-        } catch (error) {
-          console.error('Error al parsear JSON:', error);
-          this.user = {};
-        }
-      } else {
-        this.user = {};
-      }
-
-    if (loggedInUser) {
-      this.user = JSON.parse(loggedInUser);
-      this.cargarDatosUsuario();
-    } else {
-      console.error('No hay usuario logueado en el localStorage');
-      this.router.navigate(['/login']);
+    if (!this.loggedInUser) {
+      this.router.navigate(['/login']);  // chao no estas logeao
     }
+    this.cargarDatosUsuario();
+
+
+
   }
 
 
   cargarDatosUsuario(): void {
-    if (!this.user || !this.user.usuarioId) {
-      console.error('usuarioId no está disponible');
-      return;
-    }
 
-    this.http.get<any>(`http://localhost:8080/perfil/get?id=${this.user.usuarioId}`)
+    this.http.get<any>(`http://localhost:8080/perfil/get?id=${this.loggedInUser}`)
       .subscribe(
         (data: any) => {
           if (data) {
             console.log('Datos del usuario cargados', data);
-            
+
             this.user = {
               nombre: data.nombre || 'Usuario Desconocido',
-              usuarioId: this.user.usuarioId,
+              usuarioId: this.loggedInUser,
               descripcion: data.biografia || '',
               medallas: data.medallas || [],
               publicaciones: []
