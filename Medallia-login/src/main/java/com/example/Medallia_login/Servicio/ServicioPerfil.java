@@ -30,10 +30,12 @@ public class ServicioPerfil {
             perfilActual.get().setImagenURL(imagen);
             System.out.println("Falopa máxima");
             repositorioPerfil.save(perfilActual.get());
+            return perfilActual.get();
         }else{
             System.out.println("No se encontro el perfil: Falota triste");
+            Perfil perfilNuevo = new Perfil(id, biografia, imagen);
+            repositorioPerfil.save(perfilNuevo);
+            return perfilNuevo;
         }
-
-        return perfilActual.orElse(null);
     }
 }
