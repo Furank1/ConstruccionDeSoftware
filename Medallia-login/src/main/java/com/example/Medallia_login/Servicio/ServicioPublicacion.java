@@ -119,4 +119,33 @@ public class ServicioPublicacion {
         repositorioPublicaciones.save(publicacion);
         return publicacion;
     }
+
+    public List<PublicacionDTO> obtenerPublicacionesUsuarioDTO(String objId) {
+        List<Publicacion> publicacionesUsuario = new ArrayList<>();
+        List<Publicacion> publicaciones = obtenerPublicaciones();
+        for(Publicacion publicacion : publicaciones) {
+            if(publicacion.getUsuarioId().toHexString().equals(objId)) {
+                publicacionesUsuario.add(publicacion);
+            }
+        }
+        return convertirListaDTO(publicacionesUsuario);
+    }
+
+    public List<String> incrementarAplausosEnLista(String publicacionId, String usuarioId){
+        ObjectId publicacionIdObj = new ObjectId(publicacionId);
+        incrementarAplausosPorId(publicacionIdObj);
+        Optional<Cuenta> usuarioActual = repositoriocuenta.findById(usuarioId);
+        if(usuarioActual.isPresent()) {
+            //System.out.println(usuarioActual.get().getAplausos().toString());
+            if(usuarioActual.get().getAplausos() == null) {
+                //System.out.println("no aplausos");
+                usuarioActual.get().setAplausos(new ArrayList<>());
+            }
+            usuarioActual.get().getAplausos().add(publicacionId);
+            System.out.println("aplauso");
+        }
+        System.out.println(usuarioActual.get().getAplausos().toString());
+        repositoriocuenta.save(usuarioActual.get());
+        return usuarioActual.get().getAplausos();
+    }
 }

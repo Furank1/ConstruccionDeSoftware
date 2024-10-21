@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';  // Importar Router
-import { HttpClientModule, HttpClient } from '@angular/common/http'; // Importar HttpClient y HttpClientModule
-import { forkJoin } from 'rxjs'; // Importar forkJoin para manejar múltiples peticiones
-
+import { Router, RouterLink } from '@angular/router'; 
+import { HttpClientModule, HttpClient } from '@angular/common/http'; 
+import { forkJoin } from 'rxjs'; 
+import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'app-medalla',
   standalone: true,
   templateUrl: './medalla.component.html',
   styleUrls: ['./medalla.component.css'],
-  imports: [CommonModule, RouterLink, HttpClientModule] // Agregar HttpClientModule aquí
+  imports: [CommonModule, RouterLink, HttpClientModule, NavbarComponent] 
 })
 export class MedallaComponent {
   usuarios: any[] = [];
   medallas: any[] = [];
-  medallaMap: Map<string, string> = new Map(); // Diccionario para mapear ObjectId a nombres
+  medallaMap: Map<string, string> = new Map(); 
 
   constructor(private router: Router, private http: HttpClient) {
-    this.cargarDatos();  // Cargar las medallas y luego los usuarios
+    this.cargarDatos();  
   }
 
   // Método para cargar tanto las medallas como los usuarios
