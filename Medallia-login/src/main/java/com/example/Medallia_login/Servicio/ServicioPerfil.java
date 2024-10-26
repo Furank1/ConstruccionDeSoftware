@@ -18,7 +18,29 @@ public class ServicioPerfil {
         System.out.println(idusuario);
         ObjectId id = new ObjectId(idusuario);
         Optional<Perfil> perfil = repositorioPerfil.findByUsuarioId(id);
-        return perfil.orElse(null);
+        if(perfil.isPresent()){
+            return perfil.get();
+        } else {
+            return new Perfil(id, "", "");
+        }
+        
+    }
 
+    public Perfil actualizarPerfil (String perfilId, String biografia, String imagen){
+        ObjectId id = new ObjectId(perfilId);
+        Optional<Perfil> perfilActual = repositorioPerfil.findByUsuarioId(id);
+        
+        if(perfilActual.isPresent()){
+            perfilActual.get().setBiografia(biografia);
+            perfilActual.get().setImagenURL(imagen);
+            System.out.println("Falopa máxima");
+            repositorioPerfil.save(perfilActual.get());
+            return perfilActual.get();
+        }else{
+            System.out.println("No se encontro el perfil: Falota triste");
+            Perfil perfilNuevo = new Perfil(id, biografia, imagen);
+            repositorioPerfil.save(perfilNuevo);
+            return perfilNuevo;
+        }
     }
 }
