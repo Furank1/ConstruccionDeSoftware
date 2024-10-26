@@ -29,9 +29,10 @@ public class ControladorReportes {
     }
     @CrossOrigin(origins = "*")
     @GetMapping("/all")
-    public List<List<HashMap<String,String>>> devolverpublicaciones  (){
+    public List<List<HashMap<String,String>>> devolverpublicaciones (){
 
 
+        return List.of();
     }
 
 }
