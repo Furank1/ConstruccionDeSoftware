@@ -1,25 +1,30 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router'; 
-import { HttpClientModule, HttpClient } from '@angular/common/http'; 
-import { forkJoin } from 'rxjs'; 
+import { Router, RouterLink } from '@angular/router';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { forkJoin } from 'rxjs';
 import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'app-medalla',
   standalone: true,
   templateUrl: './medalla.component.html',
   styleUrls: ['./medalla.component.css'],
-  imports: [CommonModule, RouterLink, HttpClientModule, NavbarComponent] 
+  imports: [CommonModule, RouterLink, HttpClientModule, NavbarComponent]
 })
 export class MedallaComponent {
   usuarios: any[] = [];
   medallas: any[] = [];
-  medallaMap: Map<string, string> = new Map(); 
+  medallaMap: Map<string, string> = new Map();
+  mostrarMedallas: boolean = false ;
 
   constructor(private router: Router, private http: HttpClient) {
-    this.cargarDatos();  
+    this.cargarDatos();
   }
 
+
+  toggleMostrarMedallas(usuario: any): void {
+    usuario.mostrarMedallas = !usuario.mostrarMedallas;
+  }
   // Método para cargar tanto las medallas como los usuarios
   cargarDatos(): void {
     // Utilizamos forkJoin para esperar a que ambas peticiones se completen
@@ -39,7 +44,7 @@ export class MedallaComponent {
           medallas: usuario.medallas.map((medallaId: string) => this.medallaMap.get(medallaId) || 'Medalla desconocida') // Reemplazar ObjectId con nombre
         };
       });
-
+      this.usuarios.sort((a, b) => b.medallas.length - a.medallas.length);
       console.log('Usuarios con medallas:', this.usuarios); // Verificar si los nombres de usuarios están presentes
     }, error => {
       console.error('Error al cargar los datos:', error);
