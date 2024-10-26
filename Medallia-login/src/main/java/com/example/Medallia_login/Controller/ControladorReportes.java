@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/reporte")
@@ -29,10 +31,8 @@ public class ControladorReportes {
     }
     @CrossOrigin(origins = "*")
     @GetMapping("/all")
-    public List<List<HashMap<String,String>>> devolverpublicaciones (){
-
-
-        return List.of();
+    public List<HashMap<String,String>> devolverpublicaciones  (){
+        return servicioReporte.devolverreportes();
     }
 
 }
