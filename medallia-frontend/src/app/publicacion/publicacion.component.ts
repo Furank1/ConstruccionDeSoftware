@@ -7,11 +7,7 @@ import {FormsModule} from "@angular/forms";
 @Component({
   selector: 'app-publicacion',
   standalone: true,
-<<<<<<< Updated upstream
-  imports:[CommonModule],
-=======
   imports: [CommonModule, FormsModule],
->>>>>>> Stashed changes
   templateUrl: './publicacion.component.html',
   styleUrls: ['./publicacion.component.css']
 })
@@ -28,16 +24,11 @@ export class PublicacionComponent implements OnInit {
 
   haAplaudido: boolean = false;
   fechaFormateada!: string;
-<<<<<<< Updated upstream
-  mostrarModal: boolean = false; //  visibilidad del modal
-  
-=======
   mostrarModal: boolean = false;  // Visibilidad del modal
   loggedInUser = localStorage.getItem('loggedInUser');
   mostrarOpciones = false;
   mostrarFormularioReporte = false;
   motivoReporte = '';
->>>>>>> Stashed changes
 
   constructor(private http: HttpClient) {}
 
@@ -46,7 +37,7 @@ export class PublicacionComponent implements OnInit {
   }
 
   onAplaudir() {
-    if (!this.haAplaudido) {  
+    if (!this.haAplaudido) {
       this.aplausos++;
       this.haAplaudido = true;
       this.aplauso.emit();
