@@ -1,0 +1,17 @@
+<app-navbar></app-navbar>
+
+<div *ngIf="reportes.length > 0; else noReportes" class="reportes-container">
+  <div *ngFor="let reporte of reportes" class="reporte-card">
+    <img [src]="reporte.imagen" alt="Imagen de la publicación" class="reporte-imagen" />
+    <div class="reporte-detalles">
+      <h3>{{ reporte.nombreUsuario}}</h3>
+      <p class="reporte-fecha">{{ reporte.fecha | date:'dd/MM/yyyy HH:mm' }}</p>
+      <p class="reporte-descripcion">{{ reporte.DescripcionPublicacion }}</p>
+      <button class="aplaudir-btn">Aplaudir</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #noReportes>
+  <p>No se encontraron reportes.</p>
+</ng-template>

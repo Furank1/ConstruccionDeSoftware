@@ -52,8 +52,8 @@ public class ControladorCuenta {
     @GetMapping("cuentasmasmedallas")
     public List<CuentaMedallasDTO> cuentasConMasMedallas(){
         List<Cuenta> cuentas = servicioCuenta.getUsuariosMasMedallas();
-        System.out.println(cuentas.toString());
-        System.out.println(servicioCuenta.convertirCuentaADTO(cuentas).toString());
+        //System.out.println(cuentas.toString());
+        //System.out.println(servicioCuenta.convertirCuentaADTO(cuentas).toString());
         return servicioCuenta.convertirCuentaADTO(cuentas);
     }
 

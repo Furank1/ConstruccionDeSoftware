@@ -31,15 +31,15 @@ throw new Error('Method not implemented.');
 publicacion: any;
   
     constructor(private router: Router, private http: HttpClient) {}
-  
+
     ngOnInit(): void {
       if (!this.loggedInUser) {
-        this.router.navigate(['/login']);  // Redirigir si no está logueado
+        this.router.navigate(['/login']);
       }
-      this.cargarMedallas(); // todas las medallas disponibles
+      this.cargarMedallas();
       this.cargarDatosUsuario();
     }
-  
+
     cargarMedallas(): void {
       this.http.get<any[]>('http://localhost:8080/medallas/obtenermedallas')
         .subscribe(
@@ -51,7 +51,7 @@ publicacion: any;
           }
         );
     }
-  
+
     cargarDatosUsuario(): void {
       this.http.get<any>(`http://localhost:8080/perfil/get?id=${this.loggedInUser}`)
         .subscribe(
@@ -66,7 +66,7 @@ publicacion: any;
                 medallasUsuario: this.agruparMedallas(data.medallasUsuario || []), // Agrupar las medallas
                 publicaciones: data.publicacionesUsuario || []
               };
-              // Vincular los nombres de las medallas
+
               this.vincularNombresMedallas();
             } else {
               console.error('El objeto de datos de usuario no contiene la información esperada', data);
@@ -77,11 +77,11 @@ publicacion: any;
           }
         );
     }
-  
+
     agruparMedallas(medallas: string[]): { id: string, count: number }[] {
       const medallasMap: { [id: string]: number } = {};
-  
-      // Contar ocurrencias de cada medalla
+
+
       medallas.forEach(id => {
         if (medallasMap[id]) {
           medallasMap[id]++;
@@ -89,16 +89,14 @@ publicacion: any;
           medallasMap[id] = 1;
         }
       });
-  
-      // Convertir el objeto en un arreglo
+
       return Object.keys(medallasMap).map(id => ({
         id,
         count: medallasMap[id]
       }));
     }
-  
+
     vincularNombresMedallas(): void {
-      // Asocia los nombres de las medallas con los IDs del usuario
       this.user.medallasUsuario = this.user.medallasUsuario.map((medallaUsuario: { id: any; }) => {
         const medallaCompleta = this.medallas.find(medalla => medalla.id === medallaUsuario.id);
         return {
@@ -107,23 +105,22 @@ publicacion: any;
         };
       });
     }
-  
+
     toggleMostrarMedallas(): void {
       this.mostrarMedallas = !this.mostrarMedallas;
     }
-  
+
     toggleEditar(): void {
       this.editando = !this.editando;
     }
-  
+
     guardarCambios(): void {
       const perfilActualizado = {
         id: this.loggedInUser,
         biografia: this.user.descripcion,
         imagen: this.user.imagen
       };
-  
-      // Realizar la solicitud POST al back-end
+
       this.http.post('http://localhost:8080/perfil/update', perfilActualizado)
         .subscribe(
           (response: any) => {
@@ -135,7 +132,7 @@ publicacion: any;
           }
         );
     }
-  
+
     extraerNombreUsuario(correo: string | null): string {
       if (!correo || typeof correo !== 'string') {
         return 'Usuario desconocido';
@@ -143,4 +140,3 @@ publicacion: any;
       return correo.split('@')[0];
     }
   }
-  

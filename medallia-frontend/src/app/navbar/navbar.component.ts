@@ -34,6 +34,10 @@ export class NavbarComponent {
     this.router.navigate(['/publicar']);
   }
 
+  irAReporte() {
+    this.router.navigate(['/reporte']);
+  }
+
   irACerrarSesion() {
     localStorage.removeItem('loggedInUser');
     this.router.navigate(['/login']);
