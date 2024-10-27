@@ -31,12 +31,9 @@ export class PublicacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.fechaFormateada = dayjs(this.fecha).format('DD/MM/YYYY HH:mm');
-
-    // Verificar si la publicación ha sido aplaudida por el usuario
-    if (this.publicacionesAplaudidas.includes(this.postId)) {
-      this.haAplaudido = true;
-    }
+    this.haAplaudido = this.publicacionesAplaudidas?.includes(this.postId) ?? false;
   }
+
 
   onAplaudir() {
     if (!this.haAplaudido) {

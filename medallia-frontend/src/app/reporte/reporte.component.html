@@ -1,20 +1,17 @@
-<nav class="flex justify-around items-center bg-accent py-3 fixed w-full top-0 z-50 shadow-lg">
-  <div class="text-gray-800 font-bold">
+<app-navbar></app-navbar>
 
+<div *ngIf="reportes.length > 0; else noReportes" class="reportes-container">
+  <div *ngFor="let reporte of reportes" class="reporte-card">
+    <img [src]="reporte.imagen" alt="Imagen de la publicación" class="reporte-imagen" />
+    <div class="reporte-detalles">
+      <h3>{{ reporte.nombreUsuario }}</h3>
+      <p class="reporte-fecha">{{ reporte.fecha | date:'dd/MM/yyyy HH:mm' }}</p>
+      <p class="reporte-descripcion">{{ reporte.DescripcionPublicacion }}</p>
+      <button class="aplaudir-btn">Aplaudir</button>
+    </div>
   </div>
-  <button (click)="irAProfile()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-    {{nombreUsuario}}
-  </button>
-  <button (click)="irAFeed()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-    Feed
-  </button>
-  <button (click)="irAMedallas()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-    Medalla
-  </button>
-  <button (click)="irAPublicar()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-    Publicar
-  </button>
-  <button (click)="irACerrarSesion()" class="bg-primary text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-accent hover:text-gray-800 hover:scale-110 transition-transform duration-300 ease-in-out">
-    Cerrar Sesión
-  </button>
-</nav>
+</div>
+
+<ng-template #noReportes>
+  <p>No se encontraron reportes.</p>
+</ng-template>
