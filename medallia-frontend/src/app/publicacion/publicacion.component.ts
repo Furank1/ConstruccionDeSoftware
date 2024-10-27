@@ -39,16 +39,16 @@ export class PublicacionComponent implements OnInit {
   }
 
   onAplaudir() {
+    const aplausosDTO = {
+      publicacionId: this.postId,
+      usuarioId: this.loggedInUser
+    };
+  
     if (!this.haAplaudido) {
+      // Incrementar aplauso
       this.aplausos++;
       this.haAplaudido = true;
-      this.aplauso.emit();
-
-      const aplausosDTO = {
-        publicacionId: this.postId,
-        usuarioId: this.loggedInUser
-      };
-
+  
       this.http.post('http://localhost:8080/publicaciones/aplaudidas', aplausosDTO)
         .subscribe({
           next: (response) => {
@@ -58,8 +58,23 @@ export class PublicacionComponent implements OnInit {
             console.error('Error al actualizar los aplausos', error);
           }
         });
+    } else {
+      // Disminuir aplauso
+      this.aplausos--;
+      this.haAplaudido = false;
+  
+      this.http.post('http://localhost:8080/publicaciones/disminuiraplauso', aplausosDTO)
+        .subscribe({
+          next: (response) => {
+            console.log('Aplauso eliminado exitosamente', response);
+          },
+          error: (error) => {
+            console.error('Error al eliminar el aplauso', error);
+          }
+        });
     }
   }
+  
 
   abrirModal() {
     this.mostrarModal = true;

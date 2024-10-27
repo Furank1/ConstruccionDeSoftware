@@ -2,17 +2,36 @@
   <app-navbar></app-navbar>
   <div class="relative h-full overflow-y-auto mt-20">
     <div class="flex flex-col items-center gap-4 px-4">
-      <h1 class="text-3xl font-bold text-gray-800 mt-4">Ranking</h1>
-      <div *ngFor="let usuario of usuarios; let i = index" class="flex flex-col items-center p-6 bg-white shadow-lg rounded-lg max-w-xs">
-        <div class="mt-6">
-          <span class="text-2xl font-bold text-gray-700"> #{{ i + 1 }} </span>
-          <button (click)="toggleMostrarMedallas(usuario)" class="text-xl font-semibold text-gray-700 focus:outline-none">
+      <h1 class="text-4xl font-bold text-gray-800 mt-4">Ranking de Medallas 🏆</h1>
+      
+      <div *ngFor="let usuario of usuarios; let i = index" class="ranking-card flex flex-col items-center p-6 bg-white shadow-lg rounded-lg max-w-md relative">
+        <!-- Icono de medalla y posición -->
+        <div class="flex items-center justify-between w-full">
+          <span class="ranking-position text-3xl font-bold text-primary">#{{ i + 1 }}</span>
+          <div *ngIf="i < 3" class="ranking-icon text-xl">
+            <span *ngIf="i === 0">🥇</span>
+            <span *ngIf="i === 1">🥈</span>
+            <span *ngIf="i === 2">🥉</span>
+          </div>
+        </div>
+
+        <!-- Información de usuario -->
+        <div class="text-center mt-4">
+          <button (click)="toggleMostrarMedallas(usuario)" class="user-name text-xl font-semibold text-dark focus:outline-none">
             {{ usuario.nombre }}
           </button>
-          <ul *ngIf="usuario.mostrarMedallas" class="mt-4 border border-gray-300 rounded-lg shadow-md max-w-md mx-auto">
-            <div *ngFor="let medalla of usuario.medallas" class="m-2 text-center">
-              <p class="text-sm font-medium text-highlight">{{ medalla }}</p>
-            </div>
+          <p class="text-lg text-accent">Medallas totales: {{ usuario.totalMedallas }}</p>
+          
+          <!-- Barra de progreso de medallas -->
+          <div class="progress-bar mt-2">
+            <div class="progress" [style.width.%]="(usuario.totalMedallas / usuarios[0].totalMedallas) * 100"></div>
+          </div>
+          
+          <!-- Lista de medallas desplegable -->
+          <ul *ngIf="usuario.mostrarMedallas" class="medalla-list mt-4 border border-gray-300 rounded-lg shadow-md max-w-md mx-auto">
+            <li *ngFor="let medalla of usuario.medallas" class="medalla-item text-sm font-medium text-highlight p-2">
+              {{ medalla }}
+            </li>
           </ul>
         </div>
       </div>

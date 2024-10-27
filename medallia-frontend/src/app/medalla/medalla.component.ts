@@ -36,30 +36,35 @@ export class MedallaComponent {
       medallas.forEach(medalla => {
         this.medallaMap.set(medalla.id, medalla.nombre);
       });
-
+  
       this.usuarios = usuarios.map(usuario => {
         const medallaCounts = usuario.medallas.reduce((counts: Record<string, number>, medallaId: string) => {
           const medallaNombre = this.medallaMap.get(medallaId) || 'Medalla desconocida';
           counts[medallaNombre] = (counts[medallaNombre] || 0) + 1;
           return counts;
         }, {} as Record<string, number>);
-
+  
         const medallasConContador = Object.entries(medallaCounts).map(([nombre, count]) =>
           (count as number) > 1 ? `${nombre} x${count}` : nombre
         );
-
+  
         return {
           nombre: usuario.email,
-          medallas: medallasConContador
+          medallas: medallasConContador,
+          totalMedallas: usuario.medallas.length // Total de medallas por usuario
         };
       });
-
-      this.usuarios.sort((a, b) => b.medallas.length - a.medallas.length);
+  
+      // Ordenar usuarios de mayor a menor cantidad de medallas
+      this.usuarios.sort((a, b) => b.totalMedallas - a.totalMedallas);
+  
       console.log('Usuarios con medallas:', this.usuarios);
     }, error => {
       console.error('Error al cargar los datos:', error);
     });
   }
+  
+  
 
   obtenerUsuarioConMasMedallas(): void {
     this.http.get<any[]>('http://localhost:8080/cuenta/cuentasmasmedallas').subscribe(data => {
