@@ -16,17 +16,18 @@ export class MedallaComponent {
   usuarios: any[] = [];
   medallas: any[] = [];
   medallaMap: Map<string, string> = new Map();
-  mostrarMedallas: boolean = false ;
+  mostrarMedallas: boolean = false;
+  private usuarioConMasMedallas: any;
 
   constructor(private router: Router, private http: HttpClient) {
     this.cargarDatos();
+    this.obtenerUsuarioConMasMedallas();
   }
-
 
   toggleMostrarMedallas(usuario: any): void {
     usuario.mostrarMedallas = !usuario.mostrarMedallas;
   }
-  // Método para cargar tanto las medallas como los usuarios
+
   cargarDatos(): void {
     forkJoin({
       medallas: this.http.get<any[]>('http://localhost:8080/medallas/obtenermedallas'),
@@ -37,18 +38,31 @@ export class MedallaComponent {
       });
 
       this.usuarios = usuarios.map(usuario => {
+        // Contar la cantidad de cada medalla
+        const medallaCounts = usuario.medallas.reduce((counts: Record<string, number>, medallaId: string) => {
+          const medallaNombre = this.medallaMap.get(medallaId) || 'Medalla desconocida';
+          counts[medallaNombre] = (counts[medallaNombre] || 0) + 1;
+          return counts;
+        }, {} as Record<string, number>);
+
+        // Convertir el conteo en un arreglo de medallas con contador
+        const medallasConContador = Object.entries(medallaCounts).map(([nombre, count]) =>
+          (count as number) > 1 ? `${nombre} x${count}` : nombre
+        );
+
         return {
           nombre: usuario.email,
-          medallas: usuario.medallas.map((medallaId: string) => this.medallaMap.get(medallaId) || 'Medalla desconocida')
+          medallas: medallasConContador
         };
       });
+
+      // Ordenar usuarios por la cantidad de medallas
       this.usuarios.sort((a, b) => b.medallas.length - a.medallas.length);
-      console.log('Usuarios con medallas:', this.usuarios); // Verificar si los nombres de usuarios están presentes
+      console.log('Usuarios con medallas:', this.usuarios);
     }, error => {
       console.error('Error al cargar los datos:', error);
     });
   }
-
 
   obtenerUsuarioConMasMedallas(): void {
     this.http.get<any[]>('http://localhost:8080/cuenta/cuentasmasmedallas').subscribe(data => {
