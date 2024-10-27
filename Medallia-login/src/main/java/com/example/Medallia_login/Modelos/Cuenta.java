@@ -71,4 +71,11 @@ public class Cuenta {
     public void setAplausos(List<String> aplausos) {
         this.aplausos = aplausos;
     }
+
+    public int getMedalCount(){
+        if(medallas == null) {
+            this.medallas = new ArrayList<>();
+        }
+        return medallas.size();
+    }
 }
