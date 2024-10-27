@@ -22,15 +22,25 @@ export class ReporteComponent implements OnInit {
   }
 
   obtenerReportes() {
-    const url = `${this.apiUrl}`;
-    this.http.get<any[]>(url).subscribe(
-      (response) => {
-        this.reportes = response;
-        console.log('Reportes obtenidos:', this.reportes);
-      },
-      (error) => {
-        console.error('Error al obtener los reportes:', error);
-      }
+    this.http.get<any[]>(this.apiUrl).subscribe(
+        (response) => {
+          this.reportes = response.map(reporte => ({
+            ...reporte,
+            nombreUsuario: this.extraerNombreUsuario(reporte.nombreUsuario)
+          }));
+
+          console.log('Reportes obtenidos:', this.reportes);
+        },
+        (error) => {
+          console.error('Error al obtener los reportes:', error);
+        }
     );
+  }
+
+  extraerNombreUsuario(correo: string): string {
+    if (!correo || typeof correo !== 'string') {
+      return 'Usuario desconocido';
+    }
+    return correo.split('@')[0];
   }
 }

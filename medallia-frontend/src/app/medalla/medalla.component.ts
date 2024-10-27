@@ -38,14 +38,12 @@ export class MedallaComponent {
       });
 
       this.usuarios = usuarios.map(usuario => {
-        // Contar la cantidad de cada medalla
         const medallaCounts = usuario.medallas.reduce((counts: Record<string, number>, medallaId: string) => {
           const medallaNombre = this.medallaMap.get(medallaId) || 'Medalla desconocida';
           counts[medallaNombre] = (counts[medallaNombre] || 0) + 1;
           return counts;
         }, {} as Record<string, number>);
 
-        // Convertir el conteo en un arreglo de medallas con contador
         const medallasConContador = Object.entries(medallaCounts).map(([nombre, count]) =>
           (count as number) > 1 ? `${nombre} x${count}` : nombre
         );
@@ -56,7 +54,6 @@ export class MedallaComponent {
         };
       });
 
-      // Ordenar usuarios por la cantidad de medallas
       this.usuarios.sort((a, b) => b.medallas.length - a.medallas.length);
       console.log('Usuarios con medallas:', this.usuarios);
     }, error => {
@@ -75,7 +72,6 @@ export class MedallaComponent {
     });
   }
 
-  // Métodos de navegación
   irAProfile(): void {
     this.router.navigate(['/profile']);
   }

@@ -3,26 +3,18 @@ package com.example.Medallia_login.Dominio;
 import java.time.Instant;
 
 public class ReporteDTO {
-    private String id;
+    //private String id;
     private String usuarioId;
     private String publicacionId;
     private Instant fecha;
     private String descripcion;
 
-    public ReporteDTO(String id, String usuarioId, String publicacionId, Instant fecha, String descripcion) {
-        this.id = id;
+    public ReporteDTO(String usuarioId, String publicacionId, Instant fecha, String descripcion) {
+        //this.id = id;
         this.usuarioId = usuarioId;
         this.publicacionId = publicacionId;
         this.fecha = fecha;
         this.descripcion = descripcion;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getUsuarioId() {

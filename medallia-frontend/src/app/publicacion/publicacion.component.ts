@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import dayjs from 'dayjs';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-publicacion',
@@ -20,12 +20,12 @@ export class PublicacionComponent implements OnInit {
   @Input() fecha!: Date;
   @Input() aplausos!: number;
   @Input() postId!: string;
-  @Input() publicacionesAplaudidas!: string[];  // Tipo array de strings
+  @Input() publicacionesAplaudidas!: string[];
   @Output() aplauso = new EventEmitter<void>();
 
   haAplaudido: boolean = false;
   fechaFormateada!: string;
-  mostrarModal: boolean = false;  // Visibilidad del modal
+  mostrarModal: boolean = false;
   loggedInUser = localStorage.getItem('loggedInUser');
   mostrarOpciones = false;
   mostrarFormularioReporte = false;
@@ -38,20 +38,17 @@ export class PublicacionComponent implements OnInit {
     this.haAplaudido = this.publicacionesAplaudidas?.includes(this.postId) ?? false;
   }
 
-
   onAplaudir() {
     if (!this.haAplaudido) {
       this.aplausos++;
       this.haAplaudido = true;
       this.aplauso.emit();
 
-      // Crear el objeto para enviar al backend
       const aplausosDTO = {
         publicacionId: this.postId,
         usuarioId: this.loggedInUser
       };
 
-      // Realizar la solicitud HTTP POST
       this.http.post('http://localhost:8080/publicaciones/aplaudidas', aplausosDTO)
         .subscribe({
           next: (response) => {
@@ -64,12 +61,10 @@ export class PublicacionComponent implements OnInit {
     }
   }
 
-  // Abrir el modal
   abrirModal() {
     this.mostrarModal = true;
   }
 
-  // Cerrar el modal
   cerrarModal() {
     this.mostrarModal = false;
   }
@@ -86,8 +81,23 @@ export class PublicacionComponent implements OnInit {
 
   enviarReporte() {
     if (this.postId && this.motivoReporte.trim()) {
-      console.log('Reporte enviado para la publicación:', this.postId);
-      console.log('Motivo del reporte:', this.motivoReporte);
+      const reporteDTO = {
+        usuarioId: this.loggedInUser || '',
+        publicacionId: this.postId,
+        fecha: new Date().toISOString(),
+        descripcion: this.motivoReporte
+      };
+
+      this.http.post('http://localhost:8080/reporte/register', reporteDTO)
+        .subscribe({
+          next: (response) => {
+            console.log('Reporte enviado exitosamente', response);
+          },
+          error: (error) => {
+            console.error('Error al enviar el reporte', error);
+          }
+        });
+
       this.cerrarFormulario();
     }
   }
@@ -96,5 +106,4 @@ export class PublicacionComponent implements OnInit {
     this.mostrarFormularioReporte = false;
     this.motivoReporte = '';
   }
-
 }
