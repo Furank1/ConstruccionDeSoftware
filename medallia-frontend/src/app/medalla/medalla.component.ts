@@ -16,13 +16,17 @@ export class MedallaComponent {
   usuarios: any[] = [];
   medallas: any[] = [];
   medallaMap: Map<string, string> = new Map();
-  usuarioConMasMedallas: any;
+  mostrarMedallas: boolean = false ;
 
   constructor(private router: Router, private http: HttpClient) {
     this.cargarDatos();
-    this.obtenerUsuarioConMasMedallas();
   }
 
+
+  toggleMostrarMedallas(usuario: any): void {
+    usuario.mostrarMedallas = !usuario.mostrarMedallas;
+  }
+  // Método para cargar tanto las medallas como los usuarios
   cargarDatos(): void {
     forkJoin({
       medallas: this.http.get<any[]>('http://localhost:8080/medallas/obtenermedallas'),
@@ -38,8 +42,8 @@ export class MedallaComponent {
           medallas: usuario.medallas.map((medallaId: string) => this.medallaMap.get(medallaId) || 'Medalla desconocida')
         };
       });
-
-      console.log('Usuarios con medallas:', this.usuarios);
+      this.usuarios.sort((a, b) => b.medallas.length - a.medallas.length);
+      console.log('Usuarios con medallas:', this.usuarios); // Verificar si los nombres de usuarios están presentes
     }, error => {
       console.error('Error al cargar los datos:', error);
     });

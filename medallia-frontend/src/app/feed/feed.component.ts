@@ -4,11 +4,12 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 import { PublicacionComponent } from '../publicacion/publicacion.component';
 import { NavbarComponent } from '../navbar/navbar.component';
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule, DatePipe, HttpClientModule, RouterLink, PublicacionComponent, NavbarComponent],
+  imports: [CommonModule, DatePipe, HttpClientModule, RouterLink, PublicacionComponent, NavbarComponent, FormsModule],
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })

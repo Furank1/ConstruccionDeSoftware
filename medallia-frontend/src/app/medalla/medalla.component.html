@@ -5,14 +5,19 @@
     <!-- Contenedor del componente de medallas con scroll -->
     <div class="relative h-full overflow-y-auto mt-20">
       <div class="flex flex-col items-center gap-4 px-4">
+        <h1 class="text-3xl font-bold text-gray-800 mt-4">Ranking</h1>
         <!-- Iterar sobre usuarios y mostrar sus medallas -->
-        <div *ngFor="let usuario of usuarios" class="flex flex-col items-center p-6 bg-white shadow-lg rounded-lg max-w-xs">
-          <h3 class="text-lg font-semibold text-dark">{{ usuario.nombre }}</h3>
-          <div class="flex flex-wrap mt-4 justify-center">
-            <!-- Iterar sobre las medallas del usuario -->
-            <div *ngFor="let medalla of usuario.medallas" class="m-2 text-center">
-              <p class="text-sm font-medium text-highlight">{{ medalla }}</p>
-            </div>
+        <div *ngFor="let usuario of usuarios; let i = index" class="flex flex-col items-center p-6 bg-white shadow-lg rounded-lg max-w-xs">
+          <div class="mt-6">
+              <span class="text-2xl font-bold text-gray-700"> #{{ i + 1 }} </span>
+            <button (click)="toggleMostrarMedallas(usuario)" class="text-xl font-semibold text-gray-700 focus:outline-none">
+              {{ usuario.nombre }}
+            </button>
+            <ul *ngIf="usuario.mostrarMedallas" class="mt-4 border border-gray-300 rounded-lg shadow-md max-w-md mx-auto">
+              <div *ngFor="let medalla of usuario.medallas" class="m-2 text-center">
+                <p class="text-sm font-medium text-highlight">{{ medalla }}</p>
+              </div>
+            </ul>
           </div>
         </div>
       </div>
