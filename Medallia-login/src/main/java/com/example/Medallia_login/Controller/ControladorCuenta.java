@@ -1,6 +1,7 @@
 package com.example.Medallia_login.Controller;
 
 import com.example.Medallia_login.Dominio.CuentaDTO;
+import com.example.Medallia_login.Dominio.CuentaMedallasDTO;
 import com.example.Medallia_login.Modelos.Cuenta;
 import com.example.Medallia_login.Repositories.RepositorioCuenta;
 import com.example.Medallia_login.Servicio.ServicioCuenta;
@@ -45,6 +46,15 @@ public class ControladorCuenta {
     public List<String> getPublicacionesAplaudidas(@RequestParam("id") String id){
         List<String> pubAplaudidasUsuario = servicioCuenta.getPublicacionesAplaudidas(id);
         return pubAplaudidasUsuario;
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("cuentasmasmedallas")
+    public List<CuentaMedallasDTO> cuentasConMasMedallas(){
+        List<Cuenta> cuentas = servicioCuenta.getUsuariosMasMedallas();
+        System.out.println(cuentas.toString());
+        System.out.println(servicioCuenta.convertirCuentaADTO(cuentas).toString());
+        return servicioCuenta.convertirCuentaADTO(cuentas);
     }
 
 
