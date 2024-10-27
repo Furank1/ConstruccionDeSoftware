@@ -51,6 +51,21 @@ public class ServicioPublicacion {
         }
     }
 
+    public void disminuiriAplausosPorId(ObjectId publicacionId) {
+        //System.out.println(publicacionId);
+        //System.out.println("llega al servicio");
+        Optional<Publicacion> publicacion = repositoriopublicacion.findById(publicacionId);
+        if(publicacion.isPresent()){
+            //System.out.println("encontrono una publicacion : "+ publicacion.get().getDescripcion());
+            if(publicacion.get().getAplausos()>0) {
+                publicacion.get().setAplausos(publicacion.get().getAplausos() - 1);
+                repositoriopublicacion.save(publicacion.get());
+            }
+        }else{
+            System.out.println("no");
+        }
+    }
+
     public void entregarMedalla(Publicacion publicacion){
         ObjectId usuarioId = publicacion.getUsuarioId();
         Optional<Cuenta> cuentaOpt = repositoriocuenta.findById(usuarioId.toHexString());
@@ -143,6 +158,24 @@ public class ServicioPublicacion {
             }
             usuarioActual.get().getAplausos().add(publicacionId);
             System.out.println("aplauso");
+        }
+        System.out.println(usuarioActual.get().getAplausos().toString());
+        repositoriocuenta.save(usuarioActual.get());
+        return usuarioActual.get().getAplausos();
+    }
+
+    public List<String> disminuirAplausosEnLista(String publicacionId, String usuarioId){
+        ObjectId publicacionIdObj = new ObjectId(publicacionId);
+        disminuiriAplausosPorId(publicacionIdObj);
+        Optional<Cuenta> usuarioActual = repositoriocuenta.findById(usuarioId);
+        if(usuarioActual.isPresent()) {
+            //System.out.println(usuarioActual.get().getAplausos().toString());
+            if(usuarioActual.get().getAplausos() == null) {
+                //System.out.println("no aplausos");
+                usuarioActual.get().setAplausos(new ArrayList<>());
+            }
+            usuarioActual.get().getAplausos().remove(publicacionId);
+            System.out.println("quitar aplauso");
         }
         System.out.println(usuarioActual.get().getAplausos().toString());
         repositoriocuenta.save(usuarioActual.get());
