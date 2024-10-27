@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import dayjs from 'dayjs';
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-publicacion',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './publicacion.component.html',
   styleUrls: ['./publicacion.component.css']
 })
@@ -26,6 +27,9 @@ export class PublicacionComponent implements OnInit {
   fechaFormateada!: string;
   mostrarModal: boolean = false;  // Visibilidad del modal
   loggedInUser = localStorage.getItem('loggedInUser');
+  mostrarOpciones = false;
+  mostrarFormularioReporte = false;
+  motivoReporte = '';
 
   constructor(private http: HttpClient) {}
 
@@ -72,4 +76,28 @@ export class PublicacionComponent implements OnInit {
   cerrarModal() {
     this.mostrarModal = false;
   }
+
+  abrirOpciones() {
+    this.mostrarOpciones = !this.mostrarOpciones;
+  }
+
+  abrirFormularioReporte(postId: string) {
+    this.mostrarOpciones = false;
+    this.mostrarFormularioReporte = true;
+    this.postId = postId;
+  }
+
+  enviarReporte() {
+    if (this.postId && this.motivoReporte.trim()) {
+      console.log('Reporte enviado para la publicación:', this.postId);
+      console.log('Motivo del reporte:', this.motivoReporte);
+      this.cerrarFormulario();
+    }
+  }
+
+  cerrarFormulario() {
+    this.mostrarFormularioReporte = false;
+    this.motivoReporte = '';
+  }
+
 }

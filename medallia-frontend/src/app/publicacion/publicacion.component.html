@@ -1,11 +1,32 @@
-<div class="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6 w-75 p-4">
+<div class="relative flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6 w-full p-4">
+
+  <!-- Menú de tres puntos en la esquina superior derecha -->
+  <div class="absolute top-2 right-2 cursor-pointer" (click)="abrirOpciones()">
+    <svg class="w-6 h-6 text-gray-600 hover:text-gray-800" aria-label="Opciones" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+      <circle cx="5" cy="10" r="1.5" />
+      <circle cx="10" cy="10" r="1.5" />
+      <circle cx="15" cy="10" r="1.5" />
+    </svg>
+
+    <!-- Opciones del menú -->
+    <div *ngIf="mostrarOpciones" class="absolute top-10 right-0 bg-white shadow-md rounded-md z-50">
+      <button (click)="abrirFormularioReporte(postId)" class="block w-full text-left px-4 py-2 hover:bg-gray-100">Reportar</button>
+    </div>
+  </div>
+
+<!-- Contenedor de imagen actualizado -->
+<!-- Contenedor de imagen con tamaño fijo -->
+<div class="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6 w-96">
   <!-- Imagen de la publicación cargada dinámicamente -->
   <div class="m-2.5 overflow-hidden rounded-md h-80 flex justify-center items-center">
-    <img class="w-full h-full object-contain cursor-pointer"
-         [src]="imagen"
-         alt="Imagen de la publicación"
+    <img class="w-full h-full object-cover cursor-pointer" 
+         [src]="imagen" 
+         alt="Imagen de la publicación" 
          (click)="abrirModal()"/>
   </div>
+
+
+
 
   <!-- Información de la publicación -->
   <div class="p-6 text-center">
@@ -19,6 +40,7 @@
       {{ descripcion }}
     </p>
   </div>
+
   <!-- Botón de interacción con el número de aplausos -->
   <div class="flex justify-center p-6 pt-2 gap-7">
     <button (click)="onAplaudir()"
@@ -27,14 +49,29 @@
       Aplaudir ({{ aplausos }})
     </button>
   </div>
-</div>
 
-<!-- Modal para mostrar la imagen en grande -->
-<div *ngIf="mostrarModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <div class="relative bg-white rounded-lg p-4 max-w-full max-h-full">
-    <button (click)="cerrarModal()" class="absolute top-2 right-2 text-gray-600 hover:text-gray-900">
-      &times;
-    </button>
-    <img [src]="imagen" alt="Imagen ampliada" class="max-w-full max-h-screen rounded-lg">
+  <!-- Modal para mostrar la imagen en grande -->
+  <div *ngIf="mostrarModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" (click)="cerrarModal()">
+    <div class="relative bg-white rounded-lg p-4 max-w-full max-h-full" (click)="$event.stopPropagation()">
+      <button (click)="cerrarModal()" class="absolute top-2 right-2 text-gray-600 hover:text-gray-900" aria-label="Cerrar Modal">
+        &times;
+      </button>
+      <img [src]="imagen" alt="Imagen ampliada" class="max-w-full max-h-screen rounded-lg">
+    </div>
+  </div>
+
+  <!-- Formulario de reporte -->
+  <div *ngIf="mostrarFormularioReporte" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div class="bg-white p-6 rounded-lg w-full md:w-1/2 max-w-md">
+      <h2 class="text-lg font-bold mb-4">Reportar</h2>
+      <form (ngSubmit)="enviarReporte()">
+        <label for="motivo" class="block mb-2">Motivo del reporte:</label>
+        <textarea id="motivo" [(ngModel)]="motivoReporte" name="motivo" required class="w-full p-2 border border-gray-300 rounded-md"></textarea>
+        <div class="mt-4 flex justify-end gap-2">
+          <button type="button" (click)="cerrarFormulario()" class="px-4 py-2 bg-gray-300 rounded-md">Cancelar</button>
+          <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-md">Enviar</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
