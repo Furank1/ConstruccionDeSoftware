@@ -14,13 +14,19 @@
     </div>
   </div>
 
-  <!-- Contenedor de imagen con tamaño fijo y limitación de dimensiones -->
-  <div class="w-full max-w-full h-64 overflow-hidden flex justify-center items-center bg-gray-200 rounded-t-lg">
-    <img class="w-full h-auto max-h-64 object-cover cursor-pointer"
-         [src]="imagen"
-         alt="Imagen de la publicación"
-         (click)="abrirModal()" />
+<!-- Contenedor de imagen actualizado -->
+<!-- Contenedor de imagen con tamaño fijo -->
+<div class="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6 w-96">
+  <!-- Imagen de la publicación cargada dinámicamente -->
+  <div class="m-2.5 overflow-hidden rounded-md h-80 flex justify-center items-center">
+    <img class="w-full h-full object-cover cursor-pointer" 
+         [src]="imagen" 
+         alt="Imagen de la publicación" 
+         (click)="abrirModal()"/>
   </div>
+
+
+
 
   <!-- Información de la publicación -->
   <div class="p-6 text-center">

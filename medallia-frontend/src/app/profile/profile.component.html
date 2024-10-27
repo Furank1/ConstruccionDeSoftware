@@ -49,11 +49,11 @@
 
   <!-- Contenedor de actividad reciente -->
   <div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-8" *ngIf="user && user.publicaciones && user.publicaciones.length > 0">
-    <h2 class="text-2xl font-semibold text-gray-700">Actividad Reciente</h2>
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-      <div *ngFor="let publicacion of user.publicaciones" class="mb-4">
+    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Actividad Reciente</h2>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2">
+      <div *ngFor="let publicacion of user.publicaciones" class="bg-white rounded-lg shadow-md overflow-hidden">
         <app-publicacion
-          class="object-cover object-center w-full h-40 max-w-full rounded-lg"
+          class="w-full h-48 object-cover"
           [imagen]="publicacion.imagen"
           [usuarioId]="publicacion.usuarioId"
           [descripcion]="publicacion.descripcion"
@@ -64,4 +64,7 @@
       </div>
     </div>
   </div>
+  
+  
+  
 </div>

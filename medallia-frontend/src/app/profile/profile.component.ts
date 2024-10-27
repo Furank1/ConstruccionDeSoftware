@@ -19,12 +19,16 @@
     styleUrls: ['./profile.component.css']
   })
   export class ProfileComponent implements OnInit {
+onAplausoRecibido(arg0: any) {
+throw new Error('Method not implemented.');
+}
     user: any = {};
     medallas: any[] = []; // Medallas globales
     loggedInUser = localStorage.getItem('loggedInUser');
     nombreUsuario = localStorage.getItem('userEmail');
     editando = false; // Control para el modo edición
     mostrarMedallas = false;
+publicacion: any;
   
     constructor(private router: Router, private http: HttpClient) {}
   
