@@ -1,0 +1,64 @@
+.bg-secondary {
+    background-color: #F2F2EB; 
+  }
+  
+  .ranking-card {
+    position: relative;
+    transition: transform 0.2s ease;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .ranking-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .ranking-position {
+    color: #BF15B4; 
+  }
+  
+  .user-name {
+    color: #A64724; 
+  }
+  
+  .ranking-icon {
+    background-color: #D9A362; 
+    padding: 0.3em;
+    border-radius: 50%;
+  }
+  
+  .text-accent {
+    color: #F2D479; 
+  }
+  
+  .progress-bar {
+    background-color: #e0e0e0; 
+    border-radius: 8px;
+    height: 8px;
+    width: 100%;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  
+  .progress {
+    background-color: #BF15B4; 
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.3s ease;
+  }
+  
+  .medalla-list {
+    background-color: #FFF;
+    border-radius: 8px;
+  }
+  
+  .medalla-item {
+    color: #A64724; 
+    padding: 8px;
+    border-bottom: 1px solid #F2F2EB;
+  }
+  
+  .medalla-item:last-child {
+    border-bottom: none;
+  }
+  

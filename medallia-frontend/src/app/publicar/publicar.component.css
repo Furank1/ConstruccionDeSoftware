@@ -28,3 +28,36 @@ img {
   height: auto;
   border-radius: 5px;
 }
+/* Aplica la fuente a toda la aplicación */
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Ajusta el estilo de los textos específicos */
+label {
+  font-weight: 500;
+  color: #333;
+}
+
+.text-sm {
+  font-size: 0.875rem; /* Aumenta la legibilidad */
+  color: #555;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+button {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: #333;
+}

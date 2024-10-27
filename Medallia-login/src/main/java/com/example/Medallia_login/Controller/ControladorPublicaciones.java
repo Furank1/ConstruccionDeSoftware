@@ -76,4 +76,21 @@ public class ControladorPublicaciones {
         return ResponseEntity.ok(aplausosUsuario);
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping("/disminuiraplauso") // Agregar {id} a la ruta
+    public ResponseEntity<?> disminuirAplausos(@RequestBody PubAplausosDTO pubAplausosDTO) {
+        String publicacionId = pubAplausosDTO.getPublicacionId();
+        String usuarioId = pubAplausosDTO.getUsuarioId();
+        System.out.println("LOCURIÑA AQUI HOLA");
+        System.out.println(publicacionId);
+        System.out.println(usuarioId);
+        System.out.println("=====================");
+
+        List<String> aplausosUsuario = servicioPublicacion.disminuirAplausosEnLista(publicacionId, usuarioId);
+
+        return ResponseEntity.ok(aplausosUsuario);
+
+    }
+
+
 }
