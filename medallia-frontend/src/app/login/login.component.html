@@ -1,20 +1,21 @@
-<div class="flex justify-center items-center h-screen bg-secondary">
-  <div class="w-80 p-5 bg-white shadow-lg rounded-lg text-center">
+<div class="flex justify-center items-center min-h-screen bg-secondary">
+  <div style="width: 24rem;" class="p-5 bg-white shadow-lg rounded-lg text-center"> 
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
-    <h1 class="text-primary font-pacifico text-4xl mb-5">Medallia</h1> <!-- Título grande -->
+    <h1 class="text-primary font-pacifico text-4xl mb-1">Medallia</h1>
+    <p class="text-dark font-semibold text-lg mb-5">Iniciar Sesión</p> 
 
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
       <div class="mb-4 text-left">
         <label for="email" class="block text-dark font-bold mb-1">Correo electrónico</label>
         <input type="email" id="email" [(ngModel)]="email" name="email" required
-               class="w-full p-3 border border-gray-300 rounded-md text-base box-border">
+               class="w-full p-3 border border-gray-300 rounded-md text-base box-border focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
       </div>
 
       <div class="mb-4 text-left">
         <label for="password" class="block text-dark font-bold mb-1">Contraseña</label>
         <input type="password" id="password" [(ngModel)]="password" name="password" required
-               class="w-full p-3 border border-gray-300 rounded-md text-base box-border">
+               class="w-full p-3 border border-gray-300 rounded-md text-base box-border focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
       </div>
 
       <button type="submit" (click)="onSubmit()" class="w-full p-3 bg-primary text-white rounded-md font-bold text-base mb-3 box-border hover:bg-[#A80CAA]">
@@ -23,8 +24,7 @@
       
       <button type="button" (click)="goToRegister()" class="w-full p-3 bg-highlight text-white rounded-md font-bold text-base box-border hover:bg-accent">
         Crear Cuenta
-      </button> <!-- Botón de crear cuenta -->
+      </button>
     </form>
   </div>
 </div>
-
