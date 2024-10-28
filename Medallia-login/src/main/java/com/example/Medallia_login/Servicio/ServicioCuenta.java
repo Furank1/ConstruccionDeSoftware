@@ -59,7 +59,11 @@ public class ServicioCuenta {
         return cuentasDTO;
     }
 
-
+    public Cuenta register(String email, String password) {
+        Cuenta cuenta = new Cuenta(email, password);
+        repositoriocuenta.save(cuenta);
+        return cuenta;
+    }
 
 }
 

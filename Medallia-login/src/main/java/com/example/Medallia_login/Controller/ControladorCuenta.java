@@ -57,5 +57,13 @@ public class ControladorCuenta {
         return servicioCuenta.convertirCuentaADTO(cuentas);
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping("register")
+    public ResponseEntity<?> register(@RequestBody CuentaDTO loginRequest){
+        String email = loginRequest.getEmail();
+        String password = loginRequest.getPassword();
+        Cuenta cuenta = servicioCuenta.register(email, password);
 
+        return ResponseEntity.ok(cuenta);
+    }
 }
