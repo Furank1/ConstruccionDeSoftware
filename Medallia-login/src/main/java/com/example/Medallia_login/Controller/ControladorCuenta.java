@@ -63,7 +63,9 @@ public class ControladorCuenta {
         String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
         Cuenta cuenta = servicioCuenta.register(email, password);
-
+        if (cuenta == null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
         return ResponseEntity.ok(cuenta);
     }
 }
