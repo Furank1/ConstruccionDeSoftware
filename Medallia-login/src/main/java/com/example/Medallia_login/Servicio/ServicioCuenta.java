@@ -60,9 +60,12 @@ public class ServicioCuenta {
     }
 
     public Cuenta register(String email, String password) {
-        Cuenta cuenta = new Cuenta(email, password);
-        repositoriocuenta.save(cuenta);
-        return cuenta;
+        if(repositoriocuenta.findByEmail(email) == null) {
+            Cuenta cuenta = new Cuenta(email, password);
+            repositoriocuenta.save(cuenta);
+            return cuenta;
+        }
+        else return null;
     }
 
 }
