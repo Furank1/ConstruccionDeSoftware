@@ -18,7 +18,7 @@ export class RegistroComponent {
     password: ''
   };
 
-  private apiUrl = 'http://localhost:8080/account/register'; // aquí joaco
+  private apiUrl = 'http://localhost:8080/account/register';
   constructor(private router: Router, private http: HttpClient) {}
 
   onRegister() {
@@ -27,7 +27,7 @@ export class RegistroComponent {
       (response: any) => {
         console.log("Formulario enviado");
         console.log('Cuenta creada con éxito:', response);
-        this.router.navigate(['/feed']); 
+        this.router.navigate(['/feed']);
       },
       (error) => {
         console.error('Error al crear la cuenta:', error);

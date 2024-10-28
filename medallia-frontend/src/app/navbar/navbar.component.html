@@ -1,20 +1,27 @@
-<nav class="flex justify-around items-center bg-accent py-3 fixed w-full top-0 z-50 shadow-lg">
-  <div class="text-gray-800 font-bold">
-
+<nav class="flex items-center bg-gradient-to-r from-[#FFD56A] to-[#BF6B30] py-5 fixed w-full top-0 z-50 shadow-lg">
+  <div 
+    class="text-gray-800 font-bold text-4xl ml-6 cursor-pointer" 
+    style="font-family: 'Pacifico', cursive;" 
+    (click)="irAFeed()">
+    Medallia
   </div>
-  <button (click)="irAProfile()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-   {{nombreUsuario}}
-  </button>
-  <button (click)="irAFeed()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-    Feed
-  </button>
-  <button (click)="irAMedallas()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-    Medalla
-  </button>
-  <button (click)="irAPublicar()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
-    Publicar
-  </button>
-  <button (click)="irACerrarSesion()" class="bg-primary text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-accent hover:text-gray-800 hover:scale-110 transition-transform duration-300 ease-in-out">
-    Cerrar Sesión
-  </button>
+
+  <!-- Contenedor de Botones alineado a la derecha -->
+  <div class="flex gap-4 ml-auto mr-6">
+    <button (click)="irAProfile()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+      {{nombreUsuario}}
+    </button>
+    <button (click)="irAMedallas()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+      Medalla
+    </button>
+    <button (click)="irAPublicar()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+      Publicar
+    </button>
+    <button (click)="irAReporte()" class="border bg-secondary text-gray-800 font-bold py-2 px-4 rounded-full shadow-md hover:bg-primary hover:text-white hover:scale-110 transition-transform duration-300 ease-in-out">
+      Reportes
+    </button>
+    <button (click)="irACerrarSesion()" class="bg-primary text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-accent hover:text-gray-800 hover:scale-110 transition-transform duration-300 ease-in-out">
+      Cerrar Sesión
+    </button>
+  </div>
 </nav>

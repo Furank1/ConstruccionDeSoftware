@@ -1,13 +1,13 @@
 <div>
   <app-navbar></app-navbar>
   <div class="flex items-center justify-center min-h-screen bg-secondary mt-16">
-    <div class="max-w-xl w-full bg-white p-6 rounded-lg shadow-lg">
+    <div class="max-w-xl w-full bg-gradient-to-r from-accent to-highlight p-6 rounded-lg shadow-lg">
       <form (submit)="onSubmit()" class="space-y-6">
         <!-- Descripción -->
         <div>
           <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
           <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="3"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-accent focus:border-accent"
                     placeholder="Escribe una descripción..."></textarea>
         </div>
 
@@ -15,7 +15,7 @@
         <div>
           <label for="imageUrl" class="block text-sm font-medium text-gray-700">Subir el link de la imagen</label>
           <input type="text" id="imageUrl" [(ngModel)]="imageUrl" name="imageUrl"
-                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-accent focus:border-accent"
                  placeholder="Aquí va el enlace de tu imagen...">
         </div>
 
@@ -23,7 +23,7 @@
         <div>
           <label for="medallas" class="block text-sm font-medium text-gray-700">Seleccionar Medalla</label>
           <select id="medallas" [(ngModel)]="medallaSeleccionada" name="medalla" (change)="seleccionarMedalla($event)"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-accent focus:border-accent">
             <option value="" disabled selected>Seleccione una medalla</option>
             <option *ngFor="let medalla of medallas" [value]="medalla.id">
               {{ medalla.nombre }} ({{ medalla.aplausos }} aplausos)
@@ -36,7 +36,7 @@
           <p>Medalla seleccionada: {{ nombreMedallaSeleccionada }}</p>
         </div>
 
-        <!-- Botón de enviar -->
+        <!-- Botón de enviar con animación y estilo renovado -->
         <div class="text-center">
           <button type="submit" class="bg-primary text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-accent hover:text-gray-800 hover:scale-110 transition-transform duration-300 ease-in-out">
             Publicar
@@ -44,10 +44,10 @@
         </div>
       </form>
 
-      <!-- Vista previa de la imagen -->
+      <!-- Vista previa de la imagen con estilo mejorado -->
       <div *ngIf="imageUrl" class="mt-6">
         <h3 class="text-lg font-medium text-gray-700">Vista previa:</h3>
-        <img [src]="imageUrl" alt="Vista previa de la imagen seleccionada" class="mt-4 max-h-64 object-cover rounded-lg shadow-md">
+        <img [src]="imageUrl" alt="Vista previa de la imagen seleccionada" class="mt-4 max-h-64 object-cover rounded-lg shadow-md border-2 border-primary">
       </div>
     </div>
   </div>

@@ -39,7 +39,7 @@ ngOnInit():void{
       .subscribe(
         response => {
           console.log('Login exitoso');
-          const userId = response.id; // Solo toma el ID
+          const userId = response.id;
           localStorage.setItem('userId', userId);
                     localStorage.setItem('loggedInUser', response.id);
           localStorage.setItem('userEmail', response.email);

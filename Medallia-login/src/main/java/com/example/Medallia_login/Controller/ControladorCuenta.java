@@ -1,6 +1,7 @@
 package com.example.Medallia_login.Controller;
 
 import com.example.Medallia_login.Dominio.CuentaDTO;
+import com.example.Medallia_login.Dominio.CuentaMedallasDTO;
 import com.example.Medallia_login.Modelos.Cuenta;
 import com.example.Medallia_login.Repositories.RepositorioCuenta;
 import com.example.Medallia_login.Servicio.ServicioCuenta;
@@ -47,5 +48,22 @@ public class ControladorCuenta {
         return pubAplaudidasUsuario;
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("cuentasmasmedallas")
+    public List<CuentaMedallasDTO> cuentasConMasMedallas(){
+        List<Cuenta> cuentas = servicioCuenta.getUsuariosMasMedallas();
+        //System.out.println(cuentas.toString());
+        //System.out.println(servicioCuenta.convertirCuentaADTO(cuentas).toString());
+        return servicioCuenta.convertirCuentaADTO(cuentas);
+    }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping("register")
+    public ResponseEntity<?> register(@RequestBody CuentaDTO loginRequest){
+        String email = loginRequest.getEmail();
+        String password = loginRequest.getPassword();
+        Cuenta cuenta = servicioCuenta.register(email, password);
+
+        return ResponseEntity.ok(cuenta);
+    }
 }

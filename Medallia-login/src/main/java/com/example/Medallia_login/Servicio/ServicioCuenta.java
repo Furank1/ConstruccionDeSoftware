@@ -1,5 +1,7 @@
 package com.example.Medallia_login.Servicio;
 
+import com.example.Medallia_login.Dominio.CuentaDTO;
+import com.example.Medallia_login.Dominio.CuentaMedallasDTO;
 import com.example.Medallia_login.Modelos.Cuenta;
 import com.example.Medallia_login.Modelos.Medalla;
 import com.example.Medallia_login.Repositories.RepositorioCuenta;
@@ -7,9 +9,8 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ServicioCuenta {
@@ -37,6 +38,32 @@ public class ServicioCuenta {
         return pubAplaudidasUsuario;
     }
 
+    public List<Cuenta> getUsuariosMasMedallas(){
+        List<Cuenta> cuentas = repositoriocuenta.findAll();
+        //List<String> usuariosMasMedallas = new ArrayList<>();
+
+        cuentas.sort(Comparator.comparingInt(Cuenta::getMedalCount).reversed());
+
+        return cuentas;
+    }
+
+    public List<CuentaMedallasDTO> convertirCuentaADTO(List<Cuenta> cuentas){
+        List<CuentaMedallasDTO> cuentasDTO = new ArrayList<>();
+        for (Cuenta cuenta : cuentas) {
+            List<String> medallas = cuenta.getMedallas().stream().map(ObjectId::toString).toList();
+            int count = cuenta.getMedalCount();
+            CuentaMedallasDTO cuentaMedallasDTO = new CuentaMedallasDTO(cuenta.getId().toString(), medallas, count);
+            cuentasDTO.add(cuentaMedallasDTO);
+        }
+
+        return cuentasDTO;
+    }
+
+    public Cuenta register(String email, String password) {
+        Cuenta cuenta = new Cuenta(email, password);
+        repositoriocuenta.save(cuenta);
+        return cuenta;
+    }
 
 }
 

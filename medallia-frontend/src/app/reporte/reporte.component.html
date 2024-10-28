@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+
+<div *ngIf="reportes.length > 0; else noReportes" class="flex flex-col items-center gap-4 p-4 mt-20">
+  <div *ngFor="let reporte of reportes" class="flex w-full max-w-2xl bg-white border border-gray-200 rounded-lg shadow-lg p-4">
+    <div class="max-w-20 object-right">
+      <img [src]="reporte.imagen" alt="Imagen de la publicación" class="w-full h-full object-cover rounded-md" />
+    </div>
+
+
+    <div class="w-2/3 pl-4 flex flex-col max-h-1 justify-between">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Reporte de {{ reporte.nombreUsuario }}</h3>
+        <p class="text-sm text-gray-500">Fecha de reporte: {{ reporte.fecha | date:'dd/MM/yyyy' }} a las {{ reporte.fecha | date:'HH:mm' }}</p>
+        <p class="text-gray-700 mt-2">Motivo del reporte: {{ reporte.descripcion }}</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<ng-template #noReportes>
+  <p class="text-center text-gray-600">No se encontraron reportes.</p>
+</ng-template>
